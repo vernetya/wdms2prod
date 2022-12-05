@@ -1,13 +1,14 @@
-use actix_web::{web, App, HttpResponse, HttpServer, Responder};
-
-async fn health_check() -> impl Responder {
-    HttpResponse::Ok()
-}
+use std::env;
+use std::net::TcpListener;
+use wdms2prod::build_and_start_server;
 
 #[tokio::main]
 async fn main() -> std::io::Result<()> {
-    HttpServer::new(|| App::new().route("health_check", web::get().to(health_check)))
-        .bind("127.0.0.1:8000")?
-        .run()
-        .await
+    let args: Vec<String> = env::args().collect();
+    let port = match args.len() {
+        1 => "8000",
+        _ => &args[1],
+    };
+    let listener = TcpListener::bind(format!("127.0.0.1:{}", &port))?;
+    build_and_start_server(listener, None)?.await
 }

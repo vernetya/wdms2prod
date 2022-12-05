@@ -1,0 +1,86 @@
+use serde_json::Value;
+use std::net::TcpListener;
+
+#[tokio::test]
+async fn health_check_test() {
+    let app_address = spawn_app();
+
+    let client = reqwest::Client::new();
+
+    let response = client
+        .get(format!("{}/health_z", app_address))
+        .send()
+        .await
+        .expect("Failed to execute request.");
+
+    assert!(
+        response.status().is_success(),
+        "should success, actual" // format!("should success, actual {:?}", response.status().as_u16())
+    );
+    assert_eq!(Some(0), response.content_length());
+}
+
+#[tokio::test]
+async fn error_test() {
+    let app_address = spawn_app();
+
+    let client = reqwest::Client::new();
+
+    let response = client
+        .get(format!("{}/error", app_address))
+        .send()
+        .await
+        .expect("Failed to execute request.");
+
+    // println!("RESPONSE => {:?}", response);
+
+    assert_eq!(response.status().as_u16(), 500);
+    // let text = response.text().await.unwrap();
+    // println!("TEXT => {}", text);
+    // assert_eq!(Some(0), response.content_length());
+}
+
+#[tokio::test]
+async fn get_well_log_test() {
+    let app_address = spawn_app();
+
+    let client = reqwest::Client::new();
+
+    let response = client
+        .get(format!("{}/welllog/super", app_address))
+        .send()
+        .await
+        .expect("Failed to execute request.");
+
+    assert_eq!(response.status().as_u16(), 200); //.is_success());
+
+    let text = response.text().await.unwrap();
+    let value = serde_json::from_str::<Value>(text.as_str());
+    assert!(value.is_ok());
+    let record_id = value
+        .unwrap()
+        .as_object()
+        .unwrap()
+        .get("id")
+        .unwrap()
+        .as_str()
+        .unwrap()
+        .to_string();
+
+    assert_eq!("super", record_id);
+}
+
+fn spawn_app() -> String {
+    let listener = TcpListener::bind("127.0.0.1:0").expect("fail to bond random port");
+    let port = listener.local_addr().unwrap().port();
+    let server = wdms2prod::build_and_start_server(
+        listener,
+        Some(wdms2prod::config::Config {
+            enable_logging: false,
+            ..Default::default()
+        }),
+    )
+    .expect("fail to start server");
+    let _ = tokio::spawn(server);
+    format!("http://127.0.0.1:{}", port)
+}

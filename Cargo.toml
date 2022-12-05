@@ -3,8 +3,27 @@ name = "wdms2prod"
 version = "0.1.0"
 edition = "2021"
 
+[lib]
+path = "src/lib.rs"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[[bin]]
+path = "src/main.rs"
+name = "wdms2prod"
+
 
 [dependencies]
 actix-web = "4"
-tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
+awc = "3"  # http client
+tokio = { version = "1", features = ["macros", "rt-multi-thread"] } # async runtime
+futures = "0.3" # futures utils
+
+serde = { version = "1", features = ["derive"] }
+serde_json = "1.0"
+figment = { version = "0.10", features = ["json", "env"] } # configuration/settings
+log = "0.4"
+env_logger = "0.9"
+thiserror = "1"
+
+[dev-dependencies]
+reqwest = "0.11"
