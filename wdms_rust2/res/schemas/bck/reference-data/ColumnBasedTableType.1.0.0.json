@@ -1,0 +1,38 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "x-osdu-governance-model": "OPEN",
+  "x-osdu-governance-authorities": [
+    "OSDU"
+  ],
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/ColumnBasedTableType.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Column Based Table Type",
+  "description": "ColumnBasedTableType holds the values for the various possible and non exhaustive column based table types.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "KeyColumns": {
+          "type": "array",
+          "title": "Key columns",
+          "description": "A columns whose values are considered as keys/indices.",
+          "items": {
+            "$ref": "../abstract/AbstractReferencePropertyType.1.1.0.json"
+          }
+        },
+        "Columns": {
+          "type": "array",
+          "title": "Common columns",
+          "description": "A common column storing values of a particular property kind.",
+          "items": {
+            "$ref": "../abstract/AbstractReferencePropertyType.1.1.0.json"
+          }
+        }
+      }
+    }
+  ]
+}

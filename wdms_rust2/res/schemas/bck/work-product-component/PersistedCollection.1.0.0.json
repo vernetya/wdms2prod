@@ -1,0 +1,62 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/work-product-component/PersistedCollection.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PersistedCollection",
+  "description": "A persisted collection of objects ingested in the data platform. The collection can aggregate objects of different nature, including master data, work-product-components and reference data. A PersistedCollection can also contain other PersistedCollection(s).",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractWPCGroupType.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractWorkProductComponent.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "MemberIDs": {
+          "type": "array",
+          "title": "MemberIDs",
+          "description": "List of objects part of the Collection, defined as an array of the member IDs",
+          "example": [
+            "namespace:work-product-component--SeismicHorizon:a7a81843-9bea-5ce4-913c-f67e4ea154ff:",
+            "namespace:work-product-component--SeismicHorizon:aff9a086-3da6-53c0-baef-222c2273a040:"
+          ],
+          "items": {
+            "type": "string",
+            "pattern": "^[\\w\\-\\.]+:(master-data\\-\\-[\\w\\-\\.]+|reference-data\\-\\-[\\w\\-\\.]+|work-product-component\\-\\-[\\w\\-\\.]+|work-product\\-\\-[\\w\\-\\.]+):[\\w\\-\\.\\:\\%]+:[0-9]*$"
+          }
+        },
+        "Description": {
+          "type": "string",
+          "title": "Description",
+          "description": "Describes the Collection (free string)"
+        },
+        "PurposeID": {
+          "type": "string",
+          "title": "PurposeID",
+          "description": "Purpose of the Collection",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-CollectionPurpose:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "ParentCollectionID": {
+          "type": "string",
+          "title": "ParentCollectionID",
+          "description": "If this PersistedCollection is nested within another PersistedCollection, this property points to the Parent Collection ID. Otherwise, leave it absent.",
+          "pattern": "^[\\w\\-\\.]+:work-product-component\\-\\-PersistedCollection:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "HomogeneousMemberKind": {
+          "type": "string",
+          "title": "HomogeneousMemberKind",
+          "description": "If the Collection is homogeneous, this indicates the single data schema Kind within the collection (without the semantic version number). If the collection is heterogeneous (collecting multiple data types) leave this property empty.",
+          "example": "osdu:wks:work-product-component--SeismicHorizon"
+        },
+        "Author": {
+          "type": "string",
+          "title": "Author",
+          "description": "The author responsible to the collection content."
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,937 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/master-data/FluidsReport.1.1.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "FluidsReport",
+  "description": "Used to capture an analysis of the drilling mud.",
+  "type": "object",
+  "x-osdu-virtual-properties": {
+    "data.VirtualProperties.DefaultLocation": {
+      "type": "object",
+      "priority": [
+        {
+          "path": "data.SpatialLocation"
+        }
+      ]
+    },
+    "data.VirtualProperties.DefaultName": {
+      "type": "string",
+      "priority": [
+        {
+          "path": "data.Name"
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractMaster.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "StartDateTime": {
+          "type": "string",
+          "title": "Report Date Time",
+          "description": "Start DateTime of the reporting period",
+          "format": "date-time",
+          "x-osdu-frame-of-reference": "DateTime",
+          "x-osdu-attribution-authority": "The Open Group",
+          "x-osdu-attribution-publication": "The OSDU Data Platform",
+          "x-osdu-attribution-revision": "evergreen"
+        },
+        "EndDateTime": {
+          "type": "string",
+          "title": "Report Date Time",
+          "description": "End DateTime of the reporting period",
+          "format": "date-time",
+          "x-osdu-frame-of-reference": "DateTime",
+          "x-osdu-attribution-authority": "The Open Group",
+          "x-osdu-attribution-publication": "The OSDU Data Platform",
+          "x-osdu-attribution-revision": "evergreen"
+        },
+        "NumReport": {
+          "type": "number",
+          "title": "Report Number",
+          "description": "Fluids report number",
+          "x-osdu-attribution-authority": "The Open Group",
+          "x-osdu-attribution-publication": "The OSDU Data Platform",
+          "x-osdu-attribution-revision": "evergreen"
+        },
+        "Fluid": {
+          "type": "array",
+          "title": "Fluid",
+          "description": "The drilling fluids that are represented on this report",
+          "x-osdu-attribution-authority": "The Open Group",
+          "x-osdu-attribution-publication": "The OSDU Data Platform",
+          "x-osdu-attribution-revision": "evergreen",
+          "items": {
+            "type": "object",
+            "title": "Fluid",
+            "description": "Information regarding an individual fluid that is part of the Drilling Report.",
+            "properties": {
+              "Type": {
+                "type": "string",
+                "title": "Type",
+                "description": "Description for the type of fluid.",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen",
+                "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-FluidType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+              },
+              "BrandName": {
+                "type": "string",
+                "title": "Brand Name",
+                "description": "The name of the fluid as given by the supplier",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "SampleLocation": {
+                "type": "string",
+                "title": "Sample Location",
+                "description": "Sample location.",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "SampleDateTime": {
+                "type": "string",
+                "title": "Date Time",
+                "description": "The time when fluid readings were recorded.",
+                "format": "date-time",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "MeasuredDepth": {
+                "type": "number",
+                "title": "Measured Depth",
+                "description": "The measured depth where the fluid readings were recorded.",
+                "x-osdu-frame-of-reference": "UOM:length",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "TVD": {
+                "type": "number",
+                "title": "TVD",
+                "description": "The true vertical depth where the fluid readings were recorded.",
+                "x-osdu-frame-of-reference": "UOM:length",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "EquivalentCirculatingDensity": {
+                "type": "number",
+                "title": "Equivalent Circulating Density",
+                "description": "Equivalent circulating density where fluid reading was recorded or calculated/simulated",
+                "x-osdu-frame-of-reference": "UOM:mass per volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "EquivalentStaticDensity": {
+                "type": "number",
+                "title": "Equivalent Static Density",
+                "description": "Equivalent static density where fluid reading was recorded or calculated/simulated",
+                "x-osdu-frame-of-reference": "UOM:mass per volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "KickToleranceVolume": {
+                "type": "number",
+                "title": "Kick Tolerance Volume",
+                "description": "Assumed kick volume for calculation of kick tolerance based on the kick intensity where the fluid reading was recorded.",
+                "x-osdu-frame-of-reference": "UOM:volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "KickToleranceIntensity": {
+                "type": "number",
+                "title": "Kick Tolerance Intensity",
+                "description": "Assumed kick density for calculation of kick tolerance where the fluid reading was recorded.",
+                "x-osdu-frame-of-reference": "UOM:mass per volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "TemperatureFlowLine": {
+                "type": "number",
+                "title": "Temperature Flow Line",
+                "description": "Flow line temperature measurement where the fluid reading was recorded.",
+                "x-osdu-frame-of-reference": "UOM:thermodynamic temperature",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "MudClass": {
+                "type": "string",
+                "title": "Mud Class",
+                "description": "The class of the drilling fluid.",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen",
+                "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-MudClass:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+              },
+              "Density": {
+                "type": "number",
+                "title": "Density",
+                "description": "Fluid density. This excludes the cuttings.",
+                "x-osdu-frame-of-reference": "UOM:mass per volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "ViscosityFunnel": {
+                "type": "number",
+                "title": "Viscosity Funnel",
+                "description": "Funnel viscosity in seconds.",
+                "x-osdu-frame-of-reference": "UOM:time",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "TemperatureViscosity": {
+                "type": "number",
+                "title": "Temperature Viscosity",
+                "description": "Funnel viscosity temperature.",
+                "x-osdu-frame-of-reference": "UOM:thermodynamic temperature",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "PlasticViscosity": {
+                "type": "number",
+                "title": "Plastic Viscosity",
+                "description": "Plastic viscosity.",
+                "x-osdu-frame-of-reference": "UOM:dynamic viscosity",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "YieldPoint": {
+                "type": "number",
+                "title": "Yield Point",
+                "description": "Yield point (Bingham and Herschel Bulkley models).",
+                "x-osdu-frame-of-reference": "UOM:pressure",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "LowShearYieldPoint": {
+                "type": "number",
+                "title": "Low Shear Yield Point",
+                "description": "Shearing capacity of mud at low velocity",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "Gel0Sec": {
+                "type": "number",
+                "title": "Gel0 Sec",
+                "description": "Zero-second gels.",
+                "x-osdu-frame-of-reference": "UOM:pressure",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "Gel10Sec": {
+                "type": "number",
+                "title": "Gel10 Sec",
+                "description": "Ten-second gels.",
+                "x-osdu-frame-of-reference": "UOM:pressure",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "Gel10Min": {
+                "type": "number",
+                "title": "Gel10 Min",
+                "description": "Ten-minute gels.",
+                "x-osdu-frame-of-reference": "UOM:pressure",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "Gel30Min": {
+                "type": "number",
+                "title": "Gel30 Min",
+                "description": "Thirty-minute gels.",
+                "x-osdu-frame-of-reference": "UOM:pressure",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "FilterCakeLtlp": {
+                "type": "number",
+                "title": "Filter Cake Ltlp",
+                "description": "Filter cake thickness at low (normal) temperature and pressure.",
+                "x-osdu-frame-of-reference": "UOM:length",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "FiltrateLtlp": {
+                "type": "number",
+                "title": "Filtrate Ltlp",
+                "description": "API water loss (low temperature and pressure mud filtrate measurement) (volume per 30 min).",
+                "x-osdu-frame-of-reference": "UOM:volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "AnnularShapeRatio": {
+                "type": "number",
+                "title": "Annular Shape Ratio",
+                "description": "Cleaning coefficient of drilling fluid",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "FiltrateTemperatureHthp": {
+                "type": "number",
+                "title": "Filtrate Temperature Hthp",
+                "description": "High temperature high pressure (HTHP) temperature.",
+                "x-osdu-frame-of-reference": "UOM:thermodynamic temperature",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "FiltratePressureHthp": {
+                "type": "number",
+                "title": "Filtrate Pressure Hthp",
+                "description": "High temperature high pressure (HTHP) pressure.",
+                "x-osdu-frame-of-reference": "UOM:pressure",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "FiltrateHthp": {
+                "type": "number",
+                "title": "Filtrate Hthp",
+                "description": "High temperature high pressure (HTHP) filtrate (volume per 30 min).",
+                "x-osdu-frame-of-reference": "UOM:volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "FilterCakeHthp": {
+                "type": "number",
+                "title": "Filter Cake Hthp",
+                "description": "High temperature high pressure (HTHP) filter cake thickness.",
+                "x-osdu-frame-of-reference": "UOM:length",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "SolidsPc": {
+                "type": "number",
+                "title": "Solids Pc",
+                "description": "Solids percentage from retort.",
+                "x-osdu-frame-of-reference": "UOM:volume per volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "WaterPc": {
+                "type": "number",
+                "title": "Water Pc",
+                "description": "Water content percent.",
+                "x-osdu-frame-of-reference": "UOM:volume per volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "OilPc": {
+                "type": "number",
+                "title": "Oil Pc",
+                "description": "Percent oil content from retort.",
+                "x-osdu-frame-of-reference": "UOM:volume per volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "SandPc": {
+                "type": "number",
+                "title": "Sand Pc",
+                "description": "Sand content percent.",
+                "x-osdu-frame-of-reference": "UOM:volume per volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "SolidsLowGravPc": {
+                "type": "number",
+                "title": "Solids Low Grav Pc",
+                "description": "Low gravity solids percent.",
+                "x-osdu-frame-of-reference": "UOM:volume per volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "SolidsLowGrav": {
+                "type": "number",
+                "title": "Solids Low Grav",
+                "description": "Solids low gravity content.",
+                "x-osdu-frame-of-reference": "UOM:mass per volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "SolidsLowGravCorrected": {
+                "type": "number",
+                "title": "Solids Low Grav Corrected",
+                "description": "Solids low gravity content corrected for chloride content",
+                "x-osdu-frame-of-reference": "UOM:mass per volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "SolidsHiGravPc": {
+                "type": "number",
+                "title": "Solids Hi Grav Pc",
+                "description": "Solids high gravity percent.",
+                "x-osdu-frame-of-reference": "UOM:volume per volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "SolidsHiGrav": {
+                "type": "number",
+                "title": "Solids Hi Grav",
+                "description": "Solids high gravity content.",
+                "x-osdu-frame-of-reference": "UOM:mass per volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "SolidsHiGravCorrected": {
+                "type": "number",
+                "title": "Solids Hi Grav Corrected",
+                "description": "Solids high gravity content corrected for chloride content",
+                "x-osdu-frame-of-reference": "UOM:mass per volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "SolidsCalcPc": {
+                "type": "number",
+                "title": "Solids Calc Pc",
+                "description": "Percent calculated solids content.",
+                "x-osdu-frame-of-reference": "UOM:volume per volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "BaritePc": {
+                "type": "number",
+                "title": "Barite Pc",
+                "description": "Barite content percent.",
+                "x-osdu-frame-of-reference": "UOM:volume per volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "Lcm": {
+                "type": "number",
+                "title": "Lcm",
+                "description": "Lost circulation material.",
+                "x-osdu-frame-of-reference": "UOM:mass per volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "Mbt": {
+                "type": "number",
+                "title": "Mbt",
+                "description": "Cation exchange capacity (CEC) of the mud sample as measured by methylene blue titration (MBT).\n\nNOTE: This is temporarily set to be a GenericMeasure with no unit validation, pending addition of CEC units to the Energistics UoM spec.",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "MudPh": {
+                "type": "number",
+                "title": "Mud Ph",
+                "description": "Mud pH.",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "MudTempPh": {
+                "type": "number",
+                "title": "Mud Temp Ph",
+                "description": "Mud pH measurement temperature.",
+                "x-osdu-frame-of-reference": "UOM:thermodynamic temperature",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "Pm": {
+                "type": "number",
+                "title": "Pm",
+                "description": "Phenolphthalein alkalinity of whole mud.",
+                "x-osdu-frame-of-reference": "UOM:volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "PmFiltrate": {
+                "type": "number",
+                "title": "Pm Filtrate",
+                "description": "Phenolphthalein alkalinity of mud filtrate.",
+                "x-osdu-frame-of-reference": "UOM:volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "Mf": {
+                "type": "number",
+                "title": "Mf",
+                "description": "Methyl orange alkalinity of filtrate.",
+                "x-osdu-frame-of-reference": "UOM:volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "AlkalinityP1": {
+                "type": "number",
+                "title": "Alkalinity P1",
+                "description": "Mud alkalinity P1 from alternate alkalinity method (volume in ml of 0.02N acid \nto reach the phenolphthalein endpoint).",
+                "x-osdu-frame-of-reference": "UOM:volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "AlkalinityP2": {
+                "type": "number",
+                "title": "Alkalinity P2",
+                "description": "Mud alkalinity P2 from alternate alkalinity method (volume in ml of 0.02N acid to titrate, the reagent mixture to the phenolphthalein endpoint).",
+                "x-osdu-frame-of-reference": "UOM:volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "Chloride": {
+                "type": "number",
+                "title": "Chloride",
+                "description": "Chloride content.",
+                "x-osdu-frame-of-reference": "UOM:mass per volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "Calcium": {
+                "type": "number",
+                "title": "Calcium",
+                "description": "Calcium content.",
+                "x-osdu-frame-of-reference": "UOM:mass per volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "Magnesium": {
+                "type": "number",
+                "title": "Magnesium",
+                "description": "Magnesium content.",
+                "x-osdu-frame-of-reference": "UOM:mass per volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "Potassium": {
+                "type": "number",
+                "title": "Potassium",
+                "description": "Potassium content.",
+                "x-osdu-frame-of-reference": "UOM:mass per volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "BrinePc": {
+                "type": "number",
+                "title": "Brine Pc",
+                "description": "Percent brine content.",
+                "x-osdu-frame-of-reference": "UOM:volume per volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "BrineDensity": {
+                "type": "number",
+                "title": "Brine Density",
+                "description": "Density of water phase of NAF.",
+                "x-osdu-frame-of-reference": "UOM:mass per volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "Lime": {
+                "type": "number",
+                "title": "Lime",
+                "description": "Lime content.",
+                "x-osdu-frame-of-reference": "UOM:mass per volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "ElectStab": {
+                "type": "number",
+                "title": "Elect Stab",
+                "description": "Measurement of the emulsion stability and oil-wetting capability in oil-based muds.",
+                "x-osdu-frame-of-reference": "UOM:electric potential difference",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "CalciumChloridePc": {
+                "type": "number",
+                "title": "Calcium Chloride Pc",
+                "description": "Calcium chloride percent.",
+                "x-osdu-frame-of-reference": "UOM:volume per volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "CalciumChloride": {
+                "type": "number",
+                "title": "Calcium Chloride",
+                "description": "Calcium chloride content.",
+                "x-osdu-frame-of-reference": "UOM:mass per volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "CompanyID": {
+                "type": "string",
+                "title": "Company",
+                "description": "Reference to the Company performing the analysis",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen",
+                "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Organisation:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+              },
+              "MudEngineer": {
+                "type": "string",
+                "title": "Mud Engineer",
+                "description": "The name of the Mud Engineer",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "Asg": {
+                "type": "number",
+                "title": "Asg",
+                "description": "Average specific gravity of solids.",
+                "x-osdu-frame-of-reference": "UOM:mass per mass",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "Polymer": {
+                "type": "number",
+                "title": "Polymer",
+                "description": "Polymers present in the mud system.",
+                "x-osdu-frame-of-reference": "UOM:volume per volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "PolymerType": {
+                "type": "array",
+                "title": "Polymer Type",
+                "description": "Type of polymers present in the mud system.",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "SolCorPc": {
+                "type": "number",
+                "title": "Sol Cor Pc",
+                "description": "Solids corrected for chloride content percent.",
+                "x-osdu-frame-of-reference": "UOM:volume per volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "OilCtg": {
+                "type": "number",
+                "title": "Oil Ctg",
+                "description": "Oil on cuttings.",
+                "x-osdu-frame-of-reference": "UOM:mass per mass",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "OilCtgDry": {
+                "type": "number",
+                "title": "Oil Ctg Dry",
+                "description": "Oil on dried cuttings.",
+                "x-osdu-frame-of-reference": "UOM:mass per volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "HardnessCa": {
+                "type": "number",
+                "title": "Hardness Ca",
+                "description": "Total calcium hardness.",
+                "x-osdu-frame-of-reference": "UOM:mass per mass",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "Sulfide": {
+                "type": "number",
+                "title": "Sulfide",
+                "description": "Sulfide content.",
+                "x-osdu-frame-of-reference": "UOM:mass per volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "AverageCuttingSize": {
+                "type": "number",
+                "title": "Average Cutting Size",
+                "description": "Average size of the drill cuttings.",
+                "x-osdu-frame-of-reference": "UOM:length",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "Carbonate": {
+                "type": "number",
+                "title": "Carbonate",
+                "description": "Carbonate content.",
+                "x-osdu-frame-of-reference": "UOM:mass per volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "Iron": {
+                "type": "number",
+                "title": "Iron",
+                "description": "Iron content.",
+                "x-osdu-frame-of-reference": "UOM:mass per volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "MetalRecovered": {
+                "type": "number",
+                "title": "Metal Recovered",
+                "description": "Metal recovered from the wellbore.",
+                "x-osdu-frame-of-reference": "UOM:mass",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "Turbidity": {
+                "type": "number",
+                "title": "Turbidity",
+                "description": "Turbidity units to measure the cloudiness or haziness of a fluid.",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "OilGrease": {
+                "type": "number",
+                "title": "Oil Grease",
+                "description": "Oil and grease content.",
+                "x-osdu-frame-of-reference": "UOM:mass per volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "Salt": {
+                "type": "number",
+                "title": "Salt",
+                "description": "Salt content.",
+                "x-osdu-frame-of-reference": "UOM:mass per volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "SaltPc": {
+                "type": "number",
+                "title": "Salt Pc",
+                "description": "Salt percent.",
+                "x-osdu-frame-of-reference": "UOM:volume per volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "Tct": {
+                "type": "number",
+                "title": "Tct",
+                "description": "True crystallization temperature.",
+                "x-osdu-frame-of-reference": "UOM:thermodynamic temperature",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "WaterPhaseSalinity": {
+                "type": "number",
+                "title": "Water Phase Salinity",
+                "description": "A factor showing the activity level of salt in oil-based mud.",
+                "x-osdu-frame-of-reference": "UOM:mass per volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "WholeMudCalcium": {
+                "type": "number",
+                "title": "Whole Mud Calcium",
+                "description": "Calcium content in the whole mud sample, including oil and water phases.",
+                "x-osdu-frame-of-reference": "UOM:mass per volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "WholeMudChloride": {
+                "type": "number",
+                "title": "Whole Mud Chloride",
+                "description": "Chloride content in the whole mud sample, including oil and water phases.",
+                "x-osdu-frame-of-reference": "UOM:mass per volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "ZincOxide": {
+                "type": "number",
+                "title": "Zinc Oxide",
+                "description": "Zinc oxide content.",
+                "x-osdu-frame-of-reference": "UOM:mass per volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "SodiumChloride": {
+                "type": "number",
+                "title": "Sodium Chloride",
+                "description": "Sodium chloride content.",
+                "x-osdu-frame-of-reference": "UOM:mass per volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "SodiumChloridePc": {
+                "type": "number",
+                "title": "Sodium Chloride Pc",
+                "description": "Sodium chloride percent.",
+                "x-osdu-frame-of-reference": "UOM:volume per volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "Comments": {
+                "type": "string",
+                "title": "Comments",
+                "description": "Comments and remarks.",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "Rheometer": {
+                "type": "array",
+                "title": "Rheometer",
+                "description": "Details of the Rheometer tests performed on the fluid sample",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen",
+                "items": {
+                  "type": "object",
+                  "title": "Rheometer",
+                  "description": "Rheometer values observed",
+                  "properties": {
+                    "TemperatureRheometer": {
+                      "type": "number",
+                      "title": "Temperature Rheometer",
+                      "description": "The temperature at which the rheometer values were measured",
+                      "x-osdu-frame-of-reference": "UOM:thermodynamic temperature",
+                      "x-osdu-attribution-authority": "The Open Group",
+                      "x-osdu-attribution-publication": "The OSDU Data Platform",
+                      "x-osdu-attribution-revision": "evergreen"
+                    },
+                    "PressureRheometer": {
+                      "type": "number",
+                      "title": "Pressure Rheometer",
+                      "description": "The pressure at which the rheometer values were measured",
+                      "x-osdu-frame-of-reference": "UOM:pressure",
+                      "x-osdu-attribution-authority": "The Open Group",
+                      "x-osdu-attribution-publication": "The OSDU Data Platform",
+                      "x-osdu-attribution-revision": "evergreen"
+                    },
+                    "RheometerViscosities": {
+                      "type": "array",
+                      "title": "Rheometer Viscosities",
+                      "description": "The viscosities recorder during the Rheometer test",
+                      "x-osdu-attribution-authority": "The Open Group",
+                      "x-osdu-attribution-publication": "The OSDU Data Platform",
+                      "x-osdu-attribution-revision": "evergreen",
+                      "items": {
+                        "type": "object",
+                        "title": "Rheometer Viscosity",
+                        "description": "Viscosity values observed",
+                        "properties": {
+                          "Speed": {
+                            "type": "number",
+                            "title": "Speed",
+                            "description": "Rotational speed of the rheometer, typically in RPM.",
+                            "x-osdu-frame-of-reference": "UOM:angular velocity",
+                            "x-osdu-attribution-authority": "The Open Group",
+                            "x-osdu-attribution-publication": "The OSDU Data Platform",
+                            "x-osdu-attribution-revision": "evergreen"
+                          },
+                          "Viscosity": {
+                            "type": "number",
+                            "title": "Viscosity",
+                            "description": "The raw reading from a rheometer. This could be, but is not necessarily, a viscosity.",
+                            "x-osdu-frame-of-reference": "UOM:dynamic viscosity",
+                            "x-osdu-attribution-authority": "The Open Group",
+                            "x-osdu-attribution-publication": "The OSDU Data Platform",
+                            "x-osdu-attribution-revision": "evergreen"
+                          }
+                        },
+                        "required": [
+                          "Speed",
+                          "Viscosity"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "TemperatureRheometer",
+                    "PressureRheometer"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "WellboreID": {
+          "type": "string",
+          "title": "Wellbore ID",
+          "description": "Reference to the wellbore that is the subject of this fluids report",
+          "x-osdu-attribution-authority": "The Open Group",
+          "x-osdu-attribution-publication": "The OSDU Data Platform",
+          "x-osdu-attribution-revision": "evergreen",
+          "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Wellbore:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "Name": {
+          "type": "string",
+          "title": "Name",
+          "description": "Name of Fluids Report"
+        }
+      },
+      "required": [
+        "StartDateTime",
+        "EndDateTime",
+        "WellboreID"
+      ]
+    }
+  ]
+}

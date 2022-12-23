@@ -1,0 +1,101 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/master-data/Agreement.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Agreement",
+  "description": "A contract or other covenant between Company and counterparties which is relevant to the data universe because it includes terms governing use of data.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractMaster.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "AgreementIdentifier": {
+          "description": "Natural unique identifier of an agreement.",
+          "type": "string"
+        },
+        "AgreementName": {
+          "description": "Familiar name of agreement.  May be a code name for highly restricted agreements.",
+          "type": "string"
+        },
+        "AgreementExternalID": {
+          "description": "Unique identifier of agreement in Company contracts system of record.",
+          "type": "string"
+        },
+        "AgreementExternalSystem": {
+          "description": "Name of Company contracts system of record containing authorized version of agreement.",
+          "type": "string"
+        },
+        "AgreementParentID": {
+          "type": "string",
+          "description": "Reference to master agreement or other parental agreement in a hierarchy of related agreements.",
+          "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Agreement:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "AgreementTypeID": {
+          "type": "string",
+          "description": "General purpose of agreement, such as license, purchase, trade, NDA.",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-AgreementType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "EffectiveDate": {
+          "description": "The Date when the agreement was put in force.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "Counterparties": {
+          "description": "A list of references to legal entities which are party to the agreement in addition to Company.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Organisation:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+          }
+        },
+        "Terms": {
+          "description": "A list of obligations or allowed activities specified by the agreement that apply to stored resources.  These are translated into rules, which the Entitlement Rulebase enforces.  Each rule should reference the agreement it codifies.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "x-osdu-indexing": {
+              "type": "flattened"
+            },
+            "properties": {
+              "ObligationTypeID": {
+                "description": "Reference to the general class of obligation, such as nondisclosure, termination of use, non-assignment, export restriction, limitation on derivatives.",
+                "type": "string",
+                "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-ObligationType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+              },
+              "ObligationDescription": {
+                "description": "Lengthy description of a legal restriction imposed on data governed by the agreement.",
+                "type": "string"
+              },
+              "StartDate": {
+                "description": "The Date when the obligation becomes enforceable.",
+                "type": "string",
+                "format": "date-time"
+              },
+              "EndDate": {
+                "description": "The Date when the obligation no longer needs to be fulfilled.",
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          }
+        },
+        "RestrictedResources": {
+          "description": "A list of Resources that are governed by the agreement.  Note that different terms may apply to different resources, but that granularity is handled by the Entitlements Rulebase.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "ResourceID": {
+                "description": "Reference to an information Resource which is governed by the agreement.",
+                "type": "string",
+                "pattern": "^[\\w\\-\\.]+:[\\w\\-\\.]+:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

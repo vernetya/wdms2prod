@@ -1,0 +1,16 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/TubularComponentGrade.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TubularComponentGrade",
+  "description": "Id of tubing grade - eg. the tensile strength of the tubing material. A system of classifying the material specifications for steel alloys used in the manufacture of tubing.",
+  "x-osdu-governance-authorities": [
+    "None"
+  ],
+  "x-osdu-governance-model": "LOCAL",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    }
+  ]
+}

@@ -1,0 +1,182 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/master-data/WellActivityProgram.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Well Activity Program",
+  "description": "A complete description of an Activity Program for a unique or a set of Well(s) and/or Wellbore(s)",
+  "type": "object",
+  "x-osdu-virtual-properties": {
+    "data.VirtualProperties.DefaultLocation": {
+      "type": "object",
+      "priority": [
+        {
+          "path": "data.SpatialLocation"
+        }
+      ]
+    },
+    "data.VirtualProperties.DefaultName": {
+      "type": "string",
+      "priority": [
+        {
+          "path": "data.ProjectName"
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractMaster.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractProject.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "RigID": {
+          "type": "string",
+          "title": "Rig ID",
+          "description": "A reference to the object that holds the information about the rig used in this drilling program",
+          "x-osdu-attribution-authority": "The Open Group",
+          "x-osdu-attribution-publication": "The OSDU Data Platform",
+          "x-osdu-attribution-revision": "evergreen",
+          "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Rig:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "RiskIDs": {
+          "type": "array",
+          "title": "Risk IDs",
+          "description": "A reference to the object that holds the information about the risks that apply to this drilling program (may be too high level for this)",
+          "items": {
+            "type": "string",
+            "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Risk:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+          }
+        },
+        "Phases": {
+          "type": "array",
+          "title": "Phases",
+          "description": "The set of multiple phases that compose the whole program",
+          "items": {
+            "type": "object",
+            "title": "Phase",
+            "description": "Description of an individual phase that compose the WellActivityProgram. A phase describes the key milestones and is usually based on the major sections of the well or non-well-related work.\n(Such as \"Acces Well\", \"Suspend \", \"Wellhead Removal \"...)",
+            "properties": {
+              "TypeID": {
+                "type": "string",
+                "title": "Type ID",
+                "description": "A reference to the object that holds the information about the type of phase that is described (such as Workover, Completion\u2026)",
+                "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-WellActivityPhaseType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+              },
+              "WellActivityPlanID": {
+                "type": "string",
+                "title": "Well Activity Plan ID",
+                "description": "A reference to the object that holds the information about the activity plan for this Well Activity program",
+                "pattern": "^[\\w\\-\\.]+:master-data\\-\\-ActivityPlan:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+              },
+              "SequenceNo": {
+                "type": "number",
+                "title": "Sequence Number",
+                "description": "The order that these phases will be executed (is this needed?)"
+              },
+              "WellboreID": {
+                "type": "string",
+                "title": "Wellbore ID",
+                "description": "The wellbore to which this drilling program phase refers",
+                "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Wellbore:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+              },
+              "RiskIDs": {
+                "type": "array",
+                "title": "Risk IDs",
+                "description": "Reference to the objects that holds the information about the risks that apply to this drilling program (may be too high level for this)",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Risk:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+                }
+              },
+              "Objective": {
+                "type": "string",
+                "title": "Objective",
+                "description": "Free text box to describe the objectives from the phase."
+              },
+              "BHARunIDs": {
+                "type": "array",
+                "title": "BHA Run IDs",
+                "description": "Reference to the different BHA runs",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[\\w\\-\\.]+:master-data\\-\\-BHARun:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+                }
+              },
+              "PlannedLithologyIDs": {
+                "type": "array",
+                "title": "Planned Lithology IDs",
+                "description": "Reference to the objects that hold the expected lithology designs information about the drilling program for this phase",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[\\w\\-\\.]+:work-product-component\\-\\-PlannedLithology:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+                }
+              },
+              "PlannedCementJobIDs": {
+                "type": "array",
+                "title": "Planned Cement Job IDs",
+                "description": "Reference to the objects that hold the cementing design information about the drilling program for this phase",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[\\w\\-\\.]+:master-data\\-\\-PlannedCementJob:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+                }
+              },
+              "EvaluationPlanID": {
+                "type": "string",
+                "title": "Evaluation Plan ID",
+                "description": "A reference to the object that holds the evaluation information about the drilling program for this phase.",
+                "pattern": "^[\\w\\-\\.]+:master-data\\-\\-EvaluationPlan:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+              },
+              "KickTolerance": {
+                "type": "number",
+                "title": "Kick Tolerance",
+                "description": "Volume of a kick that will not cause a pressure exceeding the formation fracture pressure.",
+                "x-osdu-frame-of-reference": "UOM:volume"
+              },
+              "MAASP": {
+                "type": "number",
+                "title": "Maximum Allowable Annulus Surface Pressure",
+                "description": "An absolute upper limit for the pressure in the annulus of an oil and gas well as measured at the wellhead. It's a number with pressure units",
+                "x-osdu-frame-of-reference": "UOM:pressure"
+              },
+              "WellboreArchitectureID": {
+                "type": "string",
+                "title": "Wellbore Architecture ID",
+                "description": "A reference to the object that describes the physical structure of a borehole",
+                "pattern": "^[\\w\\-\\.]+:master-data\\-\\-WellboreArchitecture:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+              },
+              "WellBarrierElementTestID": {
+                "type": "string",
+                "title": "Well Barrier Element Test ID",
+                "description": "Identifier of the description from the Well Barrier Element Test to be run",
+                "pattern": "^[\\w\\-\\.]+:master-data\\-\\-WellBarrierElementTest:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+              }
+            },
+            "required": [
+              "TypeID",
+              "WellActivityPlanID",
+              "BHARunIDs"
+            ]
+          }
+        },
+        "TypeID": {
+          "type": "string",
+          "title": "Type",
+          "description": "The type of well activity program. The default value for this is \"Primary\" (For example, they may have  \"primary\" program and \"backup\" programs)",
+          "example": "namespace:reference-data--WellActivityProgramType:Primary:",
+          "x-osdu-attribution-authority": "The Open Group",
+          "x-osdu-attribution-publication": "The OSDU Data Platform",
+          "x-osdu-attribution-revision": "evergreen",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-WellActivityProgramType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        }
+      },
+      "required": [
+        "Phases",
+        "TypeID"
+      ]
+    }
+  ]
+}

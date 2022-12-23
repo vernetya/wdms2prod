@@ -1,0 +1,50 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/abstract/AbstractFacilitySpecification.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AbstractFacilitySpecification",
+  "description": "A property, characteristic, or attribute about a facility that is not described explicitly elsewhere.",
+  "type": "object",
+  "properties": {
+    "EffectiveDateTime": {
+      "description": "The date and time at which the facility specification instance becomes effective.",
+      "type": "string",
+      "format": "date-time",
+      "x-osdu-frame-of-reference": "DateTime"
+    },
+    "TerminationDateTime": {
+      "description": "The date and time at which the facility specification instance is no longer in effect.",
+      "format": "date-time",
+      "type": "string",
+      "x-osdu-frame-of-reference": "DateTime"
+    },
+    "FacilitySpecificationQuantity": {
+      "description": "The value for the specified parameter type.",
+      "type": "number",
+      "x-osdu-frame-of-reference": "UOM_via_property:UnitOfMeasureID"
+    },
+    "FacilitySpecificationDateTime": {
+      "description": "The actual date and time value of the parameter.",
+      "type": "string",
+      "format": "date-time",
+      "x-osdu-frame-of-reference": "DateTime"
+    },
+    "FacilitySpecificationIndicator": {
+      "description": "The actual indicator value of the parameter.",
+      "type": "boolean"
+    },
+    "FacilitySpecificationText": {
+      "description": "The actual text value of the parameter.",
+      "type": "string"
+    },
+    "UnitOfMeasureID": {
+      "description": "The unit for the quantity parameter, like metre (m in SI units system) for quantity Length.",
+      "type": "string",
+      "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-UnitOfMeasure:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+    },
+    "ParameterTypeID": {
+      "description": "Parameter type of property or characteristic.",
+      "type": "string",
+      "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-ParameterType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+    }
+  }
+}

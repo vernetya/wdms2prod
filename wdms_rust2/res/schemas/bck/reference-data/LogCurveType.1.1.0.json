@@ -1,0 +1,47 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "x-osdu-governance-model": "LOCAL",
+  "x-osdu-governance-authorities": [
+    "Energistics"
+  ],
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/LogCurveType.1.1.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "LogCurveType",
+  "description": "LogCurveType is the standard mnemonic chosen by the company - OSDU provides an initial list.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "PropertyType": {
+          "$ref": "../abstract/AbstractPropertyType.1.0.0.json",
+          "title": "Property Type",
+          "description": "It holds the PropertyType associated with this reference LogCurveType further defining the semantics of the value. It contains a relationship to PropertyType record and its (de-normalized) name. String or number values can represent e.g. A date or a time by referring to the respective PropertyType record id.",
+          "example": {
+            "PropertyTypeID": "namespace:reference-data--PropertyType:ace68d4c-7400-431d-9a33-0541b8bfc4b4:",
+            "Name": "dip azimuth"
+          }
+        },
+        "UnitQuantityID": {
+          "type": "string",
+          "title": "Unit Quantity ID",
+          "description": "Only populated if the ValueType is \"number\". It holds the UnitQuantity associated with this reference property type. It is a relationship to UnitQuantity record. Denormalized value: the UnitQuantityID is derived from the PropertyType's UnitQuantity.",
+          "example": "namespace:reference-data--UnitQuantity:plane%20angle:",
+          "x-osdu-existing-standard": "Energistics Unit of Measure V1.0",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-UnitQuantity:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "AcquisitionCompanyID": {
+          "type": "string",
+          "title": "Acquisition Company ID",
+          "description": "The relationship to data acquisition company defining the LogCurveType. Log curve codes are ambiguous, the acquisition company association disambiguates them.",
+          "example": "namespace:reference-data--StandardsOrganisation:BakerHughesInteq:",
+          "x-osdu-existing-standard": "Energistics Unit of Measure V1.0",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-StandardsOrganisation:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        }
+      }
+    }
+  ]
+}

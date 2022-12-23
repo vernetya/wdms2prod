@@ -1,0 +1,20 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/dataset/File.GeoJSON.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "File.GeoJSON",
+  "description": "GeoJSON is an open standard format designed for representing simple geographical features, optionally along with their non-spatial attributes. It is based on the JSON format; the schema is available via https://geojson.org/schema/FeatureCollection.json. The features include points, line strings, polygons, and multi-part collections of these types. Coordinates are exclusively expressed in EPSG::4326.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractDataset.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractFile.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {}
+    }
+  ]
+}

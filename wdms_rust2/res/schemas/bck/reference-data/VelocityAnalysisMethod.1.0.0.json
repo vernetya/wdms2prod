@@ -1,0 +1,16 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/VelocityAnalysisMethod.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "VelocityAnalysisMethod",
+  "description": "Type of algorithm used to derive velocities such as Stacking NMO, Tomography.",
+  "x-osdu-governance-authorities": [
+    "OSDU"
+  ],
+  "x-osdu-governance-model": "OPEN",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    }
+  ]
+}

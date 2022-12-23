@@ -1,0 +1,136 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/work-product-component/WellboreTrajectory.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Wellbore Trajectory",
+  "description": "Work Product Component describing an individual instance of a wellbore trajectory data object. Also called a deviation survey, wellbore trajectory is data that is used to calculate the position and spatial uncertainty of a planned or actual wellbore in 2-dimensional and 3-dimensional space.",
+  "type": "object",
+  "x-osdu-supported-file-formats": [
+    "WITSML",
+    "P7/17",
+    "P7/2000",
+    "LAS2",
+    "LAS3",
+    "csv"
+  ],
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractWPCGroupType.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractWorkProductComponent.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "ServiceCompanyID": {
+          "type": "string",
+          "title": "Service Company",
+          "description": "Name of the Survey Company.",
+          "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Organisation:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "WellboreID": {
+          "type": "string",
+          "title": "Wellbore",
+          "description": "A unique name, code or number designated to the Wellbore.",
+          "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Wellbore:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "TopDepthMeasuredDepth": {
+          "type": "number",
+          "title": "Survey Top Measured Depth",
+          "description": "Measured depth in wellbore where the directional survey starts. This should equal the minimum station measured depth for this directional survey, regardless of whether the surveyed station represents an actual surveyed MD or not.",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "AzimuthReferenceType": {
+          "type": "string",
+          "title": "Azimuth Reference Type",
+          "description": "The North reference of the trajectory used to define the azimuth angular measurement values. For example, True North, Grid North, Magnetic North.",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-AzimuthReferenceType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "CalculationMethodType": {
+          "type": "string",
+          "title": "Calculation Method Type",
+          "description": "Calculation Method Type used to compute the TVD, X OFFSET, Y OFFSET and DOG LEG SEVERITY values for this Directional Survey. For example, Radius of Curvature, Minimum Curvature, Balanced Tangential, etc.",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-CalculationMethodType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "ProjectedCRSID": {
+          "type": "string",
+          "title": "Projected Coordinate Reference System ID",
+          "description": "Coordinate Reference System defining the Projection of the station EASTING and NORTHING values. If  type is \"Grid North\" and EASTING and NORTHING attributes are stored, clearly identifying their projection is required.",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-CoordinateReferenceSystem:[\\w\\-\\.\\:\\%]+:[0-9]*$",
+          "example": "namespace:reference-data--CoordinateReferenceSystem:Projected:EPSG::32615:"
+        },
+        "ActiveIndicator": {
+          "type": "boolean",
+          "title": "Active Survey Indicator",
+          "description": "A flag indicating if the survey is currently active or valid within his lifecycle stage, not necessarily the definitive survey."
+        },
+        "SurveyType": {
+          "type": "string",
+          "title": "Directional Survey Type",
+          "description": "The type of this directional survey.  For example a \"Directional Survey\" where MD, Inclination and Azimuth are all measured or a \"Position Log\" where Inclination and Azimuth are both null and only MD, TVD and X/Y Offsets are available) - or \"Full Survey\" where everything is fully filled-up, depth-inclination-azimuth."
+        },
+        "AcquisitionDate": {
+          "type": "string",
+          "format": "date-time",
+          "title": "Effective Date",
+          "description": "The date that the survey data was acquired on the field."
+        },
+        "GeographicCRSID": {
+          "type": "string",
+          "title": "Geographic Coordinate Reference System",
+          "description": "Coordinate Reference System defining the Geodetic Datum of the station LATITUDE and LONGITUDE values. If LATITUDE and LONGITUDE attributes are stored, clearly identifying their Datum is required.",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-CoordinateReferenceSystem:[\\w\\-\\.\\:\\%]+:[0-9]*$",
+          "example": "namespace:reference-data--CoordinateReferenceSystem:Geographic2D:EPSG::4326:"
+        },
+        "AcquisitionRemark": {
+          "type": "string",
+          "title": "Survey Remark",
+          "description": "Remarks related to acquisition context which is not the same as Description which is a summary of the work-product-component."
+        },
+        "SurveyReferenceIdentifier": {
+          "type": "string",
+          "title": "Survey Reference Identifier",
+          "description": "Unique or Distinctive Survey Reference Number, Job Number, File Number, Identifier, Label, Name, etc. as indicated on a directional survey report, file, etc.  Use this attribute to allow correlation of the data in this Directional Survey back to the original source document, file, etc."
+        },
+        "SurveyToolTypeID": {
+          "type": "string",
+          "title": "Type of the Survey Tool",
+          "description": "The type of tool or equipment used to acquire this Directional Survey.  For example, gyroscopic, magnetic, MWD, TOTCO, acid bottle, etc. Follow OWSG reference data and support the ISCWSA survey tool definitions."
+        },
+        "SurveyVersion": {
+          "type": "string",
+          "title": "Survey Version",
+          "description": "The version of the wellbore survey deliverable received from the service provider - as given by this provider"
+        },
+        "ExtrapolatedMeasuredDepth": {
+          "type": "number",
+          "title": "Extrapolated Measured Depth",
+          "description": "The measured depth to which the survey segment was extrapolated.",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "BaseDepthMeasuredDepth": {
+          "type": "number",
+          "title": "Survey Base Measured Depth",
+          "description": "Measured depth within the wellbore of the LAST surveyed station with recorded data.  If a stored survey has been extrapolated to a deeper depth than the last surveyed station then that is the extrapolated measured depth and not the survey base depth.",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "TieMeasuredDepth": {
+          "type": "number",
+          "title": "Tie Measured Depth",
+          "description": "Tie-point depth measured along the wellbore from the measurement reference datum to the survey station - where tie point is the place on the originating survey where the current survey intersect it.",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "VerticalMeasurement": {
+          "$ref": "../abstract/AbstractFacilityVerticalMeasurement.1.0.0.json",
+          "description": "References an entry in the Vertical Measurement array for the Wellbore identified by WellboreID, which defines the vertical reference datum for all survey station measured depths."
+        }
+      },
+      "required": [
+        "WellboreID",
+        "TopDepthMeasuredDepth",
+        "BaseDepthMeasuredDepth",
+        "VerticalMeasurement"
+      ]
+    }
+  ]
+}

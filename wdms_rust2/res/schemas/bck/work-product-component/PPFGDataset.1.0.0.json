@@ -1,0 +1,157 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/work-product-component/PPFGDataset.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PPFGDataset",
+  "description": "Pore Pressure and Fracture (Pressure) Gradient (PPFG) data describes the predicted (Pre-drill) and actual (Post-drill) depth-related variations in overburden stress, pore pressure, fracture pressure and minimum principal stress within a wellbore and conveys the range of uncertainty in these values given various plausible geological scenarios. PPFG predictions are fundamental inputs for well design and construction and estimates of pore and fracture pressure are typically provided to the well planning and execution teams.",
+  "type": "object",
+  "x-osdu-supported-file-formats": [
+    "WITSML",
+    "LAS2",
+    "LAS3",
+    "csv"
+  ],
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractWPCGroupType.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractWorkProductComponent.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "WellID": {
+          "type": "string",
+          "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Well:[\\w\\-\\.\\:\\%]+:[0-9]*$",
+          "description": "ID from the Well where the PPFG Work Product Component was recorded"
+        },
+        "WellboreID": {
+          "type": "string",
+          "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Wellbore:[\\w\\-\\.\\:\\%]+:[0-9]*$",
+          "description": "ID from the Wellbore where the PPFG Work Product Component was recorded"
+        },
+        "RecordDate": {
+          "type": "string",
+          "description": "The date that the PPFG data set was created by the PPFG practitioner or contractor",
+          "format": "date-time",
+          "x-osdu-frame-of-reference": "DateTime"
+        },
+        "ContextTypeID": {
+          "type": "string",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-PPFGContextType:[\\w\\-\\.\\:\\%]+:[0-9]*$",
+          "description": "ID that reflects the context of the PPFG  data set, for example 'Pre-Drill' or 'Post-Drill'"
+        },
+        "ServiceCompanyID": {
+          "description": "ID of the service Company that acquired the PPFG",
+          "type": "string",
+          "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Organisation:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "Comment": {
+          "description": "Open comments from the calculation team",
+          "type": "string"
+        },
+        "ReferenceWellTrajectoryID": {
+          "type": "string",
+          "pattern": "^[\\w\\-\\.]+:work-product-component\\-\\-WellboreTrajectory:[\\w\\-\\.\\:\\%]+:[0-9]*$",
+          "description": "Id of the Reference WellTrajectory used for TVD's calculation"
+        },
+        "OffsetWellboreIDs": {
+          "description": "IDs of the offset Wellbores included in the context and calculations of this PPFG data set",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Wellbore:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+          }
+        },
+        "PrimaryReferenceCurveID": {
+          "type": "string",
+          "description": "ID of the PPFG curve that is the primary reference or index. Derived from the PPFG curve ID "
+        },
+        "PrimaryReferenceType": {
+          "type": "string",
+          "description": "The type of the primary reference, for example 'TVDSS',  'MD' , 'TWT'"
+        },
+        "AbsentValueCharacters": {
+          "type": "string",
+          "description": "The characters that represent absent curve values in this data set, for example  '-999', 'NULL', '0', etc. Typically for legacy data "
+        },
+        "TectonicSetting": {
+          "type": "string",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-TectonicSettingType:[\\w\\-\\.\\:\\%]+:[0-9]*$",
+          "description": "Tectonic Scenario Setting for Planning and Pore Pressure Practitioners. Built into interpretive curves. Can be, for example 'Strike Slip'"
+        },
+        "GaugeType": {
+          "type": "string",
+          "description": "Free text to describe the type of gauge used for the pressure measurement"
+        },
+        "VerticalMeasurement": {
+          "$ref": "../abstract/AbstractFacilityVerticalMeasurement.1.0.0.json",
+          "description": "The Vertical Measurement for the Wellbore identified which defines the vertical reference pressure datum for the related PPFG curves in this data set. The pressure datum is used to calculate the average pressure gradient in"
+        },
+        "Curves": {
+          "description": "Array of curve that constitutes the whole PPFG Dataset",
+          "type": "array",
+          "x-osdu-indexing": {
+            "type": "nested"
+          },
+          "items": {
+            "type": "object",
+            "properties": {
+              "CurveID": {
+                "description": "The ID of the PPFG Curve",
+                "type": "string"
+              },
+              "CurveName": {
+                "description": "The original or as supplied PPFG curve name. Intended to hold historical or legacy information",
+                "type": "string"
+              },
+              "CurveMainFamilyID": {
+                "type": "string",
+                "description": "ID of the Main Family Type of the PPFG quantity measured, for example 'Pore Pressure'. Primarily used for high level curve classification",
+                "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-PPFGCurveMainFamily:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+              },
+              "CurveFamilyID": {
+                "type": "string",
+                "description": "ID of the PPFG Curve Family of the PPFG quantity measured, for example 'Pore Pressure from Corrected Drilling Exponent'. An individual curve that belongs to a Main Family",
+                "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-PPFGCurveFamily:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+              },
+              "CurveFamilyMnemonicID": {
+                "type": "string",
+                "description": "ID of the mnemonic of the Curve Family which is the value as received either from external providers or from internal processing team, for example 'PP DxC'",
+                "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-PPFGCurveMnemonic:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+              },
+              "CurveProbabilityID": {
+                "type": "string",
+                "description": "ID of the PPFG Curve probability, for example 'Most Likely Case' and 'P50'",
+                "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-PPFGCurveProbability:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+              },
+              "CurveDataProcessingTypeIDs": {
+                "description": "IDs of the type and level of processing that has been applied to the curve. An array of curve processing operations that have been applied, for example 'Smoothed', 'Calibrated', etc",
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-PPFGCurveProcessingType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+                }
+              },
+              "CurveLithologyID": {
+                "type": "string",
+                "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-PPFGCurveLithoType:[\\w\\-\\.\\:\\%]+:[0-9]*$",
+                "description": "ID of the lithological unit represented by the curve"
+              },
+              "CurveTransformModelTypeID": {
+                "type": "string",
+                "description": "ID of the empirical calibrated model used for pressure calculations from a petrophysical curve (sonic or resistivity logs), for example 'Eaton' and  'Bowers',... ",
+                "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-PPFGCurveTransformModelType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+              },
+              "CurveUOM": {
+                "type": "string",
+                "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-UnitOfMeasure:[\\w\\-\\.\\:\\%]+:[0-9]*$",
+                "description": "Unit of Measure of the Physical Quantity Measured by the curve. An ID to relevant unit of measure reference"
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/SeismicDomainType.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SeismicDomainType",
+  "description": "Nature of the vertical axis in the trace data set, usually Depth or Time.  Indicates which pair of start/end values in trace data is the reliable, precise pair.",
+  "x-osdu-governance-authorities": [
+    "OSDU"
+  ],
+  "x-osdu-governance-model": "FIXED",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    }
+  ]
+}

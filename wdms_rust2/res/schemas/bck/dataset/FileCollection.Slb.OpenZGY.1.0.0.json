@@ -1,0 +1,26 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "x-osdu-supported-file-formats": [
+    "OpenZGY"
+  ],
+  "x-osdu-governance-authorities": [
+    "Schlumberger"
+  ],
+  "$id": "https://schema.osdu.opengroup.org/json/dataset/FileCollection.Slb.OpenZGY.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "FileCollection.Slb.OpenZGY",
+  "description": "The dataset representation for optimized seismic access to the OpenZGY framework developed by Schlumberger, storing seismic 3D data for seismic interpretation.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractDataset.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractFileCollection.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {}
+    }
+  ]
+}

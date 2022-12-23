@@ -1,0 +1,20 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/dataset/File.Image.PNG.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "File.Image.PNG",
+  "description": "An image file in Portable Network Graphics (PNG) format, https://en.wikipedia.org/wiki/Portable_Network_Graphics.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractDataset.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractFile.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {}
+    }
+  ]
+}

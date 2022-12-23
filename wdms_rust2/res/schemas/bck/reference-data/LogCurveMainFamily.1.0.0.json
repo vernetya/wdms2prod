@@ -1,0 +1,16 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/LogCurveMainFamily.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "LogCurveMainFamily",
+  "description": "LogCurveMainFamily is the Geological Physical Quantity Measured - such as porosity ",
+  "x-osdu-governance-authorities": [
+    "None"
+  ],
+  "x-osdu-governance-model": "LOCAL",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    }
+  ]
+}

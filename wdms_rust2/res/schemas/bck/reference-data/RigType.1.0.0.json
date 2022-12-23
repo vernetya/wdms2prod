@@ -1,0 +1,21 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "x-osdu-governance-model": "OPEN",
+  "x-osdu-governance-authorities": [
+    "osdu"
+  ],
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/RigType.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RigType",
+  "description": "Types of Drilling Rigs. Possible reference values: Barge, Coiled Tubing, Floater, Jackup, Land, Platform, Semi_Submersible, Unknown",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {}
+    }
+  ]
+}

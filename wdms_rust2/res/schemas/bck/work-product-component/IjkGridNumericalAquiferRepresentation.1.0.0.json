@@ -1,0 +1,119 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/work-product-component/IjkGridNumericalAquiferRepresentation.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "NumericalAquiferRepresentation",
+  "description": "A numerical aquifer representation defines the geometry of the aquifer as IJK grid cell indices.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractWPCGroupType.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractWorkProductComponent.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractRepresentation.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "InterpretationID": {
+          "type": "string",
+          "title": "Aquifer Interpretation ID",
+          "description": "The reference to the AquiferInterpretation this representation belongs to.",
+          "format": "uri-reference",
+          "pattern": "^[\\w\\-\\.]+:work-product-component\\-\\-AquiferInterpretation:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "SingleCellAquiferSet": {
+          "type": "array",
+          "title": "Single Cell Aquifer Set",
+          "description": "Describe the aquifer by means of one to many single cell of reservoir grids",
+          "items": {
+            "type": "object",
+            "title": "SingleCellAquifer",
+            "description": "Describe a cell which is a part or the whole definition of an aquifer.",
+            "properties": {
+              "SupportingGridID": {
+                "type": "string",
+                "title": "Supporting Grid",
+                "description": "The grid where the aquifer cell is defined",
+                "format": "uri-reference",
+                "example": "namespace:work-product-component--IjkGridRepresentation:85348741-3433-406B-9189-22B298C3E2D2:",
+                "pattern": "^[\\w\\-\\.]+:work-product-component\\-\\-IjkGridRepresentation:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+              },
+              "I": {
+                "type": "integer",
+                "title": "I index",
+                "description": "I index of the cell",
+                "example": 10
+              },
+              "J": {
+                "type": "integer",
+                "title": "J index",
+                "description": "J index of the cell",
+                "example": 20
+              },
+              "K": {
+                "type": "integer",
+                "title": "K index",
+                "description": "K index of the cell",
+                "example": 30
+              },
+              "Area": {
+                "type": "number",
+                "title": "Area",
+                "description": "Area of the aquifer.",
+                "example": 11520.56,
+                "x-osdu-frame-of-reference": "UOM:area"
+              },
+              "Length": {
+                "type": "number",
+                "title": "Length",
+                "description": "Length of the aquifer.",
+                "example": 7045,
+                "x-osdu-frame-of-reference": "UOM:length"
+              },
+              "Porosity": {
+                "type": "number",
+                "title": "Porosity",
+                "description": "Porosity of the aquifer.  Default property, caution if the grid property has got multi realizations.",
+                "example": 0.2,
+                "x-osdu-frame-of-reference": "UOM:dimensionless"
+              },
+              "Permeability": {
+                "type": "number",
+                "title": "Permeability",
+                "description": "Permeability of the aquifer. Default property, caution if the grid property has got multi realizations.",
+                "example": 180,
+                "x-osdu-frame-of-reference": "UOM:permeability rock"
+              },
+              "Depth": {
+                "type": "number",
+                "title": "Depth",
+                "description": "Depth of the aquifer",
+                "example": 2150,
+                "x-osdu-frame-of-reference": "UOM:length"
+              },
+              "InitialPressure": {
+                "type": "number",
+                "title": "Initial Pressure",
+                "description": "Initial pressure of the aquifer.  Default property, caution if the grid property has got multi realizations.",
+                "example": 0,
+                "x-osdu-frame-of-reference": "UOM:pressure"
+              }
+            }
+          }
+        },
+        "ConnectionSet": {
+          "type": "array",
+          "title": "Connection Set",
+          "description": "List all connections between the aquifer and reservoir grids.",
+          "items": {
+            "$ref": "../abstract/AbstractIjkGridFlowSimulationBoundaryConnection.1.0.0.json"
+          }
+        }
+      }
+    }
+  ]
+}

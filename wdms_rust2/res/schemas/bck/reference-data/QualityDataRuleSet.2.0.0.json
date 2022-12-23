@@ -1,0 +1,63 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "x-osdu-governance-model": "LOCAL",
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/QualityDataRuleSet.2.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "QualityDataRuleSet",
+  "description": "A set of data quality rules to assess a specific aspect in the trustworthiness of data.",
+  "type": "object",
+  "x-osdu-virtual-properties": {
+    "data.VirtualProperties.DefaultName": {
+      "type": "string",
+      "priority": [
+        {
+          "path": "data.Name"
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "description": "Name of the data ruleset. For example, QualityDataRuleSet collection 1 for wellbore"
+        },
+        "Description": {
+          "type": "string",
+          "description": "A description of the QualityDataRuleSet."
+        },
+        "DataRules": {
+          "type": "array",
+          "description": "The list of QualityDataRule items that this QualityDataRuleSet consists of.",
+          "items": {
+            "type": "object",
+            "title": "DataRule",
+            "description": "The list of QualityDataRule items that this QualityDataRuleSet consists of.",
+            "properties": {
+              "DataRuleID": {
+                "type": "string",
+                "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-QualityDataRule:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+              },
+              "DataRulePurposeClass": {
+                "type": "string",
+                "description": "Indicated if the QualityDataRule is required to pass or for information.",
+                "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-DataRulePurposeType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+              }
+            }
+          }
+        },
+        "EvaluatedKind": {
+          "type": "string",
+          "description": "The kind of the data this ruleset applies to. Version-specific and non-version-specific kind can be defined. For example, osdu:wks:master-data--Well:1 (requiring only the major version and permits any minor and patch version); osdu:wks:master-data--Wellbore:1.0.0 (this is version-specific); osdu:wks:work-product-component--WellLog (this is unspecific accepting any version). Also note: a total wildcard would have to end with a :  like this: osdu:wks:group-type--EntityType:.",
+          "example": "osdu:wks:group-type--EntityType:2",
+          "pattern": "^[\\w\\-\\.]+:[\\w\\-\\.]+:[\\w\\-\\.]+:([0-9]+)?(\\.)?([0-9]+)?(\\.)?([0-9]+)?$"
+        }
+      }
+    }
+  ]
+}

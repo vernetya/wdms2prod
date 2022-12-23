@@ -1,0 +1,16 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/AliasNameTypeClass.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AliasNameTypeClass",
+  "description": "Used to describe the type of alias name types. AliasNameTypeClass is intended to be used to categorize alias name types by their general purpose, with values like \"Standard Identifier\", \"System Identifier\", and \"Moniker\". Combined with the AliasNameType, and DefinitionOrganisation one can define a complete context for a particular identifier or name. For example, a standard identifier of type Regulatory ID, from API, is the US standards regulatory ID; a standard identifier of type company ID, from BigOil, is BigOil's Standard ID; System Identifiers would be particular to systems of record, or other systems, and Monikers, things like display names, plot labels, etc.",
+  "x-osdu-governance-authorities": [
+    "OSDU"
+  ],
+  "x-osdu-governance-model": "OPEN",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    }
+  ]
+}

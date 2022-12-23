@@ -1,0 +1,147 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/work-product-component/PlannedLithology.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Planned Lithology",
+  "description": "Describes the sequence of expected lithologic intervals for the Wellbore",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractWPCGroupType.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractWorkProductComponent.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "WellName": {
+          "type": "string",
+          "title": "Well Name",
+          "description": "Human recognizable context for the well that contains the wellbore."
+        },
+        "WellboreName": {
+          "type": "string",
+          "title": "Wellbore Name",
+          "description": "Human recognizable context for the wellbore that contains the mud log"
+        },
+        "WellID": {
+          "type": "string",
+          "title": "Well ID",
+          "description": "Reference to the Well",
+          "pattern": "^[\\w\\-\\.]+:master-data\\-\\-WellPlanningWell:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "WellboreID": {
+          "type": "string",
+          "title": "Wellbore ID",
+          "description": "Reference to the Wellbore",
+          "pattern": "^[\\w\\-\\.]+:master-data\\-\\-WellPlanningWellbore:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "MeasuredDepthTop": {
+          "type": "number",
+          "title": "Measured Depth Top",
+          "description": "The minimum mdTop value for this object. This is an API \"structural-range\" query parameter for growing objects. See the relevant API specification for the query behavior related to this element."
+        },
+        "MeasuredDepthBase": {
+          "type": "number",
+          "title": "Measured Depth Base",
+          "description": "The maximum mdTop value for this object. This is an API \"structural-range\" query parameter for growing objects. See the relevant API specification for the query behavior related to this element."
+        },
+        "GeologyIntervals": {
+          "type": "array",
+          "title": "Geology Interval",
+          "description": "Set of geology and drilling information records for the wellbore. This is an API \"data-node\" query parameter for growing objects. See the relevant API specification for the query behavior related to this element.",
+          "items": {
+            "type": "object",
+            "title": "Geology Interval",
+            "description": "Geology Interval Component Schema",
+            "properties": {
+              "IntervalMeasuredDepthTop": {
+                "type": "number",
+                "title": "Interval Measured Depth Top",
+                "description": "Measured depth at top of interval.",
+                "x-osdu-frame-of-reference": "UOM:length"
+              },
+              "IntervalMeasuredDepthBase": {
+                "type": "number",
+                "title": "Interval Measured Depth Base",
+                "description": "Measured depth at base of interval.",
+                "x-osdu-frame-of-reference": "UOM:length"
+              },
+              "IntervalTVDTop": {
+                "type": "number",
+                "title": "Interval True Vertical Depth Top",
+                "description": "True vertical depth at top of the section.",
+                "x-osdu-frame-of-reference": "UOM:length"
+              },
+              "IntervalTVDBase": {
+                "type": "number",
+                "title": "Interval True Vertical Depth Base",
+                "description": "True vertical depth at base of interval.",
+                "x-osdu-frame-of-reference": "UOM:length"
+              },
+              "LithostratigraphicIDs": {
+                "type": "array",
+                "title": "Lithostratigraphic",
+                "description": "Name of lithostratigraphy, regionally dependent.",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-LithoStratigraphy:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+                }
+              },
+              "ChronostratigraphicIDs": {
+                "type": "array",
+                "title": "Chronostratigraphic",
+                "description": "Chronostratigraphic classification.",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-ChronoStratigraphy:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+                }
+              },
+              "Description": {
+                "type": "string",
+                "title": "Description",
+                "description": "Description of item and details."
+              },
+              "ReferenceWellboreTrajectoryID": {
+                "type": "string",
+                "title": "Reference Wellbore Trajectory ID",
+                "description": "Identifier of the reference trajectory for TVD measurements",
+                "pattern": "^[\\w\\-\\.]+:work-product-component\\-\\-WellboreTrajectory:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+              },
+              "ReferenceDatum": {
+                "type": "string",
+                "title": "Reference Datum",
+                "description": "Description of the Reference Datum used for Depth Measurement"
+              },
+              "LithologyTypeID": {
+                "type": "string",
+                "title": "Lithology Type IDs",
+                "description": "The geological name for the type of lithology from the enum table listing a \n\t\t\t\t\tsubset of the OneGeology / CGI defined formation types.",
+                "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-LithologyType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+              },
+              "LithologyTypeIDs": {
+                "type": "array",
+                "title": "Lithology Type IDs",
+                "description": "Array of lithological types - allowing for one or more lithological types.",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-LithologyType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+                }
+              }
+            },
+            "required": [
+              "IntervalMeasuredDepthTop",
+              "IntervalMeasuredDepthBase",
+              "LithologyTypeID"
+            ]
+          }
+        }
+      },
+      "required": [
+        "WellID",
+        "WellboreID"
+      ]
+    }
+  ]
+}

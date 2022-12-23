@@ -1,0 +1,315 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/master-data/Risk.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Risk",
+  "description": "Possible risk potentially encountered during the run of a drilling program or a single string run.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractMaster.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "Preventions": {
+          "type": "array",
+          "title": "Preventions",
+          "description": "A textual description of the steps to prevent this risk",
+          "items": {
+            "type": "object",
+            "title": "Risk Response",
+            "description": "Describe a set of action to prevent for a risk or to mitigate its consequences",
+            "properties": {
+              "Name": {
+                "type": "string",
+                "title": "Name",
+                "description": "Name of the response"
+              },
+              "Description": {
+                "type": "string",
+                "title": "Description",
+                "description": "General description of the response"
+              },
+              "Status": {
+                "type": "string",
+                "title": "Status",
+                "description": "Describes the status of the action such as (progress, done, canceled)",
+                "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-RiskResponseStatus:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+              },
+              "Responsibles": {
+                "type": "array",
+                "title": "Responsibles",
+                "description": "List of the staff responsible to proceed with the response",
+                "items": {
+                  "$ref": "../abstract/AbstractContact.1.0.0.json"
+                }
+              },
+              "Deadline": {
+                "type": "number",
+                "title": "Deadline",
+                "description": "Date the response must be completed",
+                "format": "date-time",
+                "x-osdu-frame-of-reference": "DateTime"
+              },
+              "UpdateDate": {
+                "type": "number",
+                "title": "Update Date",
+                "description": "Date the description of the response has been updated.",
+                "format": "date-time",
+                "x-osdu-frame-of-reference": "DateTime"
+              }
+            },
+            "required": [
+              "Name",
+              "Description",
+              "Status",
+              "Responsibles"
+            ]
+          }
+        },
+        "Cause": {
+          "type": "string",
+          "title": "Cause",
+          "description": "A textual description of the cause of this risk"
+        },
+        "Consequence": {
+          "type": "string",
+          "title": "Consequence",
+          "description": "A textual description of the consequence of this risk occurring"
+        },
+        "ConsequenceCategoryID": {
+          "type": "string",
+          "title": "Consequence Category ID",
+          "description": "Reference to the name of the category of the loss - equivalent to the \"ConsequenceCategory\" as defined in Bow Tie.",
+          "x-osdu-existing-standard": "Proposed reference values: Asset - Equipment, Asset - Products, Asset - 3rd Party, Asset - Computer, Automotive Heavy, Automotive Light, Environment - Accidental Discharge, Environment - Physical Damage, Environment - Sanctions and Scrutiny, Environment - Inappropriate Disposal, Fine/Penalties, Information - Client, Information - Schlumberger, Information - 3rd Party, NPT Client, NPT Schlumberger, NPT 3rd Party, Personnel Injury, Personnel Occupational Illness, Personnel Non-Occupational Illness, Process, Reputation, Revenue",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-RiskConsequenceCategory:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "ConsequenceSubCategoryID": {
+          "type": "string",
+          "title": "Consequence SubCategory ID",
+          "description": "References the consequence sub-category of the risk. Possible effects arising were a risk event to occur.",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-RiskConsequenceSubCategory:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "ResidualSeverity": {
+          "type": "number",
+          "title": "Residual Severity",
+          "description": "Severity Level of the Risk. \n\t\t\t\t\tValues of 1 through 5 with 1 being the lowest."
+        },
+        "ResidualProbability": {
+          "type": "number",
+          "title": "Residual Probability",
+          "description": "Probability Level of the Risk.\n\t\t\t\t\tValues of 1 through 5 with 1 being the lowest."
+        },
+        "RiskAssociatedObjectIDs": {
+          "type": "array",
+          "title": "Risk Associated Object IDs",
+          "description": "Array of identifiers from the risk to related objects or documents (such as BHA, Mud design, Activity plans...)",
+          "items": {
+            "type": "string"
+          }
+        },
+        "PublicationDate": {
+          "type": "string",
+          "title": "Publication Date",
+          "description": "Date a resource is formed outside of OSDU before loading",
+          "format": "date-time",
+          "x-osdu-frame-of-reference": "DateTime"
+        },
+        "InitialSeverity": {
+          "type": "number",
+          "title": "Initial Severity",
+          "description": "Initial Severity Level of the Risk. \n\t\t\t\t\tValues of 1 through 5 with 1 being the lowest."
+        },
+        "InitialProbability": {
+          "type": "number",
+          "title": "Initial Probability",
+          "description": "Initial Probability Level of the Risk.\n\t\t\t\t\tValues of 1 through 5 with 1 being the lowest."
+        },
+        "InitialRiskScore": {
+          "type": "number",
+          "title": "Initial Risk Score",
+          "description": "Score computed as of \"Pre-Mitigation\" which is the combination of : \nInitial Severity * Initial Probability \nValues of 1 through 25 with 1 being the lowest."
+        },
+        "ResidualRiskScore": {
+          "type": "number",
+          "title": "Residual Risk",
+          "description": "Score computed as of \"Post-Mitigation\" which is the combination of : \nCombination of Residual Severity * Residual Probability\nValues of 1 through 25 with 1 being the lowest."
+        },
+        "RiskHierarchyLevelID": {
+          "type": "string",
+          "title": "Risk Hierarchy Level ID",
+          "description": "Describes the Hierarchy Level the risk is applying to (such as Well, Field, Global\u2026)",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-RiskHierarchyLevel:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "RiskCategoryID": {
+          "type": "string",
+          "title": "Risk Category ID",
+          "description": "General category of the described risk such as \"Reservoir\", \"Overburden\", \"Life of Well\", \"Drilling\", \"Completion\" or \"Opportunity\"",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-RiskCategory:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "RiskSubCategoryID": {
+          "type": "string",
+          "title": "Risk Sub Category ID",
+          "description": "Detailed category of the described risk such as \"BOP\", \"Casing\", \"Cementing\", \"Riserless\"",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-RiskSubCategory:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "RiskDisciplineID": {
+          "type": "string",
+          "title": "Risk Discipline ID",
+          "description": "Describes the \"discipline\" that may be affected by the risk",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-RiskDiscipline:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "Mitigations": {
+          "type": "array",
+          "title": "Mitigations",
+          "description": "Describes the measure or measures that may be applied to the risk to mitigate its consequences",
+          "items": {
+            "type": "object",
+            "title": "Risk Response",
+            "description": "Describe a set of action to prevent for a risk or to mitigate its consequences",
+            "properties": {
+              "Name": {
+                "type": "string",
+                "title": "Name",
+                "description": "Name of the response"
+              },
+              "Description": {
+                "type": "string",
+                "title": "Description",
+                "description": "General description of the response"
+              },
+              "Status": {
+                "type": "string",
+                "title": "Status",
+                "description": "Describes the status of the action such as (progress, done, canceled)",
+                "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-RiskResponseStatus:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+              },
+              "Responsibles": {
+                "type": "array",
+                "title": "Responsibles",
+                "description": "List of the staff responsible to proceed with the response",
+                "items": {
+                  "$ref": "../abstract/AbstractContact.1.0.0.json"
+                }
+              },
+              "Deadline": {
+                "type": "number",
+                "title": "Deadline",
+                "description": "Date the response must be completed",
+                "format": "date-time",
+                "x-osdu-frame-of-reference": "DateTime"
+              },
+              "UpdateDate": {
+                "type": "number",
+                "title": "Update Date",
+                "description": "Date the description of the response has been updated.",
+                "format": "date-time",
+                "x-osdu-frame-of-reference": "DateTime"
+              }
+            },
+            "required": [
+              "Name",
+              "Description",
+              "Status",
+              "Responsibles"
+            ]
+          }
+        },
+        "Name": {
+          "type": "string",
+          "title": "Name",
+          "description": "The common or preferred name for a risk"
+        },
+        "Description": {
+          "type": "string",
+          "title": "Description",
+          "description": "Description of the risk"
+        },
+        "Summary": {
+          "type": "string",
+          "title": "Summary",
+          "description": "Short description of the risk"
+        },
+        "EffectiveDateTime": {
+          "type": "string",
+          "title": "Effective Data Time",
+          "description": "Date and time that activities started."
+        },
+        "TerminationDateTime": {
+          "type": "string",
+          "title": "Termination Date Time",
+          "description": "Date and time that activities were completed."
+        },
+        "TypeID": {
+          "type": "string",
+          "title": "Type",
+          "description": "The type of risk.",
+          "x-osdu-existing-standard": "WITSML",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-RiskType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "AffectedPersonnel": {
+          "type": "string",
+          "title": "Affected Personnel",
+          "description": "Describes the entity that may be affected by the risk",
+          "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Organisation:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "RiskResponsibles": {
+          "type": "array",
+          "title": "Responsibles",
+          "description": "Describes the responsibles (person/role/entity) for managing the risk",
+          "items": {
+            "$ref": "../abstract/AbstractContact.1.0.0.json"
+          }
+        },
+        "ExtendedRiskCategory": {
+          "type": "string",
+          "title": "Extended Risk Category",
+          "description": "Custom string to further extend the risk categorization"
+        },
+        "NetSeverity": {
+          "type": "number",
+          "title": "Net Severity",
+          "description": "Assumes PREVENTION AND MITIGATION barriers are in place to manage the risk event"
+        },
+        "NetProbability": {
+          "type": "number",
+          "title": "Net Probability",
+          "description": "Assumes PREVENTION AND MITIGATION barriers are in place to manage the risk event"
+        },
+        "NetRiskScore": {
+          "type": "number",
+          "title": "Net Score",
+          "description": "Assumes PREVENTION AND MITIGATION barriers are in place to manage the risk event  which is the combination of : \nNet Severity * Net Probability"
+        },
+        "RelatedRiskSetID": {
+          "type": "string",
+          "title": "Related RiskSet ID",
+          "description": "Identifier of the Related Risks collection",
+          "pattern": "^[\\w\\-\\.]+:work-product-component\\-\\-PersistedCollection:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "WellboreID": {
+          "type": "string",
+          "title": "Wellbore ID",
+          "description": "Identifier of the planned Wellbore",
+          "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Wellbore:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "RiskStartDepth": {
+          "type": "number",
+          "title": "Risk Start Depth",
+          "description": "start depth of the risk interval. Depth relative to Planned wellbore ZDP. Navigate via WellboreID to the side-car WellPlanningWellbore, which holds the depth reference in data.VerticalMeasurement.",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "RiskEndDepth": {
+          "type": "number",
+          "title": "Risk End Depth",
+          "description": "end depth of the risk interval. Depth relative to Planned wellbore ZDP. Navigate via WellboreID to the side-car WellPlanningWellbore, which holds the depth reference in data.VerticalMeasurement.",
+          "x-osdu-frame-of-reference": "UOM:length"
+        }
+      },
+      "required": [
+        "WellboreID"
+      ]
+    }
+  ]
+}

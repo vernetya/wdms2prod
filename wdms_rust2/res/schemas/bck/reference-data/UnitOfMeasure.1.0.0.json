@@ -1,0 +1,72 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/UnitOfMeasure.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnitOfMeasure",
+  "description": "Used to describe the unit of measures.",
+  "x-osdu-governance-authorities": [
+    "Energistics"
+  ],
+  "x-osdu-governance-model": "OPEN",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "UnitQuantityID": {
+          "description": "Unit Quantity is a semantic description of the quantity the UoM is describing ('length' for instance)",
+          "type": "string",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-UnitQuantity:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "UnitDimensionCode": {
+          "description": "The dimensionality using the symbols for dimension as defined in https://www.bipm.org/utils/common/documents/jcgm/JCGM_200_2012.pdf, i.e. L for length, M for mass, T for time, I for electric current, N for amount of substance, J for luminous intensity; except \u0398 for thermodynamic temperature, which is replaced by the symbol K, the additional symbol D for temperature difference and the additional symbol 0 for no dimension.",
+          "type": "string",
+          "example": "K"
+        },
+        "IsBaseUnit": {
+          "title": "Base Unit Flag",
+          "description": "True if the unit is a base unit for the unit quantity. If the property is absent, it means the unit is not a base unit.",
+          "type": "boolean",
+          "example": false
+        },
+        "UnitDimensionName": {
+          "description": "The name of the unit dimension concept.",
+          "type": "string",
+          "example": "thermodynamic temperature"
+        },
+        "CoefficientA": {
+          "type": "number",
+          "title": "A",
+          "example": "2298.35",
+          "description": "The A parameter; formula: y = (A+B*x)/(C+D*x)"
+        },
+        "CoefficientB": {
+          "type": "number",
+          "title": "B",
+          "example": "5.0",
+          "description": "The B parameter; formula: y = (A+B*x)/(C+D*x)"
+        },
+        "CoefficientC": {
+          "type": "number",
+          "title": "C",
+          "example": "9.0",
+          "description": "The C parameter; formula: y = (A+B*x)/(C+D*x)"
+        },
+        "CoefficientD": {
+          "type": "number",
+          "title": "D",
+          "example": "0.0",
+          "description": "The D parameter; formula: y = (A+B*x)/(C+D*x)"
+        },
+        "PersistableReference": {
+          "title": "Persistable Reference",
+          "description": "The self-contained, stringified JSON reference for the unit. This value can be attached to data values and data records and carry the unit reference independent of a UnitOfRecord instance.",
+          "type": "string",
+          "example": "{\"abcd\":{\"a\":2298.35,\"b\":5.0,\"c\":9.0,\"d\":0.0},\"symbol\":\"degF\",\"baseMeasurement\":{\"ancestry\":\"K\",\"type\":\"UM\"},\"type\":\"UAD\"}"
+        }
+      }
+    }
+  ]
+}

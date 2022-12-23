@@ -1,0 +1,16 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/SeismicTraceDataDimensionalityType.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SeismicTraceDataDimensionalityType",
+  "description": "The dimensionality of trace data sets (not as acquired but as in the dataset), such as 2D, 3D, 4D.",
+  "x-osdu-governance-authorities": [
+    "OSDU"
+  ],
+  "x-osdu-governance-model": "OPEN",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    }
+  ]
+}

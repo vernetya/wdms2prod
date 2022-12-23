@@ -1,0 +1,71 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "x-osdu-governance-model": "LOCAL",
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/QualityDataRule.1.1.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "QualityDataRule",
+  "description": "Generic reference object quality rule",
+  "type": "object",
+  "x-osdu-virtual-properties": {
+    "data.VirtualProperties.DefaultName": {
+      "type": "string",
+      "priority": [
+        {
+          "path": "data.Name"
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "ExternalRuleID": {
+          "type": "string",
+          "description": "Unique identifier to an external data rule, e.g. PPDM rule ID number."
+        },
+        "DataRuleStatement": {
+          "type": "string",
+          "description": "Expression of data rule"
+        },
+        "DataRuleRevision": {
+          "type": "string",
+          "description": "Revision version number"
+        },
+        "DataRuleStatus": {
+          "type": "string",
+          "description": "status of the business rule such as Published"
+        },
+        "DataRuleCreatedOn": {
+          "type": "string",
+          "description": "Date of creation of data rule independent of OSDU",
+          "format": "date-time"
+        },
+        "DataRuleCreatedBy": {
+          "type": "string",
+          "description": "User that created the rule independent of OSDU"
+        },
+        "DataRulePublishedOn": {
+          "type": "string",
+          "description": "Timestamp of the time when the data rule was published independent of OSDU.",
+          "format": "date-time"
+        },
+        "DataRuleUpdatedOn": {
+          "type": "string",
+          "description": "Timestamp of the time when the data rule was updated independent of OSDU.",
+          "format": "date-time"
+        },
+        "DataRuleDimensionTypeID": {
+          "type": "string",
+          "title": "Data Rule Dimension Type Identifier",
+          "description": "Dimension of the Rule indicating the rule purpose like completeness, validity etc.",
+          "example": "partition_id:reference-data--DataRuleDimensionType:Completeness:",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-DataRuleDimensionType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        }
+      }
+    }
+  ]
+}

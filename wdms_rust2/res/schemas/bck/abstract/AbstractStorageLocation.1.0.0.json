@@ -1,0 +1,38 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/abstract/AbstractStorageLocation.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AbstractStorageLocation",
+  "description": "A record about the storage location of an item, e.g. a rock or fluid sample, seismic tape, where (facility), by whom (organisation), when (dates) and how (description).",
+  "type": "object",
+  "properties": {
+    "StorageLocationDescription": {
+      "type": "string",
+      "description": "The name of the location where the item is stored. It can be stored in more than one location over time."
+    },
+    "StorageFacilityID": {
+      "type": "string",
+      "description": "Identifies the warehouse in which the item is stored.",
+      "pattern": "^[\\w\\-\\.]+:master-data\\-\\-StorageFacility:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+    },
+    "StorageOrganisationID": {
+      "type": "string",
+      "description": "Identifies the organisation with which the item is stored.",
+      "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Organisation:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+    },
+    "EffectiveDateTime": {
+      "type": "string",
+      "description": "The date the item arrived at the storage location.",
+      "format": "date"
+    },
+    "TerminationDateTime": {
+      "type": "string",
+      "description": "The date and time at which the item is  no longer stored in the given location.  If the item is still in this storage, the 'TerminationDateTime' is left absent.",
+      "format": "date"
+    },
+    "SampleIdentifier": {
+      "type": "string",
+      "description": "The item (sample, tape)  identifier, for example a barcode, which identifies the item in the StorageFacility."
+    }
+  }
+}

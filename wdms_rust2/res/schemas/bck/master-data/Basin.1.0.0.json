@@ -1,0 +1,51 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/master-data/Basin.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Basin",
+  "description": "A natural geographic area covering a single depositional system.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractMaster.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "BasinID": {
+          "title": "External Basin Identifier",
+          "description": "Native identifier from a Master Data Management System or other trusted source external to OSDU - stored here in order to allow for multi-system connection and synchronization. If used, the \"Source\" property should identify that source system.",
+          "type": "string"
+        },
+        "BasinName": {
+          "description": "Name of the Basin.",
+          "type": "string"
+        },
+        "BasinNameAliases": {
+          "description": "DEPRECATED: please use data.NameAliases. Alternative names, including historical, by which this basin is/has been known.",
+          "type": "array",
+          "items": {
+            "$ref": "../abstract/AbstractAliasNames.1.0.0.json"
+          }
+        },
+        "BasinDescription": {
+          "description": "A textual description of the Basin.",
+          "type": "string"
+        },
+        "ProspectFlag": {
+          "description": "Indicator showing whether the basin is considered prospective for hydrocarbons",
+          "type": "boolean"
+        },
+        "BasinTypeID": {
+          "description": "High level classification of the geological characteristics of the Basin; for example, Foothills, Active Margin, Passive Margin, etc.",
+          "type": "string",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-BasinType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "ParentBasinID": {
+          "description": "Identifier of the parent Basin",
+          "type": "string",
+          "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Basin:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        }
+      }
+    }
+  ]
+}

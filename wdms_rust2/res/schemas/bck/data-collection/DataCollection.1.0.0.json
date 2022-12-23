@@ -1,0 +1,66 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/data-collection/DataCollection.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DataCollection",
+  "description": "Transient collection of object references used e.g. to exchange context between running applications. DataCollection is not intended to be persisted.",
+  "type": "object",
+  "properties": {
+    "Resources": {
+      "description": "List of Resources",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[\\w\\-\\.]+:[\\w\\-\\.]+:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+      }
+    },
+    "Name": {
+      "type": "string",
+      "description": "Name"
+    },
+    "Description": {
+      "type": "string",
+      "description": "Description"
+    },
+    "CreationDateTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Creation DateTime"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "Array of Tag Names",
+      "items": {
+        "type": "string"
+      }
+    },
+    "SubmitterName": {
+      "type": "string",
+      "description": "Submitter Name"
+    },
+    "AuthorIDs": {
+      "type": "array",
+      "description": "Array of Author IDs",
+      "items": {
+        "type": "string"
+      }
+    },
+    "OwnerID": {
+      "description": "ID of the User who owns the Collection",
+      "type": "string"
+    },
+    "WorkSpaceID": {
+      "description": "Collection Workspace",
+      "type": "string"
+    },
+    "FilterSpecification": {
+      "description": "Collection Filter Specification",
+      "type": "object",
+      "properties": {}
+    }
+  },
+  "required": [
+    "Resources",
+    "Name",
+    "OwnerID"
+  ]
+}

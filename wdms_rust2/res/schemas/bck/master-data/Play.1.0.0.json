@@ -1,0 +1,56 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/master-data/Play.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Play",
+  "description": "A named area that likely contains a combination of certain geological factors making it prospective for mineral exploration. It is often considered to be a set of prospects with a common set of characteristics.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractMaster.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "PlayID": {
+          "type": "string",
+          "title": "External Play Identifier",
+          "description": "Native identifier from a Master Data Management System or other trusted source external to OSDU - stored here in order to allow for multi-system connection and synchronization. If used, the \"Source\" property should identify that source system."
+        },
+        "PlayName": {
+          "type": "string",
+          "description": "Preferred name for a Play."
+        },
+        "PlayNameAliases": {
+          "type": "array",
+          "description": "DEPRECATED: please use data.NameAliases. Set of alternative names for a Play.",
+          "items": {
+            "$ref": "../abstract/AbstractAliasNames.1.0.0.json"
+          }
+        },
+        "PlayDescription": {
+          "type": "string",
+          "description": "Textual description about a Play."
+        },
+        "EffectiveDate": {
+          "type": "string",
+          "description": "Date when a Play goes into effect.",
+          "format": "date-time",
+          "x-osdu-frame-of-reference": "DateTime"
+        },
+        "TerminationDate": {
+          "type": "string",
+          "description": "Date when a Play is no longer in effect.",
+          "format": "date-time",
+          "x-osdu-frame-of-reference": "DateTime"
+        },
+        "PlayTypeID": {
+          "type": "string",
+          "title": "Play Type ID",
+          "description": "The type of play as defined in PlayType.",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-PlayType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        }
+      }
+    }
+  ]
+}

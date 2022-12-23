@@ -1,0 +1,26 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/abstract/AbstractWellboreDrillingReason.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AbstractWellboreDrillingReason",
+  "description": "Purpose for drilling a wellbore, which often is an indication of the level of risk.",
+  "type": "object",
+  "properties": {
+    "DrillingReasonTypeID": {
+      "description": "Identifier of the drilling reason type for the corresponding time period.",
+      "type": "string",
+      "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-DrillingReasonType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+    },
+    "EffectiveDateTime": {
+      "description": "The date and time at which the event becomes effective.",
+      "type": "string",
+      "format": "date-time",
+      "x-osdu-frame-of-reference": "DateTime"
+    },
+    "TerminationDateTime": {
+      "description": "The date and time at which the event is no longer in effect.",
+      "type": "string",
+      "format": "date-time",
+      "x-osdu-frame-of-reference": "DateTime"
+    }
+  }
+}

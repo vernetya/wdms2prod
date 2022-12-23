@@ -1,0 +1,52 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/work-product-component/GeologicUnitOccurrenceInterpretation.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "GeologicUnitOccurrenceInterpretation",
+  "description": "Interpretation of a sequence of geologic units actually observed (interpreted)  along or inside a representation, the representation can be \n\u2022\t1D such as a well or an arbitrary line\n\u2022\t2D like a cross section\n\u2022\t3D like a entire model or a group of fault blocks\nIt is typically based on a stratigraphic column rank but can include more units (example intrusive bodies), duplicated units (repeated sequence along a well or lines), or less units (Eroded or non-deposited).\nAn ordering criteria indicates the reason for the order (age, apparent depth or measured depth).",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractWPCGroupType.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractWorkProductComponent.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractInterpretation.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "StratigraphicColumnRankInterpretationID": {
+          "type": "string",
+          "title": "Stratigraphic Rank Interpretation ID",
+          "description": "Stratigraphic Rank Interpretation on which the organization is based on",
+          "example": "namespace:work-product-component--StratigraphicColumnRankInterpretation:85348741-3433-406B-9189-22B298C3E2D2:",
+          "pattern": "^[\\w\\-\\.]+:work-product-component\\-\\-StratigraphicColumnRankInterpretation:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "OrderingCriteriaTypeID": {
+          "type": "string",
+          "title": "Ordering Criteria Type ID",
+          "description": "Define the criteria used for ordering (age, apparent depth, measured depth)",
+          "format": "uri-reference",
+          "example": "namespace:reference-data--OrderingCriteriaType:Age:",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-OrderingCriteriaType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "GeologicUnitInterpretationIDs": {
+          "type": "array",
+          "title": "Geologic Unit Interpretation IDs",
+          "description": "Lists the units observed",
+          "example": [
+            "namespace:work-product-component--StratigraphicUnitInterpretation:90008741-3433-406B-9189-22B298C3E2D2:",
+            "namespace:work-product-component--StratigraphicUnitInterpretation:11008888-3433-406B-9189-33B298F3E2D4:"
+          ],
+          "items": {
+            "type": "string",
+            "pattern": "^[\\w\\-\\.]+:(work-product-component\\-\\-RockFluidUnitInterpretation|work-product-component\\-\\-StratigraphicUnitInterpretation):[\\w\\-\\.\\:\\%]+:[0-9]*$"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/TubularComponentType.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TubularComponentType",
+  "description": "Specifies the types of components that can be used in a tubular string. These are used to specify the type of component and multiple components are used to define a tubular string (Tubular).",
+  "x-osdu-governance-authorities": [
+    "None"
+  ],
+  "x-osdu-governance-model": "LOCAL",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    }
+  ]
+}

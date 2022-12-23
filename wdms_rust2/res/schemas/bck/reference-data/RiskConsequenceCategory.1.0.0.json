@@ -1,0 +1,21 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "x-osdu-governance-model": "OPEN",
+  "x-osdu-governance-authorities": [
+    "osdu"
+  ],
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/RiskConsequenceCategory.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RiskConsequenceCategory",
+  "description": "Consequence category of the risk for possible effects on Asset, Business & Reputation, Environment, Health & Safety\u2026",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {}
+    }
+  ]
+}

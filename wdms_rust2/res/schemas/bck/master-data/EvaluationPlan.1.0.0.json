@@ -1,0 +1,362 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/master-data/EvaluationPlan.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Evaluation Plan",
+  "description": "A planned evaluation on a drilling operation",
+  "type": "object",
+  "x-osdu-virtual-properties": {
+    "data.VirtualProperties.DefaultLocation": {
+      "type": "object",
+      "priority": [
+        {
+          "path": "data.SpatialLocation"
+        }
+      ]
+    },
+    "data.VirtualProperties.DefaultName": {
+      "type": "string",
+      "priority": [
+        {
+          "path": "data.ProjectName"
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractMaster.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractProject.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "FormationIntegrityEvaluations": {
+          "type": "array",
+          "title": "Formation Integrity Evaluation",
+          "description": "A collection of integrity evaluations made on a formation",
+          "x-osdu-attribution-authority": "The Open Group",
+          "x-osdu-attribution-publication": "The OSDU Data Platform",
+          "x-osdu-attribution-revision": "evergreen",
+          "items": {
+            "type": "object",
+            "title": "Formation Integrity Evaluation",
+            "description": "A test performed to determine the integrity of a formation",
+            "properties": {
+              "PressureTestType": {
+                "type": "string",
+                "title": "Pressure Test Type",
+                "description": "The type of pressure test used in the evaluation of the formation",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen",
+                "x-osdu-existing-standard": "Proposed reference values: Formation Integrity Test, Leak Off Test, Extended Leak Off Test",
+                "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-FormationPressureTestType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+              },
+              "DesignKickTolerance": {
+                "type": "number",
+                "title": "Design Kick Tolerance",
+                "description": "The designed maximum gas volume for a given degree of underbalance which the circulation can be performed without exceeding the weakest formation in the wellbore",
+                "x-osdu-frame-of-reference": "UOM:volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "EquivalentMudWeightEstimated": {
+                "type": "number",
+                "title": "Equivalent Mud Weight Estimated",
+                "description": "The total amount of pressure exerted at a true vertical depth which is denoted in the mud density.",
+                "x-osdu-frame-of-reference": "UOM:mass per volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "MeasuredDepthCasingShoe": {
+                "type": "number",
+                "title": "Measured Depth Casing Shoe",
+                "description": "The measured depth of the Casing Shoe during this evaluation. Depth relative to Planned wellbore ZDP. Navigate via WellboreID to the side-car WellPlanningWellbore, which holds the depth reference in data.VerticalMeasurement.",
+                "x-osdu-frame-of-reference": "UOM:length",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "TrueVerticalDepthCasingShoe": {
+                "type": "number",
+                "title": "True Vertical Depth Casing Shoe",
+                "description": "The true vertical depth of the Casing Shoe during this evaluation. Depth relative to Planned wellbore ZDP. Navigate via WellboreID to the side-car WellPlanningWellbore, which holds the depth reference in data.VerticalMeasurement.",
+                "x-osdu-frame-of-reference": "UOM:length",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "TestFluidDensity": {
+                "type": "number",
+                "title": "Test Fluid Density",
+                "description": "The density of the fluid measured during the evaluation test",
+                "x-osdu-frame-of-reference": "UOM:mass per volume",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "TestPressureAtSurface": {
+                "type": "number",
+                "title": "Test Pressure At Surface",
+                "description": "The pressure observed at the surface during the test.",
+                "x-osdu-frame-of-reference": "UOM:pressure",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "MaxTestPressureAtSurface": {
+                "type": "number",
+                "title": "Maximum Test Pressure At Surface",
+                "description": "The maximum pressure observed at the surface during the test.",
+                "x-osdu-frame-of-reference": "UOM:pressure",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "TestingPumpingRate": {
+                "type": "number",
+                "title": "Testing Pumping Rate",
+                "description": "The pumping rate used during the integrity test.",
+                "x-osdu-frame-of-reference": "UOM:volume per time",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "DrilledIntervalBeforeTest": {
+                "type": "number",
+                "title": "Drilled Interval Before Test",
+                "description": "The depth of the interval drilled before the integrity test. Depth relative to Planned wellbore ZDP. Navigate via WellboreID to the side-car WellPlanningWellbore, which holds the depth reference in data.VerticalMeasurement.",
+                "x-osdu-frame-of-reference": "UOM:length",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "Comments": {
+                "type": "string",
+                "title": "Comments",
+                "description": "Comments associated with the formation integrity test",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "HasLeakOffOccurred": {
+                "type": "boolean",
+                "title": "Has LeakOff Occurred",
+                "description": "Indicates if a leak off has occurred during the test"
+              },
+              "LeakOffPressure": {
+                "type": "number",
+                "title": "LeakOff Pressure",
+                "description": "The pressure observed from the LeakOff",
+                "x-osdu-frame-of-reference": "UOM:pressure"
+              },
+              "VolumePumped": {
+                "type": "number",
+                "title": "Volume Pumped",
+                "description": "Amount of fluid pumped during the test",
+                "x-osdu-frame-of-reference": "UOM:volume"
+              },
+              "FormationName": {
+                "type": "string",
+                "title": "Formation Name",
+                "description": "The name of the formation on which the integrity test has been run.",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              }
+            }
+          }
+        },
+        "FormationEvaluationCorings": {
+          "type": "array",
+          "title": "Formation Evaluation Corings",
+          "description": "Information regarding any evaluation made on the formation by analyzing cores",
+          "x-osdu-attribution-authority": "The Open Group",
+          "x-osdu-attribution-publication": "The OSDU Data Platform",
+          "x-osdu-attribution-revision": "evergreen",
+          "items": {
+            "type": "object",
+            "title": "Core",
+            "description": "A rock sample obtained by drilling into the earth with a pipe conveyed hollow bit and core barrel",
+            "properties": {
+              "FormationName": {
+                "type": "string",
+                "title": "Formation Name",
+                "description": "The name of the formation from which the core was extracted",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "CoreNumber": {
+                "type": "string",
+                "title": "Core Number",
+                "description": "An identifier, assigned by the well operator, that uniquely identifies the sample.",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "MeasuredDepthTop": {
+                "type": "number",
+                "title": "Measured Depth Top",
+                "description": "The start depth of the interval to which the coring activity refers. Depth relative to Planned wellbore ZDP. Navigate via WellboreID to the side-car WellPlanningWellbore, which holds the depth reference in data.VerticalMeasurement.",
+                "x-osdu-frame-of-reference": "UOM:length",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "Length": {
+                "type": "number",
+                "title": "Length",
+                "description": "A measurement that represents the length of the core that was recovered from the core acquisition activity.",
+                "x-osdu-frame-of-reference": "UOM:length",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "CoreDiameter": {
+                "type": "number",
+                "title": "Core Diameter",
+                "description": "A measurement that represents the diameter of the recovered core.",
+                "x-osdu-frame-of-reference": "UOM:length",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "Comments": {
+                "type": "string",
+                "title": "Comments",
+                "description": "A description of the core",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "MeasuredDepthBase": {
+                "type": "number",
+                "title": "Measured Depth Base",
+                "description": "The base depth of the interval to which the coring activity refers. Depth relative to Planned wellbore ZDP. Navigate via WellboreID to the side-car WellPlanningWellbore, which holds the depth reference in data.VerticalMeasurement.",
+                "x-osdu-frame-of-reference": "UOM:length",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              }
+            }
+          }
+        },
+        "ReservoirEvaluations": {
+          "type": "array",
+          "title": "Reservoir Evaluation",
+          "description": "Information regarding the evaluation of the reservoir",
+          "x-osdu-attribution-authority": "The Open Group",
+          "x-osdu-attribution-publication": "The OSDU Data Platform",
+          "x-osdu-attribution-revision": "evergreen",
+          "items": {
+            "type": "object",
+            "title": "DST Run",
+            "description": "A test performed on a drillstem",
+            "properties": {
+              "FormationName": {
+                "type": "string",
+                "title": "Formation Name",
+                "description": "The name of the formation in which the test was performed.",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "MinimumDepthTestStart": {
+                "type": "number",
+                "title": "Minimum Depth Test Start",
+                "description": "The minimum start depth for the drillstem test. Depth relative to Planned wellbore ZDP. Navigate via WellboreID to the side-car WellPlanningWellbore, which holds the depth reference in data.VerticalMeasurement.",
+                "x-osdu-frame-of-reference": "UOM:length",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "MaximumDepthTestStart": {
+                "type": "number",
+                "title": "Maximum Depth Test Start",
+                "description": "The maximum start depth for the drillstem test. Depth relative to Planned wellbore ZDP. Navigate via WellboreID to the side-car WellPlanningWellbore, which holds the depth reference in data.VerticalMeasurement.",
+                "x-osdu-frame-of-reference": "UOM:length",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "Comments": {
+                "type": "string",
+                "title": "Comments",
+                "description": "Comments made regarding the Drillstem Test",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "Sequence": {
+                "type": "number",
+                "title": "Sequence",
+                "description": "Sequential number of the DST"
+              },
+              "HoleType": {
+                "type": "string",
+                "title": "Hole Type",
+                "description": "Free text describing the type of the hole the DST is running through (such as \"Cased\", \"OpenHole\",\u2026)"
+              },
+              "PackerDepth": {
+                "type": "number",
+                "title": "Packer Depth",
+                "description": "Depth of the Packer while running the DST",
+                "x-osdu-frame-of-reference": "UOM:length"
+              },
+              "PerforationNumber": {
+                "type": "number",
+                "title": "Perforation Number",
+                "description": "Sequential number of the perforation that the DST is running through"
+              },
+              "DepthPerforationTop": {
+                "type": "number",
+                "title": "Depth Perforation Top",
+                "description": "Perforation Top Depth for the DST to run through. Depth relative to Planned wellbore ZDP. Navigate via WellboreID to the side-car WellPlanningWellbore, which holds the depth reference in data.VerticalMeasurement.",
+                "x-osdu-frame-of-reference": "UOM:length"
+              },
+              "HoleSectionID": {
+                "type": "string",
+                "title": "Hole Section ID",
+                "description": "Description of the Hole Section in which the evaluation will be performed",
+                "pattern": "^[\\w\\-\\.]+:master-data\\-\\-HoleSection:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+              },
+              "DepthPerforationBase": {
+                "type": "number",
+                "title": "Depth Perforation Base",
+                "description": "Perforation Base Depth for the DST to run through. Depth relative to Planned wellbore ZDP. Navigate via WellboreID to the side-car WellPlanningWellbore, which holds the depth reference in data.VerticalMeasurement.",
+                "x-osdu-frame-of-reference": "UOM:length"
+              },
+              "TestTimeDuration": {
+                "type": "number",
+                "title": "Test Time Duration",
+                "description": "Planned test duration",
+                "x-osdu-frame-of-reference": "UOM:time"
+              },
+              "TestIntervalLength": {
+                "type": "number",
+                "title": "Test Interval Length",
+                "description": "Planned test length",
+                "x-osdu-frame-of-reference": "UOM:length"
+              }
+            }
+          }
+        },
+        "WellboreID": {
+          "type": "string",
+          "title": "Wellbore ID",
+          "description": "Identifier of the planned Wellbore",
+          "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Wellbore:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        }
+      },
+      "required": [
+        "WellboreID"
+      ]
+    }
+  ]
+}

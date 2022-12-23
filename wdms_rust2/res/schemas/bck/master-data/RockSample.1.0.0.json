@@ -1,0 +1,208 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/master-data/RockSample.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RockSample",
+  "description": "A rock sample retrieved from an outcrop or Well.  It can be core, sample cut from core, cutting, outcrop, slide etc.",
+  "type": "object",
+  "x-osdu-virtual-properties": {
+    "data.VirtualProperties.DefaultLocation": {
+      "type": "object",
+      "priority": [
+        {
+          "path": "data.SpatialLocation"
+        }
+      ]
+    },
+    "data.VirtualProperties.DefaultName": {
+      "type": "string",
+      "priority": [
+        {
+          "path": "data.Name"
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractMaster.1.1.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "RockSampleIdentifier": {
+          "type": "string",
+          "title": "Rock Sample Identifier",
+          "description": "Native identifier from a Master Data Management System or other trusted source external to OSDU - stored here in order to allow for multi-system connection and synchronization. If used, the \"Source\" property should identify that source system. i.e. this item is optional."
+        },
+        "WellboreID": {
+          "type": "string",
+          "title": "Wellbore ID",
+          "description": "Unique wellbore identifier. Not required for outcrops.",
+          "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Wellbore:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "CoringID": {
+          "type": "string",
+          "title": "Coring ID",
+          "description": "Identifies the Coring from which this sample is created from it directly. Not populated for outcrops and cuttings.",
+          "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Coring:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "ParentSampleID": {
+          "type": "string",
+          "title": "Parent Sample ID",
+          "description": "Identifies the RockSample from which this sample is created from it directly.",
+          "pattern": "^[\\w\\-\\.]+:master-data\\-\\-RockSample:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "Name": {
+          "type": "string",
+          "title": "Name",
+          "description": "The name of this RockSample."
+        },
+        "VerticalMeasurement": {
+          "$ref": "../abstract/AbstractFacilityVerticalMeasurement.1.0.0.json",
+          "title": "Vertical Measurement",
+          "description": "References an entry in the VerticalMeasurements array for the Wellbore identified by WellboreID, or a standalone vertical reference which defines the vertical reference datum for all measured depths of the RockSample record. If this is not populated, the VerticalMeasurement is derived from the Coring."
+        },
+        "LabSampleIdentifier": {
+          "type": "string",
+          "title": "Laboratory Sample Identifier",
+          "description": "The data vendor assigned sample ID or number."
+        },
+        "DataSource": {
+          "type": "string",
+          "title": "Data Source",
+          "description": "The person, vendor or other provider of this information."
+        },
+        "SampleTypeID": {
+          "type": "string",
+          "title": "Sample Type ID",
+          "description": "Identifies a rock sample type.  E.g. Core, Cuttings, Core Slab, Core Plug, Core Chip, Slides. Considered mandatory.",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-RockSampleType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "TopDepth": {
+          "type": "number",
+          "title": "Top Depth",
+          "description": "The depth of the top of the rock sample. For point measurements (slides, sidewall cores), the same value is assigned to TopDepth and BottomDepth.",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "BottomDepth": {
+          "type": "number",
+          "title": "Bottom Depth",
+          "description": "The depth of the base of the rock sample. For point measurements (slides, sidewall cores), the same value is assigned to TopDepth and BottomDepth.",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "SampleInterval": {
+          "type": "number",
+          "title": "Sample Interval",
+          "description": "The interval between the top depth and bottom depth.",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "SampleAcquiredDate": {
+          "type": "string",
+          "title": "Sample Acquired Date",
+          "description": "The date that the sample was acquired.",
+          "format": "date-time"
+        },
+        "SampleStorageLocations": {
+          "type": "array",
+          "title": "Sample Storage Location",
+          "description": "An array containing the name of the locations where the material sample is stored. It can be stored in more than one location over time.",
+          "x-osdu-indexing": {
+            "type": "flattened"
+          },
+          "items": {
+            "$ref": "../abstract/AbstractStorageLocation.1.0.0.json"
+          }
+        },
+        "SampleRemarks": {
+          "type": "array",
+          "title": "Sample Remarks",
+          "description": "An array containing operational or quality comments pertaining to a rock sample.",
+          "example": [
+            {
+              "RemarkID": "1",
+              "Remark": "Shaker not functioning properly.",
+              "RemarkSource": "Mud Logger"
+            }
+          ],
+          "x-osdu-indexing": {
+            "type": "flattened"
+          },
+          "items": {
+            "type": "object",
+            "description": "An array containing narrative remarks pertaining to a rock sample.",
+            "properties": {
+              "RemarkID": {
+                "type": "string",
+                "title": "Remark ID",
+                "description": "A unique identifier for each remark record."
+              },
+              "Remark": {
+                "type": "string",
+                "title": "Remark",
+                "description": "A descriptive comment for this remark."
+              },
+              "RemarkSource": {
+                "type": "string",
+                "title": "Remark Source",
+                "description": "The person, vendor, interpreter or other provider of information."
+              }
+            }
+          }
+        },
+        "SampleOwnerID": {
+          "type": "string",
+          "title": "Sample Owner ID",
+          "description": "Company and/or organization that owns the sample.",
+          "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Organisation:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "SampleWeight": {
+          "type": "number",
+          "title": "Sample Weight",
+          "description": "Weight of sample",
+          "x-osdu-frame-of-reference": "UOM:mass"
+        },
+        "SampleLength": {
+          "type": "number",
+          "title": "Sample Length",
+          "description": "The length of rock sample. Not applicable to cuttings",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "SampleDiameter": {
+          "type": "number",
+          "title": "Sample Diameter",
+          "description": "The diameter of rock sample. Not applicable to cuttings",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "IsCoreSlabbed": {
+          "type": "boolean",
+          "title": "Is Core Slabbed?",
+          "description": "A flag to denote whether a particular core has been slabbed or not."
+        },
+        "IsPlugCleaned": {
+          "type": "boolean",
+          "title": "Is Plug Cleaned",
+          "description": "For sample plugs: a flag indicating whether the plug has been cleaned. More details in the associated RockSampleAnalysis."
+        },
+        "AreCuttingsWashedAndDried": {
+          "type": "boolean",
+          "title": "Are Cuttings Washed and Dried",
+          "description": "For cuttings: a flag indication whether the cuttings were washed and dried. More details in the associated RockSampleAnalysis."
+        },
+        "PreservationTypeID": {
+          "type": "string",
+          "title": "Preservation Type ID",
+          "description": "The kind of preservation applied to this sample.",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-CorePreservationType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "SampleOrientationID": {
+          "type": "string",
+          "title": "Sample Orientation ID",
+          "description": "The kind of orientation of this sample with respect to the bedding or drilling direction. Typical values are Horizontal, Vertical, Axial.",
+          "example": "namespace:reference-data--SampleOrientationType:Horizontal:",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-SampleOrientationType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        }
+      }
+    }
+  ]
+}

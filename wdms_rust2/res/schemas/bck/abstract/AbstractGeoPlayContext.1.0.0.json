@@ -1,0 +1,24 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/abstract/AbstractGeoPlayContext.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AbstractGeoPlayContext",
+  "description": "A single, typed Play entity reference, which is 'abstracted' to AbstractGeoContext and then aggregated by GeoContexts properties.",
+  "type": "object",
+  "properties": {
+    "PlayID": {
+      "type": "string",
+      "description": "Reference to the play.",
+      "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Play:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+    },
+    "GeoTypeID": {
+      "type": "string",
+      "description": "The PlayType reference of the Play (via PlayID) for application convenience.",
+      "x-osdu-is-derived": {
+        "RelationshipPropertyName": "PlayID",
+        "TargetPropertyName": "PlayTypeID"
+      },
+      "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-PlayType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "x-osdu-governance-model": "OPEN",
+  "x-osdu-governance-authorities": [
+    "osdu"
+  ],
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/WellActivityPhaseType.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Well Activity Phase Type",
+  "description": "Key milestones in a well activity program, usually based on the major sections of the well or non well-related work",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {}
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+[package]
+name = "wdms_rust1"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+serde_json = "1.0"
+jsonschema = { version = "0.16", default-features = false, features = ["draft201909", "draft202012"] }
+url = "2"
+lazy_static = "1.4"
+polars = { version = "0.21.1", features = ["parquet", "dtype-full", "lazy"] }

@@ -1,0 +1,28 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/master-data/SeismicProcessingProject.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SeismicProcessingProject",
+  "description": "A seismic processing project is a type of business project which manages the creation of processed seismic work products. It is not the same as the geometry of the processed traces (binning or bin grid), which is a work product component, although it typically defines a single binning.  A processing project may merge data from multiple field surveys, so it is not required to be equated to a single field survey.  Original processing and re-processing activities generate separate and independent processing projects.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractMaster.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractProject.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "SeismicAcquisitionSurveys": {
+          "description": "List of seismic acquisition projects (surveys) that originated the underlying data used in Processing Project.  Trace data work product components have an explicit child relationship.  Other affiliated objects may use Lineage.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[\\w\\-\\.]+:master-data\\-\\-SeismicAcquisitionSurvey:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+          }
+        }
+      }
+    }
+  ]
+}

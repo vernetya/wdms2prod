@@ -1,0 +1,109 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/master-data/SeismicAcquisitionSurvey.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SeismicAcquisitionSurvey",
+  "description": "A seismic acquisition project is a type of business project that deploys resources to the field to record seismic data.  It may be referred to as a field survey, acquisition survey, or field program.  It is not the same as the geometry of the deployed equipment (nav), which is a work product component.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractMaster.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractProject.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "SeismicGeometryTypeID": {
+          "description": "Reference to the standard values for the general layout of the acquisition.  This is an hierarchical value.  The top value is like 2D, 3D, 4D, Borehole, Passive.  The second value is like NATS, WATS, Brick, Crosswell.  Nodes are separated by forward slash.",
+          "type": "string",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-SeismicGeometryType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "OperatingEnvironmentID": {
+          "description": "Identifies the setting of acquisition (land, marine, transition zone).",
+          "type": "string",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-OperatingEnvironment:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "AreaCalculated": {
+          "description": "The calculated are covered by the survey. This value is calculated during the loading of the survey.",
+          "type": "number",
+          "x-osdu-frame-of-reference": "UOM:area"
+        },
+        "AreaNominal": {
+          "description": "The nominal area covered by the survey. This value is usually entered by the end user.",
+          "type": "number",
+          "x-osdu-frame-of-reference": "UOM:area"
+        },
+        "ShotpointIncrementDistance": {
+          "type": "number",
+          "description": "Horizontal distance between shotpoint locations",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "EnergySourceTypeID": {
+          "type": "string",
+          "description": "Seismic Source type. E.g.: Airgun, Vibroseis, Dynamite,Watergun",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-SeismicEnergySourceType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "SourceArrayCount": {
+          "type": "integer",
+          "description": "Number of energy sources"
+        },
+        "SourceArraySeparationDistance": {
+          "type": "number",
+          "description": "Distance between energy Sources",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "SampleInterval": {
+          "type": "number",
+          "description": "Vertical sampling interval of data at time of acquisition",
+          "x-osdu-frame-of-reference": "UOM:time"
+        },
+        "RecordLength": {
+          "type": "number",
+          "description": "Length of record at time of acquisition",
+          "x-osdu-frame-of-reference": "UOM:time"
+        },
+        "ShootingAzimuthAngle": {
+          "type": "number",
+          "description": "Orientation of plane between source and receivers.",
+          "x-osdu-frame-of-reference": "UOM:plane angle"
+        },
+        "CableCount": {
+          "type": "integer",
+          "description": "Number of receiver arrays (lines)"
+        },
+        "CableLength": {
+          "type": "number",
+          "description": "Total length of receiver array",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "CableSpacingDistance": {
+          "type": "number",
+          "description": "Horizontal distance between receiver arrays",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "MinOffsetDistance": {
+          "type": "number",
+          "description": "Horizontal distance between source and first receiver",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "MaxOffsetDistance": {
+          "type": "number",
+          "description": "Horizontal distance between source and last receiver",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "FoldCount": {
+          "type": "integer",
+          "description": "The number of times a point in the subsurface is sampled.  It measures of the redundancy of common midpoint seismic data"
+        },
+        "VesselNames": {
+          "type": "array",
+          "description": "List of names of the seismic acquisition (source and streamer) vessels used (marine environment only).",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  ]
+}

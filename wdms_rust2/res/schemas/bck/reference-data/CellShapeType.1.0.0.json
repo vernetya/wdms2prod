@@ -1,0 +1,21 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "x-osdu-governance-model": "FIXED",
+  "x-osdu-governance-authorities": [
+    "OSDU"
+  ],
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/CellShapeType.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CellShapeType",
+  "description": "An enumeration of cell shape types based on the RESQML model, i.e. tetrahedral, pyramidal, prism, hexahedral, polyhedral.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {}
+    }
+  ]
+}

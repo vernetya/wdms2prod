@@ -1,0 +1,16 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/LineageRelationshipType.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "LineageRelationshipType",
+  "description": "Used by LineageAssertion to describe the nature of the line of descent of a work product component from a prior Resource, such as DIRECT, INDIRECT, REFERENCE.  It is not for proximity (number of nodes away), it is not to cover all the relationships in a full ontology or graph, and it is not to describe the type of activity that created the asserting Work Product or Work Product Component.  LineageAssertion does not encompass a full provenance, process history, or activity model.",
+  "x-osdu-governance-authorities": [
+    "OSDU"
+  ],
+  "x-osdu-governance-model": "FIXED",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    }
+  ]
+}

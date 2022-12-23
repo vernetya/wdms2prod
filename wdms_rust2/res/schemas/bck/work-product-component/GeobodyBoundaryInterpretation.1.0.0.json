@@ -1,0 +1,31 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/work-product-component/GeobodyBoundaryInterpretation.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "GeobodyBoundaryInterpretation",
+  "description": "Geologic information associated to geobody boundary-related objects  (marker, seismic picks, modeled objects like triangulated surface)",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractWPCGroupType.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractWorkProductComponent.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractInterpretation.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "BoundaryRelationTypeID": {
+          "type": "string",
+          "title": "BoundaryRelationTypeID",
+          "description": "Describes the geobody boundary relation with surrounding stratigraphic units: unconformable, conformable",
+          "format": "uri-reference",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-BoundaryRelationType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        }
+      }
+    }
+  ]
+}

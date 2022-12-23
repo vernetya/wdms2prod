@@ -1,0 +1,95 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "x-osdu-governance-authorities": [
+    "Energistics RESQML2.2"
+  ],
+  "$id": "https://schema.osdu.opengroup.org/json/work-product-component/VoidageGroupInterpretation.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "VoidageGroupInterpretation",
+  "description": "A group of several reservoir compartments which can be associated to RockFluidOrganisationInterpretations and/or to GeologicUnitOrganizationInterpretations.",
+  "type": "object",
+  "x-osdu-virtual-properties": {
+    "data.VirtualProperties.DefaultLocation": {
+      "type": "object",
+      "priority": [
+        {
+          "path": "data.SpatialArea"
+        },
+        {
+          "path": "data.SpatialPoint"
+        }
+      ]
+    },
+    "data.VirtualProperties.DefaultName": {
+      "type": "string",
+      "priority": [
+        {
+          "path": "data.Name"
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractWPCGroupType.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractWorkProductComponent.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractInterpretation.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "MemberIDs": {
+          "type": "array",
+          "title": "MemberIDs",
+          "description": "List of ReservoirCompartment interpretation parts of the Collection, defined as an array of the member IDs",
+          "example": [
+            "namespace:work-product-component--ReservoirCompartmentInterpretation:06079102-9c5c-44cd-abb1-ea6f46c039f5:",
+            "namespace:work-product-component--ReservoirCompartmentInterpretation:d5adff1c-7abc-4b0c-ac95-b68a7b1021f6:"
+          ],
+          "items": {
+            "type": "string",
+            "pattern": "^[\\w\\-\\.]+:work-product-component\\-\\-ReservoirCompartmentInterpretation:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+          }
+        },
+        "FeatureID": {
+          "type": "string",
+          "title": "Model Feature Identifier",
+          "description": "Reference to the Feature this Interpretation refers to.",
+          "pattern": "^[\\w\\-\\.]+:(master-data\\-\\-ModelFeature|work-product-component\\-\\-LocalModelFeature):[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "RockFluidOrganizationInterpretationIDs": {
+          "type": "array",
+          "title": "RockFluidOrganizationInterpretation Identifiers",
+          "description": "Reference to the RockFluidOrganizationInterpretations associated to this voidage group.",
+          "example": [
+            "namespace:work-product-component--RockFluidOrganizationInterpretation:b32e7c46-c4d4-417e-b07a-4d7b9daa6577:",
+            "namespace:work-product-component--RockFluidOrganizationInterpretation:66bec115-a43c-49b9-9e68-06a2391f5ba9:"
+          ],
+          "items": {
+            "type": "string",
+            "pattern": "^[\\w\\-\\.]+:work-product-component\\-\\-RockFluidOrganizationInterpretation:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+          }
+        },
+        "GeologicUnitOrganizationInterpretationIDs": {
+          "type": "array",
+          "title": "GeologicUnitOrganizationInterpretation Identifiers",
+          "description": "Reference to the GeologicUnitOrganizationInterpretations associated to this voidage group.",
+          "example": [
+            "namespace:work-product-component--StratigraphicColumnRankInterpretation:568e29f3-6018-4b48-919b-32a11018a4a5:"
+          ],
+          "items": {
+            "type": "string",
+            "pattern": "^[\\w\\-\\.]+:work-product-component\\-\\-StratigraphicColumnRankInterpretation:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+          }
+        }
+      },
+      "required": [
+        "MemberIDs"
+      ]
+    }
+  ]
+}

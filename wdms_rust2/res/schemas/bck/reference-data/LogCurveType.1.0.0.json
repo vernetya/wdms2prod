@@ -1,0 +1,16 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/LogCurveType.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "LogCurveType",
+  "description": "LogCurveType is the standard mnemonic chosen by the company - OSDU provides an initial list",
+  "x-osdu-governance-authorities": [
+    "None"
+  ],
+  "x-osdu-governance-model": "LOCAL",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "x-osdu-governance-authorities": [
+    "OSDU",
+    "Energistics"
+  ],
+  "$id": "https://schema.osdu.opengroup.org/json/abstract/AbstractGeologicUnitInterpretation.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AbstractGeologicUnitInterpretation",
+  "description": "Common properties for entities describing an opinion of a volume-based geologic feature or unit.",
+  "type": "object",
+  "properties": {
+    "LithologyTypeID": {
+      "type": "string",
+      "title": "Lithology Type ID",
+      "description": "The relationship to a LithologyType, corresponding to Energistics GeologicUnitComposition.",
+      "example": "namespace:reference-data--LithologyType:sand:",
+      "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-LithologyType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+    },
+    "IsIntrusive": {
+      "type": "boolean",
+      "title": "Is Intrusive Flag",
+      "description": "Corresponding to Energistics GeologicUnitMaterialEmplacement 'intrusive' and 'non-intrusive'.",
+      "example": false
+    },
+    "GeologicUnitShapeTypeID": {
+      "type": "string",
+      "title": "Geologic Unit Shape Type ID",
+      "description": "The relationship to a GeologicUnitShapeType like sheet, dyke, dome, mushroom, channel and more.",
+      "example": "namespace:reference-data--GeologicUnitShapeType:Delta:",
+      "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-GeologicUnitShapeType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+    }
+  }
+}

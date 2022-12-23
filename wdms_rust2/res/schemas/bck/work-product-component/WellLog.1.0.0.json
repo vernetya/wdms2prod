@@ -1,0 +1,216 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/work-product-component/WellLog.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "WellLog",
+  "description": "A well log is a data type that correlates a particular measurement or multiple measurements in a wellbore against depth and/or time within that wellbore. When plotted visually, well logs are typically long line graphs (called \"curves\") but may sometimes be discrete points or intervals. This schema object is intended for digital well logs, not raster log files or raster calibration files, but may be used for the latter in the absence of a defined OSDU schema for these use cases.",
+  "type": "object",
+  "x-osdu-supported-file-formats": [
+    "WITSML",
+    "DLIS",
+    "LIS",
+    "LAS2",
+    "LAS3",
+    "csv"
+  ],
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractWPCGroupType.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractWorkProductComponent.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "WellboreID": {
+          "type": "string",
+          "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Wellbore:[\\w\\-\\.\\:\\%]+:[0-9]*$",
+          "description": "The Wellbore where the Well Log Work Product Component was recorded"
+        },
+        "WellLogTypeID": {
+          "description": "Well Log Type short Description such as Raw; Evaluated; Composite;....",
+          "type": "string",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-LogType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "TopMeasuredDepth": {
+          "title": "Top Measured Depth",
+          "description": "OSDU Native Top Measured Depth of the Well Log.",
+          "type": "number",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "BottomMeasuredDepth": {
+          "title": "Bottom Measured Depth",
+          "description": "OSDU Native Bottom Measured Depth of the Well Log.",
+          "type": "number",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "ServiceCompanyID": {
+          "description": "Service Company ID",
+          "type": "string",
+          "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Organisation:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "LogSource": {
+          "description": "OSDU Native Log Source - will be updated for later releases - not to be used yet ",
+          "type": "string"
+        },
+        "LogActivity": {
+          "description": "Log Activity, used to describe the type of pass such as Calibration Pass - Main Pass - Repeated Pass",
+          "type": "string"
+        },
+        "LogRun": {
+          "description": "Log Run - describe the run of the log - can be a number, but may be also a alphanumeric description such as a version name",
+          "type": "string"
+        },
+        "LogVersion": {
+          "description": "Log Version",
+          "type": "string"
+        },
+        "LoggingService": {
+          "description": "Logging Service - mainly a short concatenation of the names of the tools",
+          "type": "string"
+        },
+        "LogServiceDateInterval": {
+          "description": "An interval built from two nested values : StartDate and EndDate. It applies to the whole log services and may apply to composite logs as [start of the first run job] and [end of the last run job]Log Service Date",
+          "type": "object",
+          "properties": {
+            "StartDate": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "EndDate": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        },
+        "ToolStringDescription": {
+          "description": "Tool String Description - a long concatenation of the tools used for logging services such as GammaRay+NeutronPorosity",
+          "type": "string"
+        },
+        "LoggingDirection": {
+          "description": "Specifies whether curves were collected downward or upward",
+          "type": "string"
+        },
+        "PassNumber": {
+          "description": "Indicates if the Pass is the Main one (1) or a repeated one - and it's level repetition",
+          "type": "integer"
+        },
+        "ActivityType": {
+          "description": "General method or circumstance of logging - MWD, completion, ...",
+          "type": "string"
+        },
+        "DrillingFluidProperty": {
+          "description": "Type of mud at time of logging (oil, water based,...)",
+          "type": "string"
+        },
+        "HoleTypeLogging": {
+          "description": "Description of the hole related type of logging - POSSIBLE VALUE : OpenHole / CasedHole / CementedHole",
+          "pattern": "^OPENHOLE|CASEDHOLE|CEMENTEDHOLE$",
+          "type": "string"
+        },
+        "VerticalMeasurementID": {
+          "type": "string",
+          "description": "References an entry in the Vertical Measurement array for the Wellbore identified by WellboreID, which defines the vertical reference datum for all curve measured depths. Either VerticalMeasurementID or VerticalMeasurement are populated."
+        },
+        "VerticalMeasurement": {
+          "$ref": "../abstract/AbstractFacilityVerticalMeasurement.1.0.0.json",
+          "description": "The vertical measurement reference for the log curves, which defines the vertical reference datum for the logged depths. Either VerticalMeasurement or VerticalMeasurementID are populated."
+        },
+        "Curves": {
+          "type": "array",
+          "x-osdu-indexing": {
+            "type": "nested"
+          },
+          "items": {
+            "type": "object",
+            "properties": {
+              "CurveID": {
+                "description": "The ID of the Well Log Curve",
+                "type": "string"
+              },
+              "DateStamp": {
+                "description": "Date curve was created in the database",
+                "type": "string",
+                "format": "date-time",
+                "x-osdu-frame-of-reference": "DateTime"
+              },
+              "CurveVersion": {
+                "description": "The Version of the Log Curve.",
+                "type": "string"
+              },
+              "CurveQuality": {
+                "description": "The Quality of the Log Curve.",
+                "type": "string"
+              },
+              "InterpreterName": {
+                "description": "The name of person who interpreted this Log Curve.",
+                "type": "string"
+              },
+              "IsProcessed": {
+                "description": "Indicates if the curve has been (pre)processed or if it is a raw recording",
+                "type": "boolean"
+              },
+              "NullValue": {
+                "description": "Indicates that there is no measurement within the curve",
+                "type": "boolean"
+              },
+              "DepthCoding": {
+                "description": "The Coding of the depth.",
+                "type": "string",
+                "pattern": "^REGULAR|DISCRETE$"
+              },
+              "Interpolate": {
+                "description": "Whether curve can be interpolated or not",
+                "type": "boolean"
+              },
+              "TopDepth": {
+                "type": "number",
+                "description": "Top Depth",
+                "x-osdu-frame-of-reference": "UOM_via_property:DepthUnit"
+              },
+              "BaseDepth": {
+                "type": "number",
+                "description": "Base Depth",
+                "x-osdu-frame-of-reference": "UOM_via_property:DepthUnit"
+              },
+              "DepthUnit": {
+                "description": "Unit of Measure for Top and Base depth",
+                "type": "string",
+                "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-UnitOfMeasure:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+              },
+              "CurveUnit": {
+                "description": "Unit of Measure for the Log Curve",
+                "type": "string",
+                "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-UnitOfMeasure:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+              },
+              "Mnemonic": {
+                "description": "The Mnemonic of the Log Curve is the value as received either from Raw Providers or from Internal Processing team ",
+                "type": "string"
+              },
+              "LogCurveTypeID": {
+                "description": "The SRN of the Log Curve Type - which is the standard mnemonic chosen by the company - OSDU provides an initial list",
+                "type": "string",
+                "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-LogCurveType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+              },
+              "LogCurveBusinessValueID": {
+                "description": "The SRN of the Log Curve Business Value Type.",
+                "type": "string",
+                "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-LogCurveBusinessValue:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+              },
+              "LogCurveMainFamilyID": {
+                "description": "The SRN of the Log Curve Main Family Type - which is the Geological Physical Quantity measured - such as porosity.",
+                "type": "string",
+                "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-LogCurveMainFamily:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+              },
+              "LogCurveFamilyID": {
+                "description": "The SRN of the Log Curve Family - which is the detailed Geological Physical Quantity Measured - such as neutron porosity",
+                "type": "string",
+                "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-LogCurveFamily:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

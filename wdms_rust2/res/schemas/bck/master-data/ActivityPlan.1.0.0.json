@@ -1,0 +1,287 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/master-data/ActivityPlan.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Activity Plan",
+  "description": "Information about a series of planned activities.",
+  "type": "object",
+  "x-osdu-virtual-properties": {
+    "data.VirtualProperties.DefaultLocation": {
+      "type": "object",
+      "priority": [
+        {
+          "path": "data.SpatialLocation"
+        }
+      ]
+    },
+    "data.VirtualProperties.DefaultName": {
+      "type": "string",
+      "priority": [
+        {
+          "path": "data.ProjectName"
+        },
+        {
+          "path": "data.Name"
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractMaster.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractProject.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "WellboreID": {
+          "type": "string",
+          "title": "Wellbore ID",
+          "description": "A reference to the wellbore that is the subject of this activity plan",
+          "x-osdu-attribution-authority": "The Open Group",
+          "x-osdu-attribution-publication": "The OSDU Data Platform",
+          "x-osdu-attribution-revision": "evergreen",
+          "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Wellbore:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "WellPlanningActivities": {
+          "type": "array",
+          "title": "WellPlanningActivities",
+          "description": "The activities that compose this plan",
+          "x-osdu-attribution-authority": "The Open Group",
+          "x-osdu-attribution-publication": "The OSDU Data Platform",
+          "x-osdu-attribution-revision": "evergreen",
+          "items": {
+            "type": "object",
+            "title": "Well Planning Activity",
+            "description": "Information regarding an individual activity that is part of the ActivityPlan",
+            "properties": {
+              "Name": {
+                "type": "string",
+                "title": "Name",
+                "description": "A name given to this activity"
+              },
+              "ActivityID": {
+                "type": "string",
+                "title": "Activity ID",
+                "description": "Identifier of the activity"
+              },
+              "DepthRange": {
+                "type": "object",
+                "title": "Depth Range",
+                "description": "The depth range over which the the activity takes place",
+                "properties": {
+                  "HoleDepthStart": {
+                    "type": "number",
+                    "title": "Hole Depth Start",
+                    "description": "The depth of the hole at the start of the activity. Depth relative to Planned wellbore ZDP. Navigate via WellboreID to the side-car WellPlanningWellbore, which holds the depth reference in data.VerticalMeasurement.",
+                    "x-osdu-frame-of-reference": "UOM:length"
+                  },
+                  "HoleDepthEnd": {
+                    "type": "number",
+                    "title": "Hole Depth End",
+                    "description": "The depth of the hole at the end of the activity. Depth relative to Planned wellbore ZDP. Navigate via WellboreID to the side-car WellPlanningWellbore, which holds the depth reference in data.VerticalMeasurement.",
+                    "x-osdu-frame-of-reference": "UOM:length"
+                  },
+                  "ActivityDepthStart": {
+                    "type": "number",
+                    "title": "Activity Depth Start",
+                    "description": "The start depth of the activity. Depth relative to Planned wellbore ZDP. Navigate via WellboreID to the side-car WellPlanningWellbore, which holds the depth reference in data.VerticalMeasurement.",
+                    "x-osdu-frame-of-reference": "UOM:length"
+                  },
+                  "ActivityDepthEnd": {
+                    "type": "number",
+                    "title": "Activity Depth End",
+                    "description": "The end depth of the activity. Depth relative to Planned wellbore ZDP. Navigate via WellboreID to the side-car WellPlanningWellbore, which holds the depth reference in data.VerticalMeasurement.",
+                    "x-osdu-frame-of-reference": "UOM:length"
+                  }
+                }
+              },
+              "ParentID": {
+                "type": "string",
+                "title": "Parent ID",
+                "description": "The parent activity to this activity"
+              },
+              "ActivityCodeID": {
+                "type": "string",
+                "title": "Activity Code",
+                "description": "The activity code of the activity",
+                "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-ActivityCode:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+              },
+              "PredecessorsID": {
+                "type": "string",
+                "title": "Predecessors ID",
+                "description": "The preceding activity in the plan"
+              },
+              "ProductiveTimeDuration": {
+                "type": "number",
+                "title": "Productive Time Duration",
+                "description": "The expected productive time of the activity - if \"clean time probability\" distribution is populated then this should be the expected value of the distribution"
+              },
+              "NonProductiveTimeDuration": {
+                "type": "number",
+                "title": "Non Productive Time Duration",
+                "description": "The expected duration of the non productive time of the activity"
+              },
+              "ProductiveTimeStatistics": {
+                "type": "array",
+                "title": "Productive Time Statistics",
+                "description": "Statistics that define the expected productivity time of this activity",
+                "items": {
+                  "type": "object",
+                  "title": "Statistics",
+                  "description": "Structure that describes a individual statistic record of the operations from an activity.",
+                  "properties": {
+                    "StatisticRecord": {
+                      "type": "number",
+                      "title": "Statistic Record",
+                      "description": "Record of the statistic estimation",
+                      "x-osdu-frame-of-reference": "UOM:time"
+                    },
+                    "ProbabilityTypeID": {
+                      "type": "string",
+                      "title": "Probability Type Identifier",
+                      "description": "Identifier of the probability type the value is describing",
+                      "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-PPFGCurveProbability:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+                    }
+                  },
+                  "required": [
+                    "StatisticRecord",
+                    "ProbabilityTypeID"
+                  ]
+                }
+              },
+              "NonProductiveTimeStatistics": {
+                "type": "array",
+                "title": "Non Productive Time Statistics",
+                "description": "Statistics that define the non productive time of this activity",
+                "items": {
+                  "type": "object",
+                  "title": "Statistics",
+                  "description": "Structure that describes a individual statistic record of the operations from an activity.",
+                  "properties": {
+                    "StatisticRecord": {
+                      "type": "number",
+                      "title": "Statistic Record",
+                      "description": "Record of the statistic estimation",
+                      "x-osdu-frame-of-reference": "UOM:time"
+                    },
+                    "ProbabilityTypeID": {
+                      "type": "string",
+                      "title": "Probability Type Identifier",
+                      "description": "Identifier of the probability type the value is describing",
+                      "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-PPFGCurveProbability:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+                    }
+                  },
+                  "required": [
+                    "StatisticRecord",
+                    "ProbabilityTypeID"
+                  ]
+                }
+              },
+              "RateOfPenetrationStatistics": {
+                "type": "array",
+                "title": "Rate Of Penetration Statistics",
+                "description": "Statistics that define the rate of penetration of this activity",
+                "items": {
+                  "type": "object",
+                  "title": "ROP Statistics",
+                  "description": "Individual Statistics that define the rate of penetration of an activity",
+                  "properties": {
+                    "StatisticRecord": {
+                      "type": "number",
+                      "title": "Statistic Record",
+                      "description": "Record of the statistic estimation",
+                      "x-osdu-frame-of-reference": "UOM:length per time"
+                    },
+                    "ProbabilityTypeID": {
+                      "type": "string",
+                      "title": "Probability Type Identifier",
+                      "description": "Identifier of the probability type the value is describing",
+                      "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-PPFGCurveProbability:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+                    }
+                  },
+                  "required": [
+                    "StatisticRecord",
+                    "ProbabilityTypeID"
+                  ]
+                }
+              },
+              "Comment": {
+                "type": "string",
+                "title": "Comment",
+                "description": "Free form comments associated with this activity"
+              },
+              "ObjectReferenceIDs": {
+                "type": "array",
+                "title": "Object Reference IDs",
+                "description": "Reference to objects that is defined within the context of a wellbore. The WITSML 1.4.1 standard has only one object reference, but a risk may related with multiple objects.",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "ActivityCodeCatalogVersion": {
+                "type": "string",
+                "title": "Catalog Version",
+                "description": "the catalog version of this activity"
+              },
+              "ActivityLevel": {
+                "type": "string",
+                "title": "Activity Level",
+                "description": "The activity level of this activity. Levels go from L1 to L6",
+                "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-ActivityLevel:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+              },
+              "PlannedStartTime": {
+                "type": "string",
+                "title": "Planned Start Time",
+                "description": "Date/Time the activity is planned to start",
+                "format": "date-time",
+                "x-osdu-frame-of-reference": "DateTime"
+              },
+              "PlannedEndTime": {
+                "type": "string",
+                "title": "Planned End Time",
+                "description": "Date/Time the activity is planned to end",
+                "format": "date-time",
+                "x-osdu-frame-of-reference": "DateTime"
+              },
+              "PlannedDuration": {
+                "type": "string",
+                "title": "Planned Duration",
+                "description": "Overall duration as planned for the activity",
+                "format": "date-time",
+                "x-osdu-frame-of-reference": "UOM:time"
+              },
+              "RiskIDs": {
+                "type": "array",
+                "title": "Risk IDs",
+                "description": "A reference to the object that holds the information about the risks that apply to the activity",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Risk:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+                }
+              },
+              "IsOptional": {
+                "type": "boolean",
+                "title": "Is Optional",
+                "description": "Flag used to indicates this particular activity is optional in the plan."
+              }
+            },
+            "required": [
+              "ActivityID"
+            ]
+          }
+        },
+        "Name": {
+          "type": "string",
+          "title": "Name",
+          "description": "Name of Activity Plan"
+        }
+      },
+      "required": [
+        "WellPlanningActivities"
+      ]
+    }
+  ]
+}

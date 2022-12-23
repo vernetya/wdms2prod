@@ -1,0 +1,16 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/ProcessingParameterType.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ProcessingParameterType",
+  "description": "A variable that can be changed independently and often arbitrarily between calculations but which remains constant during any calculation. (SEG)",
+  "x-osdu-governance-authorities": [
+    "None"
+  ],
+  "x-osdu-governance-model": "LOCAL",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    }
+  ]
+}

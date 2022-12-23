@@ -1,0 +1,78 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "x-osdu-governance-model": "LOCAL",
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/ExternalUnitQuantity.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ExternalUnitQuantity",
+  "description": "An external unit quantity definition to map to a platform standard UnitQuantity record. An ExternalUnitQuantity record can be seen as an 'alias' for the UnitQuantityID it refers to. Adding NameAliases to UnitQuantity is, however, not recommended because local overrides may be lost when new OSDU updates are shipped.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "NamespaceID": {
+          "type": "string",
+          "title": "Catalog Namespace ID",
+          "description": "A namespace reference grouping a list of records with the goal of providing unique look-ups by Name/Code. It is strongly recommended to make the NamespaceID's code part of the system property id.",
+          "example": "partition-id:reference-data--ExternalCatalogNamespace:LIS-LAS:",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-ExternalCatalogNamespace:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "MapStateID": {
+          "type": "string",
+          "title": "Map State ID",
+          "description": "The mapping status declaring whether the mapping is straight forward, direct (identical) or whether special treatment is required (corrected). Items, which are known not to be mappable are declared as unsupported. In the latter case the UnitQuantityID is not expected to be populated.",
+          "example": "partition-id:reference-data--CatalogMapStateType:identical:",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-CatalogMapStateType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "UnitQuantityID": {
+          "type": "string",
+          "title": "Unit Quantity ID",
+          "description": "The platform standard UnitQuantity record, to which this ExternalUnitQuantity record is mapped. This record may be understood as an alias to the standard UniQuantity.",
+          "example": "partition-id:reference-data--UnitQuantity:length:",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-UnitQuantity:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "UnitDimension": {
+          "type": "string",
+          "title": "UnitDimension",
+          "description": "The UnitQuantity dimensionality using the symbols for dimension as defined in https://www.bipm.org/utils/common/documents/jcgm/JCGM_200_2012.pdf, i.e. L for length, M for mass, T for time, I for electric current, N for amount of substance, J for luminous intensity; except \u0398 for thermodynamic temperature, which is replaced by the symbol K, the additional symbol D for temperature difference and the additional symbol 0 for no dimension.",
+          "example": "L"
+        },
+        "BaseForConversion": {
+          "type": "string",
+          "title": "Base Unit",
+          "description": "The base unit for unit conversion. The symbol of the unit which is used for conversion for of all members of this class. The corresponding baseForConversion must be a member of this class. To convert from one member to another member, you logically convert from the source member to the base and then convert from the base to the target member.",
+          "example": "M"
+        },
+        "MemberUnits": {
+          "type": "array",
+          "title": "Member Units",
+          "description": "Specifies the symbol of a unit of which is a member of this class. Membership indicates that a value of that class can be converted to any other member unit of that class without loss of semantics. This because the conversion formula represents a unitless factor of one.",
+          "example": [
+            "FT",
+            "F",
+            "M",
+            "KM"
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "ParentUnitQuantity": {
+          "type": "string",
+          "title": "Parent Unit Quantity",
+          "description": "Optional parent unit quantity code in case a specialized unit quantity is needed. This is typically used to assign display units to particular measurements like cylinder diameter (small) versus geographic distance (large). I this case the persistable reference string will contain the full ancestry, e.g. \"L.length.CylinderDiameter\".",
+          "example": "Length"
+        },
+        "PersistableReference": {
+          "type": "string",
+          "title": "Persistable Reference",
+          "description": "The self-contained, stringified JSON reference for the unit. This value can be attached to data values and data records and carry the unit quantity reference independent of a UnitQuantity instance.",
+          "example": "\"{\\\"ancestry\\\":\\\"Length\\\",\\\"type\\\":\\\"UM\\\"}\""
+        }
+      }
+    }
+  ]
+}

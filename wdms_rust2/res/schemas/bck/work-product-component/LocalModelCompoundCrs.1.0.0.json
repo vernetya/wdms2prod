@@ -1,0 +1,20 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/work-product-component/LocalModelCompoundCrs.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "LocalModelCompoundCrs",
+  "description": "This WPC intends to be a placeholder for storing metadata about the CRS in a Reservoir study. No attribute is present yet but could be added in next releases. The main intent is for now to be able to reference the same CRS (whatever how it is defined) from several representations.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractWPCGroupType.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractWorkProductComponent.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {}
+    }
+  ]
+}

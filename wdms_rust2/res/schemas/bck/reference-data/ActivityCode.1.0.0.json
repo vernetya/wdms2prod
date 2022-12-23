@@ -1,0 +1,39 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "x-osdu-governance-model": "FIXED",
+  "x-osdu-governance-authorities": [
+    "osdu"
+  ],
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/ActivityCode.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ActivityCode",
+  "description": "ActivityCode for Well Construction and Intervention (for L1), Construct well (for L2), Intervene well (for L2), \u2026",
+  "type": "object",
+  "x-osdu-virtual-properties": {
+    "data.VirtualProperties.DefaultName": {
+      "type": "string",
+      "priority": [
+        {
+          "path": "data.Name"
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "ActivityLevelID": {
+          "type": "string",
+          "title": "Activity Level ID",
+          "description": "The relationship to the ActivityLevel record describing the ActivityCode's position in the hierarchy.",
+          "example": "namespace:reference-data--ActivityLevel:L4:",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-ActivityLevel:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/TectonicSettingType.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TectonicSettingType",
+  "description": "Reference object to offer a list of values to describe the Tectonic Setting - which is a scenario used for Planning and Pore Pressure Practitioners - such as 'Strike Slip'",
+  "x-osdu-governance-authorities": [
+    "OSDU"
+  ],
+  "x-osdu-governance-model": "OPEN",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "x-osdu-governance-model": "FIXED",
+  "x-osdu-governance-authorities": [
+    "Energistics",
+    "OSDU"
+  ],
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/IndexableElement.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Indexble Element",
+  "description": "IndexableElement follows the RESQML pattern. IndexableElement is used to 1) contain geometry within a representation, 2) attach properties to a representation, 3) identify portions of a representation when expressing a representation identity, and 4) construct a sub-representation from an existing representation. Several specialized indexable elements, e.g., hinge node faces, have been included to add higher order geometry to a grid representation, and are not available for other purposes.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {}
+    }
+  ]
+}

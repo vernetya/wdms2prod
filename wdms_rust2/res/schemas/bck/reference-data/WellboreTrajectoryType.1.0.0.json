@@ -1,0 +1,31 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "x-osdu-governance-model": "OPEN",
+  "x-osdu-governance-authorities": [
+    "PPDM"
+  ],
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/WellboreTrajectoryType.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "WellboreTrajectoryType",
+  "description": "Profile Type [Well Profile Type, Wellbore Trajectory Type] is the general geometry of the wellbore relative to the vertical plane. The specific criteria may vary by operator or regulator. The facet value may change if conditions encountered during drilling are not what was planned or permitted.",
+  "type": "object",
+  "x-osdu-virtual-properties": {
+    "data.VirtualProperties.DefaultName": {
+      "type": "string",
+      "priority": [
+        {
+          "path": "data.Name"
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {}
+    }
+  ]
+}

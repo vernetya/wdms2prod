@@ -1,0 +1,54 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/work-product-component/GridConnectionSetRepresentation.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "GridConnectionSetRepresentation",
+  "description": "A list of cell (and optionally local face) connections in a grid.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractWPCGroupType.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractWorkProductComponent.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractRepresentation.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "ConnectionCount": {
+          "type": "integer",
+          "title": "Count of connections",
+          "description": "The count of connections between cells.",
+          "example": 10000
+        },
+        "GridRepresentationIDs": {
+          "type": "array",
+          "title": "Array of references to grid representations",
+          "description": "References to the grid representations which the connections are based on.",
+          "example": [
+            "namespace:work-product-component--IjkGridRepresentation:85348741-3433-406B-9189-22B298C3E2D2:"
+          ],
+          "items": {
+            "type": "string",
+            "pattern": "^[\\w\\-\\.]+:(work-product-component\\-\\-GpGridRepresentation|work-product-component\\-\\-IjkGridRepresentation|work-product-component\\-\\-UnstructuredColumnLayerGridRepresentation|work-product-component\\-\\-UnstructuredGridRepresentation):[\\w\\-\\.\\:\\%]+:[0-9]*$"
+          }
+        },
+        "InterpretationIDs": {
+          "type": "array",
+          "title": "Array of references to interpretations",
+          "description": "References to the interpretations which some (or all) of the connections represent.",
+          "example": [
+            "namespace:work-product-component--FaultInterpretation:95348741-3433-406B-9189-22B298C3E2D2:"
+          ],
+          "items": {
+            "type": "string",
+            "pattern": "^[\\w\\-\\.]+:(work-product-component\\-\\-FaultInterpretation|work-product-component\\-\\-EarthModelInterpretation|work-product-component\\-\\-GeobodyBoundaryInterpretation|work-product-component\\-\\-GeobodyInterpretation|work-product-component\\-\\-HorizonInterpretation|work-product-component\\-\\-RockFluidOrganizationInterpretation|work-product-component\\-\\-RockFluidUnitInterpretation|work-product-component\\-\\-StratigraphicUnitInterpretation|work-product-component\\-\\-StructuralOrganizationInterpretation):[\\w\\-\\.\\:\\%]+:[0-9]*$"
+          }
+        }
+      }
+    }
+  ]
+}

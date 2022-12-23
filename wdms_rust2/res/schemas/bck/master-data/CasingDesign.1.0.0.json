@@ -1,0 +1,61 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/master-data/CasingDesign.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Casing Design",
+  "description": "The design of the Casing in a wellbore",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractMaster.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "WellboreID": {
+          "type": "string",
+          "title": "Wellbore ID",
+          "description": "Identifier of the planned Wellbore",
+          "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Wellbore:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "HoleSectionID": {
+          "type": "string",
+          "title": "Hole Section ID",
+          "description": "Description of the Hole Section to which this Casing Design belongs",
+          "pattern": "^[\\w\\-\\.]+:master-data\\-\\-HoleSection:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "TubularID": {
+          "type": "string",
+          "title": "Tubular ID",
+          "description": "A reference to the Tubular records that are associated with this Casing Design",
+          "x-osdu-attribution-authority": "The Open Group",
+          "x-osdu-attribution-publication": "The OSDU Data Platform",
+          "x-osdu-attribution-revision": "evergreen",
+          "pattern": "^[\\w\\-\\.]+:work-product-component\\-\\-TubularAssembly:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "PPFGDatasetID": {
+          "type": "string",
+          "title": "PPFG Dataset ID",
+          "description": "A reference to the PPFG data set associated with this Casing Design",
+          "pattern": "^[\\w\\-\\.]+:work-product-component\\-\\-PPFGDataset:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "TrajectoryID": {
+          "type": "string",
+          "title": "Trajectory ID",
+          "description": "A reference to the trajectory used to define this casing design",
+          "pattern": "^[\\w\\-\\.]+:work-product-component\\-\\-WellboreTrajectory:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "Name": {
+          "type": "string",
+          "title": "Name",
+          "description": "Name of Casing Design"
+        }
+      },
+      "required": [
+        "WellboreID",
+        "HoleSectionID",
+        "TubularID"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/master-data/WellPlanningWell.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "WellPlanningWell",
+  "description": "Information about a single well. A well is a unique surface location from which wellbores are drilled into the Earth for the purpose of either (1) finding or producing underground resources; or (2) providing services related to the production of underground resources.",
+  "type": "object",
+  "properties": {
+    "WellID": {
+      "type": "string",
+      "title": "Well ID",
+      "description": "Identifier of the parent well.",
+      "x-osdu-attribution-authority": "The Open Group",
+      "x-osdu-attribution-publication": "The OSDU Data Platform",
+      "x-osdu-attribution-revision": "evergreen",
+      "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Well:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+    },
+    "TimeZone": {
+      "type": "string",
+      "title": "Time Zone",
+      "description": "The UTC time zone in which  well is located - expressed as ISO 8601."
+    },
+    "TypeWell": {
+      "type": "string",
+      "title": "Type Well",
+      "description": "Proposed values : Mining, Petroleum, Scientific, Geothermal, Storage, Surface Coring, Water well"
+    },
+    "LicenceName": {
+      "type": "string",
+      "title": "Licence Name",
+      "description": "Legal name of the well as described within the Licence"
+    },
+    "LicenceNumber": {
+      "type": "string",
+      "title": "Licence Number",
+      "description": "License number of the well"
+    },
+    "IssueDateTime": {
+      "type": "number",
+      "title": "Issue Date-Time",
+      "description": "Date and time license was issued",
+      "x-osdu-frame-of-reference": "DateTime"
+    },
+    "BlockID": {
+      "type": "string",
+      "title": "Block ID",
+      "description": "Identifier of the Geopolitical Entity that describes the Block associated to the Licence",
+      "pattern": "^[\\w\\-\\.]+:master-data\\-\\-GeoPoliticalEntity:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+    },
+    "OperatorPercentInterest": {
+      "type": "number",
+      "title": "Operator Percent Interest",
+      "description": "Interest for Operator, Commonly in percent"
+    },
+    "Name": {
+      "type": "string",
+      "title": "Name",
+      "description": "Name of Well Planning well. Derived from the record identified by WellID.",
+      "x-osdu-is-derived": {
+        "RelationshipPropertyName": "WellID",
+        "TargetPropertyName": "FacilityName"
+      }
+    }
+  },
+  "x-osdu-side-car-type-to": [
+    {
+      "GroupType": "master-data",
+      "EntityType": "Well",
+      "SideCarToPropertyName": "WellID"
+    }
+  ]
+}

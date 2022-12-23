@@ -1,0 +1,33 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/abstract/AbstractProjectActivity.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AbstractProjectActivity",
+  "description": "The activity abstraction for projects and surveys (master-data).",
+  "type": "object",
+  "properties": {
+    "ActivityTemplateID": {
+      "type": "string",
+      "title": "Activity Template ID",
+      "description": "The relation to the ActivityTemplate carrying expected parameter definitions and default values.",
+      "pattern": "^[\\w\\-\\.]+:master-data\\-\\-ActivityTemplate:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+    },
+    "ParentProjectID": {
+      "type": "string",
+      "title": "Parent Project ID",
+      "description": "The relationship to a parent project acting as a parent activity.",
+      "pattern": "^[\\w\\-\\.]+:(master-data\\-\\-[\\w\\-\\.]*Project[\\w\\-\\.]*|master-data\\-\\-[\\w\\-\\.]*Survey[\\w\\-\\.]*):[\\w\\-\\.\\:\\%]+:[0-9]*$"
+    },
+    "Parameters": {
+      "type": "array",
+      "title": "Parameters",
+      "description": "General parameter value used in one instance of activity.  Includes reference to data objects which are inputs and outputs of the activity.",
+      "x-osdu-indexing": {
+        "type": "nested"
+      },
+      "items": {
+        "$ref": "../abstract/AbstractActivityParameter.1.0.0.json"
+      }
+    }
+  }
+}

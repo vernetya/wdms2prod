@@ -1,0 +1,136 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/master-data/SurveyProgram.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Survey Program",
+  "description": "Describes the non-contextual content of an OSDU Survey Program object.",
+  "type": "object",
+  "x-osdu-virtual-properties": {
+    "data.VirtualProperties.DefaultLocation": {
+      "type": "object",
+      "priority": [
+        {
+          "path": "data.SpatialLocation"
+        }
+      ]
+    },
+    "data.VirtualProperties.DefaultName": {
+      "type": "string",
+      "priority": [
+        {
+          "path": "data.ProjectName"
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractMaster.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractProject.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "WellboreID": {
+          "type": "string",
+          "title": "Wellbore ID",
+          "description": "Reference to the Wellbore",
+          "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Wellbore:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "Engineer": {
+          "type": "string",
+          "title": "Engineer",
+          "description": "Name of engineer."
+        },
+        "SurveySections": {
+          "type": "array",
+          "title": "Survey Section",
+          "description": "Survey section object.",
+          "items": {
+            "type": "object",
+            "title": "Survey Section",
+            "description": "Description of the Survey Section Component",
+            "properties": {
+              "Sequence": {
+                "type": "number",
+                "title": "Sequence",
+                "description": "Order in which program sections will be executed / were executed."
+              },
+              "Name": {
+                "type": "string",
+                "title": "Name",
+                "description": "Name of survey program section."
+              },
+              "StartMeasuredDepth": {
+                "type": "number",
+                "title": "Start MD",
+                "description": "Hole measured depth at which the survey run will begin/began. Depth relative to Planned wellbore ZDP. Navigate via WellboreID to the side-car WellPlanningWellbore, which holds the depth reference in data.VerticalMeasurement.",
+                "x-osdu-frame-of-reference": "UOM:length"
+              },
+              "EndMeasuredDepth": {
+                "type": "number",
+                "title": "End MD",
+                "description": "Hole measured depth at which the survey run will end/ended. Depth relative to Planned wellbore ZDP. Navigate via WellboreID to the side-car WellPlanningWellbore, which holds the depth reference in data.VerticalMeasurement.",
+                "x-osdu-frame-of-reference": "UOM:length"
+              },
+              "SurveyCompanyID": {
+                "type": "string",
+                "title": "Survey Company ID",
+                "description": "Company who will run / has run survey tool.",
+                "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Organisation:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+              },
+              "SurveyToolName": {
+                "type": "string",
+                "title": "Survey Tool Name",
+                "description": "Name of survey tool, as defined by the manufacturer, to be used / used for this section."
+              },
+              "SurveyToolTypeID": {
+                "type": "string",
+                "title": "Survey Tool Type ID",
+                "description": "Standardized Type of tool used.",
+                "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-SurveyToolType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+              },
+              "ErrorModel": {
+                "type": "string",
+                "title": "Error Model",
+                "description": "Error model used to calculate ellipses of uncertainty."
+              },
+              "IsOverwrite": {
+                "type": "boolean",
+                "title": "Is Overwrite",
+                "description": "Normally true, higher index trajectory takes precedence over overlapping section of previous trajectory.  Values are \"true\" (or \"1\") and \"false\" (or \"0\")."
+              },
+              "FrequencyMx": {
+                "type": "number",
+                "title": "Frequency Maximum",
+                "description": "Maximum allowable depth frequency for survey stations for this survey run.",
+                "x-osdu-frame-of-reference": "UOM:frequency"
+              },
+              "SurveySectionExistenceKind": {
+                "type": "string",
+                "title": "Survey Section Existence Kind",
+                "description": "The item state for the data object.",
+                "example": "Actual; Model ; Plan ; Unknown"
+              },
+              "Comments": {
+                "type": "string",
+                "title": "Comments",
+                "description": "Comments and remarks."
+              }
+            },
+            "required": [
+              "Sequence",
+              "SurveySectionExistenceKind"
+            ]
+          }
+        }
+      },
+      "required": [
+        "WellboreID",
+        "SurveySections"
+      ]
+    }
+  ]
+}

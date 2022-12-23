@@ -1,0 +1,22 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "x-osdu-governance-model": "OPEN",
+  "x-osdu-governance-authorities": [
+    "OSDU",
+    "Energistics"
+  ],
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/DepositionGeometryType.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DepositionGeometryType",
+  "description": "The Deposition Geometry classification (corresponding to Energistics RESQML DepositionMode). Examples are parallel to top, parallel to bottom, etc.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {}
+    }
+  ]
+}

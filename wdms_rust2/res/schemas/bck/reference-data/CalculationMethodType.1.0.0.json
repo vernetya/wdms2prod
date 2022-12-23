@@ -1,0 +1,16 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/CalculationMethodType.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CalculationMethodType",
+  "description": "The method to calculate a wellbore path from the discrete station measurements of a wellbore directional survey.",
+  "x-osdu-governance-authorities": [
+    "PPDM"
+  ],
+  "x-osdu-governance-model": "OPEN",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    }
+  ]
+}

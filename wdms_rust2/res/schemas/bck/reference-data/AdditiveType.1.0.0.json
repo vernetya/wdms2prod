@@ -1,0 +1,21 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "x-osdu-governance-model": "FIXED",
+  "x-osdu-governance-authorities": [
+    "osdu"
+  ],
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/AdditiveType.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AdditiveType",
+  "description": "Items added to cement slurry or cement spacers, washes and fluids",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {}
+    }
+  ]
+}

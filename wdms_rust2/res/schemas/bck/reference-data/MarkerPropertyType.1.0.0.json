@@ -1,0 +1,24 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "x-osdu-governance-model": "OPEN",
+  "x-osdu-governance-authorities": [
+    "OSDU"
+  ],
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/MarkerPropertyType.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MarkerPropertyType",
+  "description": "The wellbore marker property catalog for e.g. WellboreMarkerSet data.AvailableMarkerProperties. Similar to LogCurveType and the TrajectoryStationPropertyType which describes well-known properties (or curves or channels in an array view), which can be accessed via the Wellbore Domain Data Management Services.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractReferencePropertyType.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {}
+    }
+  ]
+}

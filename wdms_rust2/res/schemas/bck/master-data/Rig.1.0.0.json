@@ -1,0 +1,66 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/master-data/Rig.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Rig",
+  "description": "Definition of a drilling rig.",
+  "type": "object",
+  "x-osdu-virtual-properties": {
+    "data.VirtualProperties.DefaultLocation": {
+      "type": "object",
+      "priority": [
+        {
+          "path": "data.SpatialLocation"
+        }
+      ]
+    },
+    "data.VirtualProperties.DefaultName": {
+      "type": "string",
+      "priority": [
+        {
+          "path": "data.FacilityName"
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractMaster.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractFacility.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "OwnerID": {
+          "type": "string",
+          "title": "Owner ID",
+          "description": "The identifier of the company that owns the rig.",
+          "x-osdu-attribution-authority": "The Open Group",
+          "x-osdu-attribution-publication": "The OSDU Data Platform",
+          "x-osdu-attribution-revision": "evergreen",
+          "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Organisation:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "TypeRig": {
+          "type": "string",
+          "title": "Type Rig",
+          "description": "The type of rig (e.g., semi-submersible, jack-up, etc.)",
+          "x-osdu-attribution-authority": "The Open Group",
+          "x-osdu-attribution-publication": "The OSDU Data Platform",
+          "x-osdu-attribution-revision": "evergreen",
+          "x-osdu-existing-standard": "Proposed reference values: Barge,  Floater, Jackup, Land, Platform, Semi_Submersible",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-RigType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "ClassRig": {
+          "type": "string",
+          "title": "Class Rig",
+          "description": "Classification of the rig.",
+          "x-osdu-attribution-authority": "The Open Group",
+          "x-osdu-attribution-publication": "The OSDU Data Platform",
+          "x-osdu-attribution-revision": "evergreen"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "x-osdu-governance-model": "OPEN",
+  "x-osdu-governance-authorities": [
+    "Energistics"
+  ],
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/ParameterKind.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Parameter Kind",
+  "description": "ParameterKind describes the value type of the parameter. Known values are integer, double, string, timestamp, subActivity, dataObject.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {}
+    }
+  ]
+}

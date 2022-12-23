@@ -1,0 +1,16 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/DrillingReasonType.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DrillingReasonType",
+  "description": "Used to describe the type of drilling reasons.",
+  "x-osdu-governance-authorities": [
+    "OSDU"
+  ],
+  "x-osdu-governance-model": "OPEN",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    }
+  ]
+}

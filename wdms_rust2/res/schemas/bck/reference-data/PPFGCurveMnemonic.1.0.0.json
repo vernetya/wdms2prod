@@ -1,0 +1,16 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/PPFGCurveMnemonic.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PPFGCurveMnemonic",
+  "description": "The mnemonic of the PPFG Curve is the value as received either from Raw Providers or from Internal Processing team.",
+  "x-osdu-governance-authorities": [
+    "None"
+  ],
+  "x-osdu-governance-model": "LOCAL",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    }
+  ]
+}

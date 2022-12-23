@@ -1,0 +1,217 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/master-data/GeometricTargetSet.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Geometric Target Set",
+  "description": "Targets (in the geometrical point of view) for a drilling plan",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractMaster.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "WellboreID": {
+          "type": "string",
+          "title": "Wellbore ID",
+          "description": "Identifier of the Wellbore",
+          "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Wellbore:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "WellboreName": {
+          "type": "string",
+          "title": "Wellbore Name",
+          "description": "Human recognizable context for the wellbore."
+        },
+        "Targets": {
+          "type": "array",
+          "title": "Targets",
+          "description": "A collection of drill targets.",
+          "items": {
+            "type": "object",
+            "title": "Target",
+            "description": "This is a geometric body describing a volume in the earth intended to be a target of one or more wellbores.",
+            "properties": {
+              "Name": {
+                "type": "string",
+                "title": "Name",
+                "description": "Human recognizable context for the target - the name must be unique within the set."
+              },
+              "Type": {
+                "type": "string",
+                "title": "Type",
+                "description": "The type of the target. Only possible values are: \"Geological\", \"Driller\" or \"Unknown\"",
+                "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-TargetType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+              },
+              "Location": {
+                "$ref": "../abstract/AbstractSpatialLocation.1.0.0.json",
+                "title": "Location",
+                "description": "The geographic location of the target"
+              },
+              "Geometry": {
+                "type": "object",
+                "title": "Geometry",
+                "description": "The Geometry of the target.",
+                "properties": {
+                  "Shape": {
+                    "type": "string",
+                    "title": "Shape",
+                    "description": "The shape of the target. Examples of this are Elliptical, Point etc",
+                    "x-osdu-existing-standard": "Proposed reference values: Point, Rectangular, Formation Plane, Circular, Elliptical, Polygon, Other",
+                    "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-TargetShape:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+                  },
+                  "Dip": {
+                    "type": "number",
+                    "title": "Dip",
+                    "description": "Angle of dip of target reference plane with respect to horizontal",
+                    "x-osdu-frame-of-reference": "UOM:plane angle"
+                  },
+                  "DipAzimuth": {
+                    "type": "number",
+                    "title": "Dip Azimuth",
+                    "description": "Direction of dip of target reference plane with respect to north azimuth reference",
+                    "x-osdu-frame-of-reference": "UOM:plane angle"
+                  },
+                  "ThicknessUp": {
+                    "type": "number",
+                    "title": "Thickness Up",
+                    "description": "Height of target top surface above reference plane, measured normal to dip plane",
+                    "x-osdu-frame-of-reference": "UOM:length"
+                  },
+                  "ThicknessDown": {
+                    "type": "number",
+                    "title": "Thickness Down",
+                    "description": "Depth of target bottom surface below reference plane, measured normal to dip plane",
+                    "x-osdu-frame-of-reference": "UOM:length"
+                  },
+                  "Width": {
+                    "type": "number",
+                    "title": "Width",
+                    "description": "The measured length of a rectangular target along the longest side",
+                    "x-osdu-frame-of-reference": "UOM:length"
+                  },
+                  "Length": {
+                    "type": "number",
+                    "title": "Length",
+                    "description": "The measured length of a rectangular target along the shortest side",
+                    "x-osdu-frame-of-reference": "UOM:length"
+                  },
+                  "MajorAxis": {
+                    "type": "number",
+                    "title": "Major Axis",
+                    "description": "Measured length of the target along Target Ref Azimuth",
+                    "x-osdu-frame-of-reference": "UOM:length"
+                  },
+                  "MinorAxis": {
+                    "type": "number",
+                    "title": "Minor Axis",
+                    "description": "Measured length of the target perpendicular to Target Ref Azimuth, assumed to be on target dip, strike, rotation plane.",
+                    "x-osdu-frame-of-reference": "UOM:length"
+                  },
+                  "Radius": {
+                    "type": "number",
+                    "title": "Radius",
+                    "description": "Radius of arc for continuous curve segment. Center assumed to be offset from start point normal to its beginning azimuth; positive value is to right, negative to left",
+                    "x-osdu-frame-of-reference": "UOM:length"
+                  },
+                  "GeometrySections": {
+                    "type": "array",
+                    "title": "Geometry Sections",
+                    "description": "The geometry sections which define the spatial geometry ot the target",
+                    "items": {
+                      "type": "object",
+                      "title": "Geometry Section",
+                      "description": "The geometric sections that combine to define the shape of a complex target",
+                      "properties": {
+                        "SectionNumber": {
+                          "type": "number",
+                          "title": "Section Number",
+                          "description": "Sequence number of the section (1,2,3\u2026)"
+                        },
+                        "SectionName": {
+                          "type": "string",
+                          "title": "Section Name",
+                          "description": "Name of this Geometry Section"
+                        },
+                        "TypeTargetSectionScope": {
+                          "type": "string",
+                          "title": "Type Target Section Scope",
+                          "description": "Section scope : Line or Arc"
+                        },
+                        "LengthRadius": {
+                          "type": "number",
+                          "title": "Length Radius",
+                          "description": "Length of straight line section or radius of arc for continuous curve section.",
+                          "x-osdu-frame-of-reference": "UOM:length"
+                        },
+                        "AngleArc": {
+                          "type": "number",
+                          "title": "AngleArc",
+                          "description": "Direction of straight line section or radius of arc for continuous curve section.",
+                          "x-osdu-frame-of-reference": "UOM:plane angle"
+                        },
+                        "ThicknessAbove": {
+                          "type": "number",
+                          "title": "Thickness Above",
+                          "description": "Height of target above center point at the start of the section.  In the case of an arc, the thickness above should vary linearly with the arc length.",
+                          "x-osdu-frame-of-reference": "UOM:length"
+                        },
+                        "ThicknessBelow": {
+                          "type": "number",
+                          "title": "Thickness Below",
+                          "description": "Depth of target below center point at the start of the section. In the case of an arc, the thickness below should vary linearly with the arc length.",
+                          "x-osdu-frame-of-reference": "UOM:length"
+                        },
+                        "Location": {
+                          "$ref": "../abstract/AbstractSpatialLocation.1.0.0.json",
+                          "title": "Location",
+                          "description": "2D coordinates that defines the start of the section."
+                        },
+                        "SectionTVD": {
+                          "type": "number",
+                          "title": "Section TVD",
+                          "description": "True Vertical Depth of this section",
+                          "x-osdu-frame-of-reference": "UOM:length"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "Comments": {
+                "type": "string",
+                "title": "Comments",
+                "description": "A comment or description of the target"
+              },
+              "TargetConfidence": {
+                "type": "number",
+                "title": "Target Confidence",
+                "description": "Confidence factor for target",
+                "x-osdu-frame-of-reference": "UoM:percent"
+              },
+              "ObjectiveType": {
+                "type": "string",
+                "title": "Objective",
+                "description": "The target could be Primary or Secondary"
+              },
+              "ParentTargetName": {
+                "type": "string",
+                "title": "Parent Target Name",
+                "description": "Name of the parent target in this set, this one has been defined from (this represents a pointer to the parent target. This may represents a relationship between a driller and geological target)."
+              }
+            }
+          }
+        },
+        "Name": {
+          "type": "string",
+          "title": "Name",
+          "description": "Name of Geometric Target Set"
+        }
+      },
+      "required": [
+        "WellboreID",
+        "Targets"
+      ]
+    }
+  ]
+}

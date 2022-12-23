@@ -1,0 +1,84 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/ParameterType.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ParameterType",
+  "description": "Used to describe the type of parameters.",
+  "x-osdu-governance-authorities": [
+    "OSDU"
+  ],
+  "x-osdu-governance-model": "OPEN",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "QuantityTypeID": {
+          "description": "The quantity types examples are volumetric thermal expansion,linear thermal expansion, length",
+          "type": "string",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-UnitQuantity:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "DefaultUnitOfMeasureID": {
+          "description": "The unit of measure for quantity.",
+          "type": "string",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-UnitOfMeasure:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "ParameterTypeDefaultValueQuantity": {
+          "description": "This generic data element represents a parameterized numeric value.",
+          "type": "number",
+          "x-osdu-frame-of-reference": "UOM_via_property:DefaultUnitOfMeasureID"
+        },
+        "ParameterTypeDefaultValueText": {
+          "description": "This generic data element represents a parameterized text (long) value.",
+          "type": "string"
+        },
+        "ParameterTypeDefaultValueDate": {
+          "description": "A general purpose field to identify a data in the form of DDMMYYYY.",
+          "type": "string",
+          "format": "date",
+          "x-osdu-frame-of-reference": "DateTime"
+        },
+        "ParameterTypeDefaultValueTime": {
+          "description": "A general purpose field to identify a time in the form of hh24:mm:ss; hh:mm:ss am/pm.",
+          "type": "string",
+          "format": "time",
+          "x-osdu-frame-of-reference": "DateTime"
+        },
+        "ParameterTypeDefaultValueDateTime": {
+          "description": "DateTime is a date value that represents a point in time on a calendar that is expressed in centuries.",
+          "type": "string",
+          "format": "date-time",
+          "x-osdu-frame-of-reference": "DateTime"
+        },
+        "ParameterTypeDefaultValueIndicator": {
+          "description": "Indicates whether something is applicable to to the Entity. This can be Y or N.",
+          "type": "boolean"
+        },
+        "ParameterTypeDefaultLengthCount": {
+          "description": "The total number of digits or strings by default allowed for the Parameter Type's value.",
+          "type": "number"
+        },
+        "ParameterTypeDefaultPrecisionCount": {
+          "description": "The total precision by default allowed for the Parameter Type's value.",
+          "type": "number"
+        },
+        "ParameterTypeDecimalPlaceCount": {
+          "description": "The number of digits in the Length Quantity that are to the right of the decimal place.",
+          "type": "number"
+        },
+        "ParameterTypeMaximumValueQuantity": {
+          "description": "The most commonly used highest number that is used to constrain the values of the Parameter Type.",
+          "type": "number",
+          "x-osdu-frame-of-reference": "UOM_via_property:DefaultUnitOfMeasureID"
+        },
+        "ParameterTypeMinimumValueQuantity": {
+          "description": "The most commonly used lowest number that is used to constrain the values of the Parameter Type.",
+          "type": "number",
+          "x-osdu-frame-of-reference": "UOM_via_property:DefaultUnitOfMeasureID"
+        }
+      }
+    }
+  ]
+}

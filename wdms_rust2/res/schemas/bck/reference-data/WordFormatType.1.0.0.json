@@ -1,0 +1,16 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/WordFormatType.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "WordFormatType",
+  "description": "Reference data for primitive data format types which describe the computer interpretation of a storage word, such as Integer, Float.",
+  "x-osdu-governance-authorities": [
+    "OSDU"
+  ],
+  "x-osdu-governance-model": "OPEN",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    }
+  ]
+}

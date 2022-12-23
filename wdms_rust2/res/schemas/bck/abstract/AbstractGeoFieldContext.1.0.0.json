@@ -1,0 +1,19 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/abstract/AbstractGeoFieldContext.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AbstractGeoFieldContext",
+  "description": "A single, typed field entity reference, which is 'abstracted' to AbstractGeoContext and then aggregated by GeoContexts properties.",
+  "type": "object",
+  "properties": {
+    "FieldID": {
+      "type": "string",
+      "description": "Reference to Field.",
+      "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Field:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+    },
+    "GeoTypeID": {
+      "type": "string",
+      "const": "Field",
+      "description": "The fixed type 'Field' for this AbstractGeoFieldContext."
+    }
+  }
+}

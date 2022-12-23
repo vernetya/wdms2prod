@@ -1,0 +1,27 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/dataset/File.WITSML.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "File.WITSML",
+  "description": "Schema describing a WITSML file resource.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractDataset.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractFile.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "WITSML_Version": {
+          "type": "string",
+          "title": "WITSML Version",
+          "description": "The Version of the WITSML standard.",
+          "example": "WITSML 1.1.4"
+        }
+      }
+    }
+  ]
+}

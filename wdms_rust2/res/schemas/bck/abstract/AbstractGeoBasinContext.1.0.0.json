@@ -1,0 +1,24 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/abstract/AbstractGeoBasinContext.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AbstractGeoBasinContext",
+  "description": "A single, typed basin entity reference, which is 'abstracted' to AbstractGeoContext and then aggregated by GeoContexts properties.",
+  "type": "object",
+  "properties": {
+    "BasinID": {
+      "type": "string",
+      "description": "Reference to Basin.",
+      "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Basin:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+    },
+    "GeoTypeID": {
+      "type": "string",
+      "description": "The BasinType reference of the Basin (via BasinID) for application convenience.",
+      "x-osdu-is-derived": {
+        "RelationshipPropertyName": "BasinID",
+        "TargetPropertyName": "BasinTypeID"
+      },
+      "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-BasinType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+    }
+  }
+}

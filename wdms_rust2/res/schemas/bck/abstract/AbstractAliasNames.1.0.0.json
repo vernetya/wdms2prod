@@ -1,0 +1,34 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/abstract/AbstractAliasNames.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AbstractAliasNames",
+  "description": "A list of alternative names for an object.  The preferred name is in a separate, scalar property.  It may or may not be repeated in the alias list, though a best practice is to include it if the list is present, but to omit the list if there are no other names.  Note that the abstract entity is an array so the $ref to it is a simple property reference.",
+  "type": "object",
+  "properties": {
+    "AliasName": {
+      "type": "string",
+      "description": "Alternative Name value of defined name type for an object."
+    },
+    "AliasNameTypeID": {
+      "type": "string",
+      "description": "A classification of alias names such as by role played or type of source, such as regulatory name, regulatory code, company code, international standard name, etc.",
+      "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-AliasNameType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+    },
+    "DefinitionOrganisationID": {
+      "type": "string",
+      "description": "The StandardsOrganisation (reference-data) or Organisation (master-data) that provided the name (the source).",
+      "pattern": "^[\\w\\-\\.]+:(reference-data\\-\\-StandardsOrganisation|master-data\\-\\-Organisation):[\\w\\-\\.\\:\\%]+:[0-9]*$"
+    },
+    "EffectiveDateTime": {
+      "type": "string",
+      "description": "The date and time when an alias name becomes effective.",
+      "format": "date-time"
+    },
+    "TerminationDateTime": {
+      "type": "string",
+      "description": "The data and time when an alias name is no longer in effect.",
+      "format": "date-time"
+    }
+  }
+}

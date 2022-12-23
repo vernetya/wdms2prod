@@ -1,0 +1,67 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/master-data/GeoPoliticalEntity.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "GeoPoliticalEntity",
+  "description": "A named geographical area which is defined and administered by an official entity.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractMaster.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "GeoPoliticalEntityID": {
+          "title": "External GeoPoliticalEntity Identifier",
+          "description": "Native identifier from a Master Data Management System or other trusted source external to OSDU - stored here in order to allow for multi-system connection and synchronization. If used, the \"Source\" property should identify that source system.",
+          "type": "string"
+        },
+        "TerminationDate": {
+          "description": "The date and time at which a given geopolitical entity is no longer in effect.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "DisputedIndicator": {
+          "description": "Indicates whether the GeoPolitical entity has a disputed status.",
+          "type": "boolean"
+        },
+        "EffectiveDate": {
+          "description": "The date and time at which a given geopolitical entity becomes effective.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "DaylightSavingTimeStartDate": {
+          "description": "Day light saving start date.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "DaylightSavingTimeEndDate": {
+          "description": "Day light saving end date.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "GeoPoliticalEntityTypeID": {
+          "description": "Type of geopolitical entity.",
+          "type": "string",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-GeoPoliticalEntityType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "GeoPoliticalEntityName": {
+          "description": "Name of the geopolitical entity.",
+          "type": "string"
+        },
+        "GeoPoliticalEntityNameAliases": {
+          "description": "DEPRECATED: please use data.NameAliases. Alternative names, including historical, by which this geopolitical entity is/has been known.",
+          "type": "array",
+          "items": {
+            "$ref": "../abstract/AbstractAliasNames.1.0.0.json"
+          }
+        },
+        "ParentGeoPoliticalEntityID": {
+          "description": "The identifier of the parent GeoPoliticalEntity, for example the GeoPoliticalEntity Texas has parent ID representing the GeoPoliticalEntity USA",
+          "type": "string",
+          "pattern": "^[\\w\\-\\.]+:master-data\\-\\-GeoPoliticalEntity:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        }
+      }
+    }
+  ]
+}

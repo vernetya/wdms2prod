@@ -1,0 +1,99 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/work-product-component/SeismicLineGeometry.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SeismicLineGeometry",
+  "description": "The 2D processing geometry of a 2D seismic line.  This is not the navigation (acquisition surface geometry). The fully sampled geometry is contained in the work product component's file.  This shows the relationship between CMP, X, Y, and station label. The ends and bends version for mapping purposes is in the work product component's spatial area.  The Name universal property is essential for describing the Line Name.",
+  "type": "object",
+  "x-osdu-supported-file-formats": [
+    "P1/11",
+    "P1/90",
+    "csv"
+  ],
+  "x-osdu-virtual-properties": {
+    "data.VirtualProperties.DefaultLocation": {
+      "type": "object",
+      "priority": [
+        {
+          "path": "data.SpatialArea"
+        },
+        {
+          "path": "data.SpatialPoint"
+        },
+        {
+          "path": "data.FirstLocation"
+        },
+        {
+          "path": "data.LastLocation"
+        }
+      ]
+    },
+    "data.VirtualProperties.DefaultName": {
+      "type": "string",
+      "priority": [
+        {
+          "path": "data.Name"
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractWPCGroupType.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractWorkProductComponent.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "NotionalSeismicLineID": {
+          "type": "string",
+          "description": "SRN reference to the Line concept that comprises all the 2D geometries belonging to the same seismic transect, of which this one is a part.",
+          "pattern": "^[\\w\\-\\.]+:work-product-component\\-\\-NotionalSeismicLine:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "Preferred2DInterpretationSetID": {
+          "type": "string",
+          "description": "Reference to the Seismic2DInterpretationSet which collects the favored geometries in an area or interpretation set.",
+          "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Seismic2DInterpretationSet:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "HorizontalCRSID": {
+          "description": "Reference to CRS of CMP table File if absent from File or given ambiguously.",
+          "type": "string",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-CoordinateReferenceSystem:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "FirstCMP": {
+          "type": "number",
+          "description": "Smallest CMP number in geometry definition."
+        },
+        "LastCMP": {
+          "type": "number",
+          "description": "Largest CMP number in geometry definition."
+        },
+        "FirstLocation": {
+          "description": "SpatialLocation corresponding to FirstCMP.",
+          "$ref": "../abstract/AbstractSpatialLocation.1.0.0.json"
+        },
+        "LastLocation": {
+          "description": "SpatialLocation corresponding to LastCMP.",
+          "$ref": "../abstract/AbstractSpatialLocation.1.0.0.json"
+        },
+        "FirstStationLabel": {
+          "type": "string",
+          "description": "Station label (such as shot point name) corresponding to FirstCMP"
+        },
+        "LastStationLabel": {
+          "type": "string",
+          "description": "Station label (such as shot point name) corresponding to LastCMP"
+        },
+        "HasMonotonicLabelling": {
+          "type": "boolean",
+          "description": "Indicates that the station label (SP name) changes monotonically with respect to CMP."
+        },
+        "HasCMPIncreaseByOne": {
+          "type": "boolean",
+          "description": "Indicates that CMP numbering increases regularly by 1."
+        }
+      }
+    }
+  ]
+}

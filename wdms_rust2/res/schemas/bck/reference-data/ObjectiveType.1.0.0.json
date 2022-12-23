@@ -1,0 +1,16 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/ObjectiveType.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ObjectiveType",
+  "description": "Purpose or intended use of a work product component, such as Stacking, Depth Migration, Time Migration, Time-depth Conversion.",
+  "x-osdu-governance-authorities": [
+    "OSDU"
+  ],
+  "x-osdu-governance-model": "OPEN",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    }
+  ]
+}

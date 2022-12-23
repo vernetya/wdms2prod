@@ -1,0 +1,122 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "x-osdu-governance-model": "LOCAL",
+  "x-osdu-governance-authorities": [
+    "OSDU"
+  ],
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/UnitOfMeasureConfiguration.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnitOfMeasureConfiguration",
+  "description": "A UnitOfMeasure configuration allowing to associate preferred units and default units to specific UnitQuantity values. UnitQuantity provides the full list of units, UnitOfMeasureConfiguration scopes the lists to a domain's/app's/user's requirements.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "ParentConfigurationID": {
+          "type": "string",
+          "title": "Parent Configuration ID",
+          "description": "Optional reference to a UnitOfMeasureConfiguration, from which the majority of definitions are derived.",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-UnitOfMeasureConfiguration:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "Configurations": {
+          "type": "array",
+          "title": "Configurations",
+          "description": "The list of configurations associating measurements or properties with preferred and default units.",
+          "items": {
+            "type": "object",
+            "title": "Configuration",
+            "description": "A configuration for a UnitQuantity offering a sub-set of units and a default unit.",
+            "properties": {
+              "Name": {
+                "type": "string",
+                "title": "Name",
+                "description": "The name of the measurement.",
+                "example": "Diameter"
+              },
+              "UnitQuantityID": {
+                "type": "string",
+                "title": "Unit Quantity ID",
+                "description": "The relationship to the UnitQuantity for this configuration. At least one of the fields UnitQuantityID, PropertyType and or PropertyNames must be populated. Scope narrows from UnitQuantityID, PropertyType to PropertyNames.",
+                "example": "namespace:reference-data--UnitQuantity:length:",
+                "x-osdu-existing-standard": "Energistics UoM V 1.0",
+                "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-UnitQuantity:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+              },
+              "PropertyType": {
+                "$ref": "../abstract/AbstractPropertyType.1.0.0.json",
+                "title": "Property Type",
+                "description": "If specified,Energistics PWLS 3 PropertyType implies a UnitQuantityID and offers a much finer scoping. PropertyType refers to a pair PropertyTypeID (typically a UUID) and a PropertyName. At least one of the fields UnitQuantityID, PropertyType and or PropertyNames must be populated. Scope narrows from UnitQuantityID, PropertyType to PropertyNames.",
+                "example": {
+                  "PropertyTypeID": "namespace:reference-data--PropertyType:a391d150-5f9d-43ec-be44-b3e020e8e0b9:",
+                  "Name": "inside diameter"
+                },
+                "x-osdu-existing-standard": "Energistics PWLS 3"
+              },
+              "PropertyNames": {
+                "type": "array",
+                "title": "Property Names",
+                "description": "The list of property names, to which this configuration should apply. At least one of the fields UnitQuantityID, PropertyType and or PropertyNames must be populated. Scope narrows from UnitQuantityID, PropertyType to PropertyNames.",
+                "example": [
+                  "TubularComponentNominalSize",
+                  "DriftDiameter",
+                  "InnerDiameter"
+                ],
+                "items": {
+                  "type": "string"
+                }
+              },
+              "DefaultUnitID": {
+                "type": "string",
+                "title": "Default Unit ID",
+                "description": "The default UnitOfMeasure to be used for this measurement name. If empty, the first element of the mandatory PreferredUnitIDs array should be taken. The DefaultUnitID should be member of the PreferredUnitIDs array.",
+                "example": "namespace:reference-data--UnitOfMeasure:in:",
+                "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-UnitOfMeasure:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+              },
+              "PreferredUnitIDs": {
+                "type": "array",
+                "title": "Preferred Unit IDs",
+                "description": "The preferred sub-set of units, which are meaningful for the domain, app or user. This property is mandatory and must contain at least one element.",
+                "example": [
+                  "namespace:reference-data--UnitOfMeasure:in:",
+                  "namespace:reference-data--UnitOfMeasure:cm:",
+                  "namespace:reference-data--UnitOfMeasure:mm:"
+                ],
+                "items": {
+                  "type": "string",
+                  "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-UnitOfMeasure:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+                }
+              },
+              "NumericFormatType": {
+                "type": "string",
+                "title": "Numeric Format Type",
+                "description": "A hint how the number is expected to be presented, e.g., d or D for decimal, f or F for fixed point, e or E for exponential (scientific), or g or G for general (default). Not all languages support all codes in all cases - in principle the case means that the resulting case is transformed to upper case or lower case depending on the case of the NumericFormatType.",
+                "enum": [
+                  "f",
+                  "F",
+                  "g",
+                  "G",
+                  "d",
+                  "D",
+                  "e",
+                  "E"
+                ]
+              },
+              "NumericPrecision": {
+                "type": "integer",
+                "title": "Numeric Precision",
+                "description": "The number of decimal digits for NumericFormatType f or F or e or E, or the number of significant digits in g or G. If populated in conjunction with NumericFormatType d or D, NumericPrecision defines the minimum number of digits. If the number has less digits than given by NumericPrecision, it is padded with leading zeroes.",
+                "example": 2
+              }
+            },
+            "required": [
+              "PreferredUnitIDs"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

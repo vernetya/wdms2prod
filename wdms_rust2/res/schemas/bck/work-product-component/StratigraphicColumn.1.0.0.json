@@ -1,0 +1,56 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "x-osdu-supported-file-formats": [
+    "RESQML"
+  ],
+  "x-osdu-governance-authorities": [
+    "OSDU"
+  ],
+  "$id": "https://schema.osdu.opengroup.org/json/work-product-component/StratigraphicColumn.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "StratigraphicColumn",
+  "description": "Representation describing the vertical location of rock units in a particular area",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractWPCGroupType.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractWorkProductComponent.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "StratigraphicColumnRankInterpretationSet": {
+          "type": "array",
+          "title": "Stratigraphic Column Rank Interpretation Set",
+          "description": "Array of StratigraphicColumnRankInterpretation[] the StratigraphicColumn is composed of",
+          "items": {
+            "type": "string",
+            "pattern": "^[\\w\\-\\.]+:work-product-component\\-\\-StratigraphicColumnRankInterpretation:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+          }
+        },
+        "ValidationDate": {
+          "type": "string",
+          "title": "ValidationDate",
+          "description": "Date of validation of a custom stratigraphic column, start of validity",
+          "format": "date-time",
+          "example": "2011-03-01T11:46:20.163Z",
+          "x-osdu-frame-of-reference": "DateTime"
+        },
+        "ValueChainStatusType": {
+          "type": "string",
+          "title": "ValueChainStatus",
+          "description": "Member where the custom stratigraphic column has been produced: Exploration, FieldDevelopment, Production, LateLife",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-ValueChainStatusType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "StratigraphicColumnValidityAreaType": {
+          "type": "string",
+          "title": "StratigraphicColumnValidityArea",
+          "description": "Geographical area where a local stratigraphic column is valid: Basin, Region, Field, Segment",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-StratigraphicColumnValidityAreaType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/work-product-component/FaultInterpretation.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "FaultInterpretation",
+  "description": "Geologic information associated to fault-related objects  (marker, fault sticks, modeled objects like triangulated surface)",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractWPCGroupType.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractWorkProductComponent.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractInterpretation.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "FaultThrowDescriptions": {
+          "type": "array",
+          "title": "FaultThrowDescriptions",
+          "description": "Describes the fault throw - as the fault characteristics might vary through time, fault throw is an array of fault throws with their own attributes",
+          "items": {
+            "type": "object",
+            "title": "FaultThrowDescriptions",
+            "description": "A structure carrying descriptions of fault throw characteristics.",
+            "properties": {
+              "FaultThrowTypeID": {
+                "type": "string",
+                "title": "FaultThrowTypeID",
+                "description": "Specifies the fault throw type (reverse, normal etc\u2026)",
+                "format": "uri-reference",
+                "example": "namespace:reference-data--FaultThrowType:Reverse:",
+                "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-FaultThrowType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+              },
+              "MinimumAge": {
+                "type": "number",
+                "title": "MinimumAge",
+                "description": "Time interval Minimum age the fault throw was active - if the link to horizon is defined, we can derive the link to horizons through geologic age",
+                "example": 10
+              },
+              "MaximumAge": {
+                "type": "number",
+                "title": "MaximumAge",
+                "description": "Time interval Maximum age the fault throw was active - if the link to horizon is defined, we can derive the link to horizons through geologic age",
+                "example": 50
+              }
+            }
+          }
+        },
+        "IsListric": {
+          "type": "boolean",
+          "title": "IsListric",
+          "description": "Specifies whether the fault is considered listric",
+          "example": true
+        },
+        "MaximumFaultThrowValue": {
+          "type": "number",
+          "title": "MaximumFaultThrowValue",
+          "description": "Indicates the maximum current fault throw value",
+          "example": 50,
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "RepresentativeDipDirection": {
+          "type": "object",
+          "title": "RepresentativeDipDirection",
+          "description": "Indicates the representative azimuth value of the fault plane",
+          "properties": {
+            "Value": {
+              "type": "number",
+              "title": "Value",
+              "description": "The azimuth value",
+              "example": 30,
+              "x-osdu-frame-of-reference": "UOM:plane angle"
+            },
+            "NorthKind": {
+              "type": "string",
+              "title": "North Kind",
+              "description": "The kind of north which is used as a reference for the azimuth value",
+              "format": "uri-reference",
+              "example": "namespace:reference-data--AzimuthReferenceType:MagneticNorth:",
+              "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-AzimuthReferenceType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+            }
+          }
+        },
+        "RepresentativeDipAngle": {
+          "type": "number",
+          "title": "RepresentativeDipAngle",
+          "description": "Indicates the representative dip angle value of the fault plane",
+          "example": 15,
+          "x-osdu-frame-of-reference": "UOM:plane angle"
+        },
+        "IsSealed": {
+          "type": "boolean",
+          "title": "Is Sealed",
+          "description": "Specifies whether the fault is considered sealed",
+          "example": false
+        }
+      }
+    }
+  ]
+}

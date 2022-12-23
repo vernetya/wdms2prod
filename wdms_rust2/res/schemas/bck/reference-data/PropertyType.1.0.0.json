@@ -1,0 +1,62 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "x-osdu-governance-model": "OPEN",
+  "x-osdu-governance-authorities": [
+    "Energistics"
+  ],
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/PropertyType.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Property Type",
+  "description": "PropertyType is part of Energistics PWLS 3, which defines a detailed hierarchy of properties linked to the Energistics UnitQuantity/UnitOfMeasure.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "ParentPropertyTypeID": {
+          "type": "string",
+          "title": "Parent Property Type",
+          "description": "Relationship to the parent PropertyType. The root PropertyType is called 'property' and refers to itself as parent.",
+          "example": "namespace:reference-data--PropertyType:46943a75-5fa3-4acf-8d9f-d9c4c748b1c9:",
+          "x-osdu-attribution-authority": "Energistics",
+          "x-osdu-attribution-publication": "PWLS 3",
+          "x-osdu-attribution-revision": 3,
+          "x-osdu-existing-standard": "Energistics PWLS 3",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-PropertyType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "ParentName": {
+          "type": "string",
+          "title": "Parent Name",
+          "description": "The name of the parent PropertyType.",
+          "example": "azimuth",
+          "x-osdu-is-derived": {
+            "RelationshipPropertyName": "ParentPropertyTypeID",
+            "TargetPropertyName": "Name"
+          },
+          "x-osdu-attribution-authority": "Energistics",
+          "x-osdu-attribution-publication": "PWLS 3",
+          "x-osdu-attribution-revision": 3,
+          "x-osdu-existing-standard": "Energistics PWLS 3"
+        },
+        "UnitQuantityID": {
+          "type": "string",
+          "title": "Unit Quantity ID",
+          "description": "The relationship to a UnitQuantity, which connects to frame of reference conversion.",
+          "example": "namespace:reference-data--UnitQuantity:plane%20angle:",
+          "x-osdu-attribution-authority": "Energistics",
+          "x-osdu-attribution-publication": "PWLS 3",
+          "x-osdu-attribution-revision": 3,
+          "x-osdu-existing-standard": "Energistics PWLS 3",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-UnitQuantity:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        }
+      },
+      "required": [
+        "ParentPropertyTypeID",
+        "UnitQuantityID"
+      ]
+    }
+  ]
+}

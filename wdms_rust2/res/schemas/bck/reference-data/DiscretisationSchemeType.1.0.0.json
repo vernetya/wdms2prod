@@ -1,0 +1,16 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/DiscretisationSchemeType.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DiscretisationSchemeType",
+  "description": "Describes geometrically where in a discretised cell representation of a velocity number field the value applies, such as vertex, cell center, average across cell.",
+  "x-osdu-governance-authorities": [
+    "OSDU"
+  ],
+  "x-osdu-governance-model": "OPEN",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/work-product-component/NotionalSeismicLine.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "NotionalSeismicLine",
+  "description": "The set of geometries comprising a full seismic transect (referenced through parent-child relationships).  This entity encompasses the concept of a logical processed line.  The parts comprising it cover things like extensions and boundary crossings.  It is largely a data management object to help collect all the geometries pertaining to a transect.  It is not needed for interpretation.  The universal WPC Name property is essential for describing the principal, preferred line name for the full transect.",
+  "type": "object",
+  "x-osdu-supported-file-formats": [
+    "P1/11",
+    "P1/90",
+    "csv"
+  ],
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractWPCGroupType.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractWorkProductComponent.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "LineNames": {
+          "description": "Segment names and aliases for the Line.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  ]
+}

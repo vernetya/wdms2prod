@@ -1,0 +1,27 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/work-product-component/GenericImage.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "GenericImage",
+  "description": "A generic image work-product-component, which associates an image dataset, typically a JPEG, PNG or TIFF file to a master-data or work-product-component item. GenericImage should not be used for geo-referenced images or core images, which have their own dedicated types.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractWPCGroupType.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractWorkProductComponent.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "AssociatedObjectID": {
+          "type": "string",
+          "title": "Associated Object ID",
+          "description": "The ID of the object (master-data, reference-data, work-product-component or work-product), to which this generic image has been associated.",
+          "pattern": "^[\\w\\-\\.]+:(master-data\\-\\-[\\w\\-\\.]+|reference-data\\-\\-[\\w\\-\\.]+|work-product-component\\-\\-[\\w\\-\\.]+|work-product\\-\\-[\\w\\-\\.]+):[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        }
+      }
+    }
+  ]
+}

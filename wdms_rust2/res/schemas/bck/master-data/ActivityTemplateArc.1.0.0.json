@@ -1,0 +1,96 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/master-data/ActivityTemplateArc.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ActivityTemplateArc",
+  "description": "An 'arc' establishing a link between ActivityTemplate output and input parameters.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractMaster.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "title": "Name",
+          "description": "The name of this input/output parameter definition set."
+        },
+        "Description": {
+          "type": "string",
+          "title": "Description",
+          "description": "A detailed textual description of the activity template arc connecting inputs and outputs of workflows (ActivityTemplate)."
+        },
+        "OutputInputArcs": {
+          "type": "array",
+          "title": "Output Input Arcs",
+          "description": "The array of arcs, which associate ActivityTemplate outputs to ActivityTemplate inputs.",
+          "items": {
+            "type": "object",
+            "title": "Arc",
+            "description": "An 'arc' establishing a link between a single pair of ActivityTemplate input and output parameters.",
+            "properties": {
+              "ProducingActivityTemplateID": {
+                "type": "string",
+                "title": "Producing Activity Template ID",
+                "description": "The relationship to the producing ActivityTemplate.",
+                "pattern": "^[\\w\\-\\.]+:master-data\\-\\-ActivityTemplate:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+              },
+              "ProducingParameterTitle": {
+                "type": "string",
+                "title": "Producing Parameter Title",
+                "description": "The Title of the producing ActivityTemplate Parameter array element."
+              },
+              "ConsumingActivityTemplateID": {
+                "type": "string",
+                "title": "Consuming Activity Template ID",
+                "description": "The relationship to the consuming ActivityTemplate.",
+                "pattern": "^[\\w\\-\\.]+:master-data\\-\\-ActivityTemplate:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+              },
+              "ConsumingParameterTitle": {
+                "type": "string",
+                "title": "Consuming Parameter Title",
+                "description": "The Title of the consuming ActivityTemplate Parameter array element."
+              }
+            },
+            "required": [
+              "ProducingActivityTemplateID",
+              "ProducingParameterTitle",
+              "ConsumingActivityTemplateID",
+              "ConsumingParameterTitle"
+            ]
+          }
+        },
+        "ActivityArcs": {
+          "type": "array",
+          "title": "Activity Arcs",
+          "description": "The array of arcs, which link pairs of ActivityTemplate as predecessor and successor.",
+          "items": {
+            "type": "object",
+            "title": "Arc",
+            "description": "An 'arc' establishing a link between a single pair of ActivityTemplate input and output parameters.",
+            "properties": {
+              "PrecedingActivityTemplateID": {
+                "type": "string",
+                "title": "Preceding Activity Template ID",
+                "description": "The relationship to the ActivityTemplate first in a pair of ActivityTemplates in the context of a workflow.",
+                "pattern": "^[\\w\\-\\.]+:master-data\\-\\-ActivityTemplate:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+              },
+              "SucceedingActivityTemplateID": {
+                "type": "string",
+                "title": "Succeeding Activity Template ID",
+                "description": "The relationship to the ActivityTemplate succeeding the first ActivityTemplate in the workflow.",
+                "pattern": "^[\\w\\-\\.]+:master-data\\-\\-ActivityTemplate:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+              }
+            },
+            "required": [
+              "PrecedingActivityTemplateID",
+              "SucceedingActivityTemplateID"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

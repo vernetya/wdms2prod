@@ -1,0 +1,40 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/work-product-component/GenericRepresentation.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "GenericRepresentation",
+  "description": "1D or 2D representations of Geologic Objects such as fault sticks, horizon surfaces, etc.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractWPCGroupType.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractWorkProductComponent.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractRepresentation.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "Role": {
+          "type": "string",
+          "title": "Representation Role",
+          "description": "Role assigned to the object geometry",
+          "format": "uri-reference",
+          "example": "namespace:reference-data--RepresentationRole:FaultSticks:",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-RepresentationRole:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "Type": {
+          "type": "string",
+          "title": "Representation Type",
+          "description": "GenericRepresentation 1D or 2D types",
+          "format": "uri-reference",
+          "example": "namespace:reference-data--RepresentationType:PolylineSet:",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-RepresentationType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        }
+      }
+    }
+  ]
+}

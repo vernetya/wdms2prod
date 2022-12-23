@@ -1,0 +1,156 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/work-product-component/TubularAssembly.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TubularAssembly",
+  "description": "Well Tubular data contains information on the tubular assemblies and their components for the well, wellbore, or wellbore completion (as appropriate). The tubulars can be tubing, casing or liners or other related equipment which is installed into the well. Tubulars can also be equipment which is lowered into the well in the context of drilling, which is then pulled back out.",
+  "type": "object",
+  "x-osdu-supported-file-formats": [
+    "WITSML"
+  ],
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractWPCGroupType.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractWorkProductComponent.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "ParentWellboreID": {
+          "type": "string",
+          "description": "Identifier of the wellbore the Component is standing in.",
+          "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Wellbore:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "ParentAssemblyID": {
+          "type": "string",
+          "description": "Optional - Identifier of the parent assembly (in case of side-track, multi-nesting,\u2026) - The Concentric Tubular model is used to identify the Assembly that an Assembly sits inside e.g. Surface Casing set inside Conductor, Tubing set inside Production Casing, a Bumper Spring set inside a Production Tubing Profile Nipple, Liner set inside Casing, etc. This is needed to enable a Digital Well Sketch application to understand relationships between Assemblies and their parent Wellbores.",
+          "pattern": "^[\\w\\-\\.]+:work-product-component\\-\\-TubularAssembly:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "TubularAssemblyStatus": {
+          "description": "Record that reflects the status of the Assembly - as 'installed', 'pulled', 'planned',... - Applicable to tubing/completions as opposed to drillstrings",
+          "type": "object",
+          "properties": {
+            "StatusTypeID": {
+              "description": "SRN of a reference value status type",
+              "type": "string",
+              "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-TubularAssemblyStatusType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+            },
+            "Description": {
+              "description": "Used to describe the reason of Activity - such as cut/pull, pulling,",
+              "type": "string"
+            },
+            "Date": {
+              "description": "Date the status has been established",
+              "type": "string",
+              "format": "date-time",
+              "x-osdu-frame-of-reference": "DateTime"
+            }
+          }
+        },
+        "SuspensionPointMD": {
+          "description": "In case of multi-nesting of assemblies, the 'point' is the Measured Depth of the top of the assembly though with PBRs the Suspension Point may not be the top.",
+          "type": "number",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "TubularAssemblyNumber": {
+          "description": "Sequence of the TubularAssembly (Typically BHA sequence)",
+          "type": "integer"
+        },
+        "TubularAssemblyTypeID": {
+          "description": "Type of tubular assembly.",
+          "type": "string",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-TubularAssemblyType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "StringClassID": {
+          "description": "Descriptor for Assembly, e.g. Production, Surface, Conductor, Intermediate, Drilling",
+          "type": "string",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-StringClass:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "ActivityTypeID": {
+          "description": "Used to describe if it belongs to a RunActivity or to a PullActivity",
+          "type": "string",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-ActivityType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "ActivityTypeReasonDescription": {
+          "description": "Used to describe the reason of Activity - such as cut/pull, pulling,\u2026",
+          "type": "string"
+        },
+        "ArtificialLiftTypeID": {
+          "description": "Type of Artificial Lift used (could be \"Surface Pump\" / \"Submersible Pump\" / \"Gas Lift\"\u2026.)",
+          "type": "string",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-ArtificialLiftType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "LinerTypeID": {
+          "description": "This reference table describes the type of liner used in the borehole. For example, slotted, gravel packed or pre-perforated etc.",
+          "type": "string",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-LinerType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "MixedStringIndicator": {
+          "description": "A YES or NO flag indicating the assembly is a mixed string. The length of the assembly may be made up of joints with different tensile strengths, or collapse resistance and yield strengths.",
+          "type": "string",
+          "pattern": "^YES|NO$"
+        },
+        "ActiveIndicator": {
+          "description": "Indicates if the Assembly is activated or not",
+          "type": "boolean"
+        },
+        "TubularDirection": {
+          "description": "Defines whether the sequence of child tubular components runs either top to bottom, or bottom to top.",
+          "type": "string",
+          "pattern": "^TOPDOWN|BOTTOMUP$"
+        },
+        "TubularAssemblyNominalSize": {
+          "description": "Nominal size (diameter) describing the whole assembly, e.g. 9.625\", 12.25",
+          "type": "number",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "TubularAssemblyTotalLength": {
+          "description": "Total Length of the whole assembly.",
+          "type": "number",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "DriftDiameter": {
+          "description": "The drift diameter is the inside diameter (ID) that the pipe manufacturer guarantees per specifications. Note that the nominal inside diameter is not the same as the drift diameter but is always slightly larger. The drift diameter is used by the well planner to determine what size tools or casing strings can later be run through the casing, whereas the nominal inside diameter is used for fluid volume calculations such as mud circulating times and cement slurry placement calculations.",
+          "type": "number",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "MinimumInnerDiameter": {
+          "description": "This is the minimum inner diameter of the whole assembly.",
+          "type": "number",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "PilotHoleSize": {
+          "description": "Diameter of the Pilot Hole",
+          "type": "number",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "SeaFloorPenetrationLength": {
+          "description": "the distance that the assembly has penetrated below the surface of the sea floor.",
+          "type": "number",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "AssemblyTopMD": {
+          "description": "The measured depth of the top from the whole assembly",
+          "type": "number",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "AssemblyBaseMD": {
+          "description": "The measured depth of the base from the whole assembly",
+          "type": "number",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "AssemblyTopReportedTVD": {
+          "description": "Depth of the top of the Assembly measured from the Well-Head",
+          "type": "number",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "AssemblyBaseReportedTVD": {
+          "description": "Depth of the base of the Assembly measured from the Well-Head",
+          "type": "number",
+          "x-osdu-frame-of-reference": "UOM:length"
+        }
+      }
+    }
+  ]
+}

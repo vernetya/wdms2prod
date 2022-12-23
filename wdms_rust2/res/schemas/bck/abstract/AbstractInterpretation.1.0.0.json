@@ -1,0 +1,45 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/abstract/AbstractInterpretation.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AbstractInterpretation",
+  "description": "The group of properties shared by different kinds of interpretations",
+  "type": "object",
+  "properties": {
+    "OlderPossibleAge": {
+      "type": "number",
+      "title": "OlderPossibleAge",
+      "description": "Represents the older possible age for the interpretation. Expressed in geological time as millions of years [Ma], and the value must be positive. The age value is not subject to normalization.",
+      "example": 100
+    },
+    "YoungerPossibleAge": {
+      "type": "number",
+      "title": "YoungerPossibleAge",
+      "description": "Represents the younger possible age for the interpretation. Expressed in geological time as millions of years [Ma], and the value must be positive. The age value is not subject to normalization.",
+      "example": 80
+    },
+    "DomainTypeID": {
+      "type": "string",
+      "title": "DomainTypeID",
+      "description": "Describes the domain of the interpretation: Depth, Time, Mixed",
+      "format": "uri-reference",
+      "example": "namespace:reference-data--DomainType:Time:",
+      "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-DomainType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+    },
+    "FeatureID": {
+      "type": "string",
+      "title": "FeatureID",
+      "description": "Reference to the Feature the Interpretation refers to. The actual type of the target is specified in the specialisation, i.e. the type, which includes this schema fragment.",
+      "pattern": "^[\\w\\-\\.]+:(master-data\\-\\-BoundaryFeature|master-data\\-\\-ModelFeature|master-data\\-\\-RockVolumeFeature|work-product-component\\-\\-LocalBoundaryFeature|work-product-component\\-\\-LocalModelFeature|work-product-component\\-\\-LocalRockVolumeFeature):[\\w\\-\\.\\:\\%]+:[0-9]*$"
+    },
+    "FeatureName": {
+      "type": "string",
+      "title": "FeatureName",
+      "description": "Name of the feature the Interpretation refers to",
+      "x-osdu-is-derived": {
+        "RelationshipPropertyName": "FeatureID",
+        "TargetPropertyName": "Name"
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "x-osdu-governance-model": "OPEN",
+  "x-osdu-governance-authorities": [
+    "OSDU",
+    "Energistics"
+  ],
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/FluidPhaseType.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "FluidPhaseType",
+  "description": "The fluid phase present in a geological unit's pore space. Examples: aquifer, gas cap, oil column, etc.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {}
+    }
+  ]
+}

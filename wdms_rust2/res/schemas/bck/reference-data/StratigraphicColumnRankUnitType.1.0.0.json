@@ -1,0 +1,46 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "x-osdu-governance-model": "OPEN",
+  "x-osdu-governance-authorities": [
+    "OSDU"
+  ],
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/StratigraphicColumnRankUnitType.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "StratigraphicColumnRankUnitType",
+  "description": "The reference value type defining a column position in a stratigraphic chart, which is ordered by rank (increasing from left to right).",
+  "type": "object",
+  "x-osdu-virtual-properties": {
+    "data.VirtualProperties.DefaultName": {
+      "type": "string",
+      "priority": [
+        {
+          "path": "data.Name"
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "StratigraphicRoleTypeID": {
+          "type": "string",
+          "title": "Stratigraphic Role Type ID",
+          "description": "The StratigraphicRoleType this column rank belongs to.",
+          "format": "uri-reference",
+          "example": "namespace:reference-data--StratigraphicRoleType:Chronostratigraphic:",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-StratigraphicRoleType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "Rank": {
+          "type": "integer",
+          "title": "Rank",
+          "description": "The rank number of the column in the stratigraphic chart starting with 0 (=highest level in the hierarchy).",
+          "example": 3
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,167 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/work-product-component/FaultSystem.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "FaultSystem",
+  "description": "A set of picked faults.",
+  "type": "object",
+  "x-osdu-supported-file-formats": [],
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractWPCGroupType.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractWorkProductComponent.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "SeismicPickingTypeID": {
+          "type": "string",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-SeismicPickingType:[\\w\\-\\.\\:\\%]+:[0-9]*$",
+          "description": "Method used to pick faults. E.g.Autotracked, Grid, Manual Picked, Mixed."
+        },
+        "Remark": {
+          "type": "string",
+          "description": "Optional comment to capture interpreter thoughts.  Distinguished from Description which is a general explanation of the object."
+        },
+        "SeismicTraceDataIDs": {
+          "description": "Seismic Volumes picked against",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[\\w\\-\\.]+:work-product-component\\-\\-SeismicTraceData:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+          }
+        },
+        "SeismicDomainTypeID": {
+          "type": "string",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-SeismicDomainType:[\\w\\-\\.\\:\\%]+:[0-9]*$",
+          "description": "Vertical domain of faults.  E.g. Time, Depth"
+        },
+        "SeismicDomainUOM": {
+          "type": "string",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-UnitOfMeasure:[\\w\\-\\.\\:\\%]+:[0-9]*$",
+          "description": "Unit of measurement for vertical domain"
+        },
+        "HorizontalCRSID": {
+          "type": "string",
+          "description": "The CRS for surface coordinates used in fault locations if not specified in File.",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-CoordinateReferenceSystem:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "BinGridID": {
+          "type": "string",
+          "pattern": "^[\\w\\-\\.]+:work-product-component\\-\\-SeismicBinGrid:[\\w\\-\\.\\:\\%]+:[0-9]*$",
+          "description": "the Bin Grid of the Fault System when coordinates are specified in seismic bin inline/crossline."
+        },
+        "VerticalDatumOffset": {
+          "type": "number",
+          "description": "Datum value, the elevation of zero time/depth on the vertical axis in the domain of seismicdomaintype relative to the vertical reference datum used (usually MSL). Positive is upward from zero elevation to seismic datum).",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "VerticalMeasurementTypeID": {
+          "type": "string",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-VerticalMeasurementType:[\\w\\-\\.\\:\\%]+:[0-9]*$",
+          "description": "Identifies a vertical reference datum type. E.g. mean sea level, ground level, mudline."
+        },
+        "ReplacementVelocity": {
+          "type": "number",
+          "description": "Value used to produce vertical static shifts in data",
+          "x-osdu-frame-of-reference": "UOM:length per time"
+        },
+        "Faults": {
+          "type": "array",
+          "x-osdu-indexing": {
+            "type": "nested"
+          },
+          "description": "Array of Faults that comprise the Fault System",
+          "items": {
+            "type": "object",
+            "properties": {
+              "SeismicFaultName": {
+                "type": "string",
+                "description": "Name of an individual fault within a fault system."
+              },
+              "SeismicFaultTypeID": {
+                "type": "string",
+                "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-SeismicFaultType:[\\w\\-\\.\\:\\%]+:[0-9]*$",
+                "description": "Geological type of fault geometry. E.g. Thrust (thr), Reverse (rev), Normal(norm)"
+              },
+              "SeismicPickingTypeID": {
+                "type": "string",
+                "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-SeismicPickingType:[\\w\\-\\.\\:\\%]+:[0-9]*$",
+                "description": "Method used to pick faults. E.g.Autotracked, Grid, Manual Picked"
+              },
+              "SeismicFaultLength": {
+                "type": "number",
+                "description": "Maximum linear dimension measured along strike of the slip surface",
+                "x-osdu-frame-of-reference": "UOM_via_property:SeismicFaultLengthUOM"
+              },
+              "SeismicFaultLengthUOM": {
+                "type": "string",
+                "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-UnitOfMeasure:[\\w\\-\\.\\:\\%]+:[0-9]*$",
+                "description": "ID of the Unit of Measure of the Length of the Fault"
+              },
+              "SeismicFaultSurfaceArea": {
+                "type": "number",
+                "description": "Surface Area of the Fault Plane",
+                "x-osdu-frame-of-reference": "UOM_via_property:SeismicFaultSurfaceAreaUOM"
+              },
+              "SeismicFaultSurfaceAreaUOM": {
+                "type": "string",
+                "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-UnitOfMeasure:[\\w\\-\\.\\:\\%]+:[0-9]*$",
+                "description": "ID of the Unit of Measure of the Surface Area of the Fault"
+              },
+              "VerticalFaultDipAngle": {
+                "type": "number",
+                "description": "Maximum vertical angle of fault",
+                "x-osdu-frame-of-reference": "UOM_via_property:VerticalFaultDipAngleUOM"
+              },
+              "VerticalFaultDipAngleUOM": {
+                "type": "string",
+                "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-UnitOfMeasure:[\\w\\-\\.\\:\\%]+:[0-9]*$",
+                "description": "ID of the Unit of Measure of the Dip angle of the Fault"
+              },
+              "FaultHeaveNumber": {
+                "type": "number",
+                "description": "Maximum stratigraphic heave, the apparent horizontal component of the net-slip.",
+                "x-osdu-frame-of-reference": "UOM_via_property:FaultHeaveNumberUOM"
+              },
+              "FaultHeaveNumberUOM": {
+                "type": "string",
+                "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-UnitOfMeasure:[\\w\\-\\.\\:\\%]+:[0-9]*$",
+                "description": "ID of the Unit of Measure of the FaultHeaveNumber"
+              },
+              "FaultNetSlipNumber": {
+                "type": "number",
+                "description": "Net (average) Slip",
+                "x-osdu-frame-of-reference": "UOM_via_property:FaultNetSlipNumberUOM"
+              },
+              "FaultNetSlipNumberUOM": {
+                "type": "string",
+                "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-UnitOfMeasure:[\\w\\-\\.\\:\\%]+:[0-9]*$",
+                "description": "ID of the Unit of Measure of the FaultNetSlipNumber"
+              },
+              "StratigraphicFaultOffset": {
+                "type": "number",
+                "description": "Maximum vertical offset of faulted strata.",
+                "x-osdu-frame-of-reference": "UOM_via_property:StratigraphicFaultOffsetUOM"
+              },
+              "StratigraphicFaultOffsetUOM": {
+                "type": "string",
+                "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-UnitOfMeasure:[\\w\\-\\.\\:\\%]+:[0-9]*$",
+                "description": "ID of the Unit of Measure of the StratigraphicFaultOffset"
+              },
+              "Remark": {
+                "type": "string",
+                "description": "Optional comment"
+              },
+              "Interpreter": {
+                "description": "The person or team who interpreted the fault data.",
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

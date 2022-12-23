@@ -1,0 +1,60 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/master-data/Organisation.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Organisation",
+  "description": "A legal or administrative body, institution, or company, or any of its divisions.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractMaster.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "OrganisationID": {
+          "title": "External Organisation Identifier",
+          "description": "Native identifier from a Master Data Management System or other trusted source external to OSDU - stored here in order to allow for multi-system connection and synchronization. If used, the \"Source\" property should identify that source system.",
+          "type": "string"
+        },
+        "OrganisationName": {
+          "description": "Text which identifies an organisation.",
+          "type": "string"
+        },
+        "OrganisationNameAliases": {
+          "description": "DEPRECATED: please use data.NameAliases. Alternative names, including historical, by which this organisation entity is/has been known.",
+          "type": "array",
+          "items": {
+            "$ref": "../abstract/AbstractAliasNames.1.0.0.json"
+          }
+        },
+        "InternalOrganisationIndicator": {
+          "description": "Indicates if the organisation is internal to the enterprise.",
+          "type": "boolean"
+        },
+        "OrganisationPurposeDescription": {
+          "description": "The reason why the organization was formed.",
+          "type": "string"
+        },
+        "OrganisationDescription": {
+          "description": "Textual description of the nature of the organisation.",
+          "type": "string"
+        },
+        "EffectiveDate": {
+          "description": "The date and time at which a given organisation becomes effective.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "TerminationDate": {
+          "description": "The date and time at which a given organisation is no longer in effect.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "OrganisationTypeID": {
+          "description": "Category the organisational structure fits into. Possible values - Operating Unit, Operating sub Unit, A Business, A Department, Government Agency, etc.",
+          "type": "string",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-OrganisationType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        }
+      }
+    }
+  ]
+}

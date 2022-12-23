@@ -1,0 +1,30 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/abstract/AbstractUnstructuredGridPatch.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AbstractUnstructuredGridPatch",
+  "description": "Definition of a collection of polyhedra which are not organized in any dimension. Only an abstract group type in order to be reused in GPGrid.",
+  "type": "object",
+  "properties": {
+    "FaceCount": {
+      "type": "integer",
+      "title": "Count of faces",
+      "description": "The count of faces in this grid",
+      "example": 2000
+    },
+    "NodeCount": {
+      "type": "integer",
+      "title": "Count of nodes",
+      "description": "The count of nodes in this grid",
+      "example": 6500
+    },
+    "CellShapeID": {
+      "type": "string",
+      "title": "Uniform shape of all cells",
+      "description": "Indicates the uniform shape of all cells in this grid : tetrahedral, pyramidal, prism, hexahedral, polyhedral",
+      "format": "uri-reference",
+      "example": "namespace:reference-data--CellShapeType:Polyhedral:",
+      "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-CellShapeType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+    }
+  }
+}

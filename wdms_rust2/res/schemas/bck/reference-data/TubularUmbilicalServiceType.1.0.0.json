@@ -1,0 +1,16 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/TubularUmbilicalServiceType.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Tubular Umbilical Service Type",
+  "description": "Used to describe the service the umbilical is designed for (such as \"Standard\", \"H2S Sour Service\",...).",
+  "x-osdu-governance-authorities": [
+    "None"
+  ],
+  "x-osdu-governance-model": "LOCAL",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    }
+  ]
+}

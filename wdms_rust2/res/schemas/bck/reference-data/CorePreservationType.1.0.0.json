@@ -1,0 +1,21 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "x-osdu-governance-model": "OPEN",
+  "x-osdu-governance-authorities": [
+    "OSDU"
+  ],
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/CorePreservationType.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CorePreservationType",
+  "description": "The core preservation classification type, such as Wax-sealed, Resin-coated, Cling-wrap, etc.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {}
+    }
+  ]
+}

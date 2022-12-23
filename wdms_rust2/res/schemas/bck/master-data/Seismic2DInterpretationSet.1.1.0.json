@@ -1,0 +1,64 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/master-data/Seismic2DInterpretationSet.1.1.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Seismic2DInterpretationSet",
+  "description": "A seismic 2D interpretation set is a collection of logical processed lines and associated trace datasets that represent an important and uniform set for interpretation.  It does not comprise all of the datasets with a common processing geometry, nor all of the lines/datasets from a processing project, nor all of the lines/datasets from an acquisition project, because some are not suitable for interpretation.  An interpretation survey may include 2D lines and datasets from more than one acquisition or processing project.  Consequently, it is not an acquisition survey nor a processing survey.  It is not an application project, which is a collection of all the various objects an application and user care about for some analysis (seismic, wells, etc.).  It inherits properties shared by project entities because it can serve to capture the archiving of a master or authorized project activity.  Interpretation objects (horizons) are hung from an interpretation project to give context and to derive spatial location based on the processing geometry of the associated 2D lines. Trace datasets and seismic horizons are associated through LineageAssertion, although a master collection of trace datasets and horizons are explicitly related through a child relationship property.",
+  "type": "object",
+  "x-osdu-virtual-properties": {
+    "data.VirtualProperties.DefaultLocation": {
+      "type": "object",
+      "priority": [
+        {
+          "path": "data.SpatialLocation"
+        }
+      ]
+    },
+    "data.VirtualProperties.DefaultName": {
+      "type": "string",
+      "priority": [
+        {
+          "path": "data.ProjectName"
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractMaster.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractProject.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractProjectActivity.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "SeismicLineGeometries": {
+          "type": "array",
+          "description": "The set of processing geometries comprising the 2D Interpretation Survey (often referred to as survey in the context of an interpretation application but not a survey in the context of acquisition).",
+          "x-osdu-indexing": {
+            "type": "nested"
+          },
+          "items": {
+            "type": "object",
+            "description": "A processing geometry comprising the 2D Interpretation Survey (often referred to as survey in the context of an interpretation application but not a survey in the context of acquisition).",
+            "properties": {
+              "SeismicLineGeometryID": {
+                "type": "string",
+                "description": "Reference to a 2D processing geometry associated with a particular seismic line used in interpretation.  Multiple datasets may refer to this geometry and support the interpretation.",
+                "pattern": "^[\\w\\-\\.]+:work-product-component\\-\\-SeismicLineGeometry:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+              },
+              "SeismicLineName": {
+                "type": "string",
+                "description": "The distinct line name used by interpretation objects (horizons) in the Interpretation Project, which may differ from the name used in seismic line geometry.  This allows the line names in the project to be unique within the project even though the names may not be unique across all the projects that use the same line geometries.  The name used in a horizon pick is related to the appropriate geometry through this name."
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

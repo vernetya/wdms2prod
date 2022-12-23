@@ -1,0 +1,88 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/master-data/WellboreArchitecture.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Wellbore Architecture",
+  "description": "Describes the physical structures for a borehole",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractMaster.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "WellboreID": {
+          "type": "string",
+          "title": "Wellbore ID",
+          "description": "A reference to the wellbore that is the subject of this activity plan",
+          "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Wellbore:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "HoleSectionIDs": {
+          "type": "array",
+          "title": "Hole Section IDs",
+          "description": "Description of the Hole Sections for this architecture",
+          "items": {
+            "type": "string",
+            "pattern": "^[\\w\\-\\.]+:master-data\\-\\-HoleSection:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+          }
+        },
+        "InstalledTubulars": {
+          "type": "array",
+          "title": "Installed Tubulars",
+          "description": "Description of the Installed tubular associated to this architecture",
+          "items": {
+            "type": "object",
+            "title": "Installed Tubular",
+            "description": "Geometrical Description of tubular assembly as installed in the wellbore",
+            "properties": {
+              "MeasuredDepthTop": {
+                "type": "number",
+                "title": "Measured Depth Tubular Top",
+                "description": "The measured depth at the top of the tubular",
+                "x-osdu-frame-of-reference": "UOM:length"
+              },
+              "MeasuredDepthBase": {
+                "type": "number",
+                "title": "Measured Depth Tubular Base",
+                "description": "The measured depth at the base of the tubular",
+                "x-osdu-frame-of-reference": "UOM:length"
+              },
+              "MeasuredDepthErrorTop": {
+                "type": "number",
+                "title": "Measured Depth Tubular Top Error",
+                "description": "The error associated with the measured depth at the top of the tubular",
+                "x-osdu-frame-of-reference": "UOM:length"
+              },
+              "MeasuredDepthErrorBase": {
+                "type": "number",
+                "title": "Measured Depth Tubular Base Error",
+                "description": "The  error associated with the measured depth at the base of the tubular",
+                "x-osdu-frame-of-reference": "UOM:length"
+              },
+              "TubularAssemblyID": {
+                "type": "string",
+                "title": "Tubular Assembly Identifier",
+                "description": "Identifier of the tubular assembly actually installed or to be installed",
+                "pattern": "^[\\w\\-\\.]+:work-product-component\\-\\-TubularAssembly:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+              }
+            },
+            "required": [
+              "TubularAssemblyID"
+            ]
+          }
+        },
+        "Name": {
+          "type": "string",
+          "title": "Name",
+          "description": "Name of Wellbore Architecture"
+        }
+      },
+      "required": [
+        "WellboreID",
+        "HoleSectionIDs",
+        "InstalledTubulars"
+      ]
+    }
+  ]
+}

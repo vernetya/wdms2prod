@@ -1,0 +1,16 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/ProjectRole.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ProjectRole",
+  "description": "The role of an individual supporting a Project, such as Project Manager, Party Chief, Client Representative, Senior Observer.",
+  "x-osdu-governance-authorities": [
+    "None"
+  ],
+  "x-osdu-governance-model": "LOCAL",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    }
+  ]
+}

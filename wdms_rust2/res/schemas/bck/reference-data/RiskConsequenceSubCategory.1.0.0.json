@@ -1,0 +1,28 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "x-osdu-governance-model": "OPEN",
+  "x-osdu-governance-authorities": [
+    "OSDU"
+  ],
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/RiskConsequenceSubCategory.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RiskConsequenceSubCategory",
+  "description": "References the consequence sub-category of the risk. Possible effects arising were a risk event to occur.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "RiskConsequenceCategoryID": {
+          "type": "string",
+          "title": "Risk Consequence Category ID",
+          "description": "Parent consequence category of the risk for possible effects on Asset, Business & Reputation, Environment, Health & Safety\u2026",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-RiskConsequenceCategory:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        }
+      }
+    }
+  ]
+}

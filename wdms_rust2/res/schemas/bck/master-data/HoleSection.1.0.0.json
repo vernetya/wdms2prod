@@ -1,0 +1,59 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/master-data/HoleSection.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Hole Section",
+  "description": "A section of a wellbore of a constant diameter",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractMaster.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "WellboreID": {
+          "type": "string",
+          "title": "Wellbore ID",
+          "description": "Identifier of the planned Wellbore",
+          "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Wellbore:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "Name": {
+          "type": "string",
+          "title": "Name",
+          "description": "Human recognizable context for the section."
+        },
+        "Size": {
+          "type": "number",
+          "title": "Size",
+          "description": "The nominal diameter of the section.",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "Comment": {
+          "type": "string",
+          "title": "Comment",
+          "description": "A comment or description associated with the section"
+        },
+        "MeasuredDepthTop": {
+          "type": "number",
+          "title": "Measured Depth Start",
+          "description": "The Measured depth at the top of the hole section. Depth relative to Planned wellbore ZDP. Navigate via WellboreID to the side-car WellPlanningWellbore, which holds the depth reference in data.VerticalMeasurement.",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "MeasuredDepthBase": {
+          "type": "number",
+          "title": "Measured Depth End",
+          "description": "The Measured depth at the base of the hole section. Depth relative to Planned wellbore ZDP. Navigate via WellboreID to the side-car WellPlanningWellbore, which holds the depth reference in data.VerticalMeasurement.",
+          "x-osdu-frame-of-reference": "UOM:length"
+        }
+      },
+      "required": [
+        "WellboreID",
+        "Name",
+        "Size",
+        "MeasuredDepthTop",
+        "MeasuredDepthBase"
+      ]
+    }
+  ]
+}

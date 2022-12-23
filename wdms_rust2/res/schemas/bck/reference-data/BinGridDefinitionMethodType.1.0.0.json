@@ -1,0 +1,16 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/BinGridDefinitionMethodType.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BinGridDefinitionMethodType",
+  "description": "Mathematical model describing generation of nodes for a regular grid.  Either 4 corner points using perspective transformation or P6 for origin and direction using affine operation.",
+  "x-osdu-governance-authorities": [
+    "OSDU"
+  ],
+  "x-osdu-governance-model": "FIXED",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    }
+  ]
+}

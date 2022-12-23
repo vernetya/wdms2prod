@@ -1,0 +1,24 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/abstract/AbstractGeoProspectContext.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AbstractGeoProspectContext",
+  "description": "A single, typed Prospect entity reference, which is 'abstracted' to AbstractGeoContext and then aggregated by GeoContexts properties.",
+  "type": "object",
+  "properties": {
+    "ProspectID": {
+      "type": "string",
+      "description": "Reference to the prospect.",
+      "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Prospect:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+    },
+    "GeoTypeID": {
+      "type": "string",
+      "description": "The ProspectType reference of the Prospect (via ProspectID) for application convenience.",
+      "x-osdu-is-derived": {
+        "RelationshipPropertyName": "ProspectID",
+        "TargetPropertyName": "ProspectTypeID"
+      },
+      "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-ProspectType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+    }
+  }
+}

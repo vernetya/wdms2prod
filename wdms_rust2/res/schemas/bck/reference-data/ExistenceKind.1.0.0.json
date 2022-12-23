@@ -1,0 +1,16 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/ExistenceKind.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ExistenceKind",
+  "description": "ExistenceKind describes at which stage the instance is in the cradle-to-grave span of its existence. Typical values are: \"Proposed\", \"Planned\", \"Active\", \"Inactive\", \"Marked for Disposal\".",
+  "x-osdu-governance-authorities": [
+    "OSDU", "Energistics"
+  ],
+  "x-osdu-governance-model": "OPEN",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    }
+  ]
+}

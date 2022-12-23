@@ -1,0 +1,60 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/abstract/AbstractQualityMetric.1.1.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AbstractQualityMetric",
+  "description": "Generic quality metric schema fragment containing the universal properties for data profiling and data metrics of OSDU objects.",
+  "type": "object",
+  "properties": {
+    "RunDateTime": {
+      "type": "string",
+      "description": "Run timestamp of the Business data quality ruleset.",
+      "format": "date-time",
+      "x-osdu-frame-of-reference": "DateTime"
+    },
+    "MetadataCountTotal": {
+      "type": "number",
+      "description": "Total number of metadata attributes for object in scope."
+    },
+    "MetadataNull": {
+      "type": "number",
+      "description": "The count of total number where metadata is not populated."
+    },
+    "MetadataCountFormat": {
+      "type": "number",
+      "description": "Total number of attributes defined in reference value lists."
+    },
+    "MetadataFormat": {
+      "type": "number",
+      "description": "The count of total number where attribute follows the defined reference value lists."
+    },
+    "MetadataCountPattern": {
+      "type": "number",
+      "description": "Total number of attributes with a pattern."
+    },
+    "MetadataPattern": {
+      "type": "number",
+      "description": "The count of total number of attributes that follow pattern."
+    },
+    "MetadataCountRequired": {
+      "type": "number",
+      "description": "Total number required attributes."
+    },
+    "MetadataCountRequiredTrue": {
+      "type": "number",
+      "description": "The count of required metadata that are not populated."
+    },
+    "MetadataCountAdditionalProperty": {
+      "type": "number",
+      "description": "Total number of additional properties."
+    },
+    "MetadataAdditionalPropertiesTrue": {
+      "type": "number",
+      "description": "The count of total number of additional properties that are not populated."
+    },
+    "MetadataScore": {
+      "type": "number",
+      "description": "The score in % for the evaluated record."
+    }
+  }
+}

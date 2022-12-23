@@ -1,0 +1,21 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "x-osdu-governance-model": "FIXED",
+  "x-osdu-governance-authorities": [
+    "Energistics"
+  ],
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/FacetType.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Facet Type",
+  "description": "Enumerations of the type of qualifier that applies to a property type to provide additional context about the nature of the property. For example, may include conditions, direction, qualifiers, or statistics. Facets are used in RESQML to provide qualifiers to existing property types, which minimizes the need to create specialized property types.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {}
+    }
+  ]
+}

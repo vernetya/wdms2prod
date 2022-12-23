@@ -1,0 +1,83 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "x-osdu-supported-file-formats": [
+    "WITSML",
+    "csv"
+  ],
+  "$id": "https://schema.osdu.opengroup.org/json/work-product-component/TubularUmbilical.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Umbilical",
+  "description": "An umbilical is any control, power or sensor cable or tube run through an outlet on the wellhead down to a particular receptacle on a downhole component (power or hydraulic line) or simply to a specific depth (sensors). Examples include Gas lift injection tube, Subsea valve control line, ESP power cable, iWire for external gauges, external Fiber Optic Sensor cable. Umbilicals are run outside of the casing or completion assembly and are typically attached by clamps. Umbilicals are run in hole same time as the host assembly. Casing Umbilicals may be cemented in place e.g. Fiber Optic.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractWPCGroupType.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractWorkProductComponent.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "ParentWellboreID": {
+          "type": "string",
+          "title": "Parent Wellbore Identifier",
+          "description": "Identifier of the Parent Wellbore",
+          "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Wellbore:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "ParentAssemblyID": {
+          "type": "string",
+          "title": "Parent Tubular Assembly Identifier",
+          "description": "Identifier of the Parent Tubular Assembly",
+          "pattern": "^[\\w\\-\\.]+:work-product-component\\-\\-TubularAssembly:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "ConnectedTubularComponentID": {
+          "type": "string",
+          "title": "Parent Tubular Component",
+          "description": "Identifier of the Wellhead Outlet the Umbilical is connected to",
+          "pattern": "^[\\w\\-\\.]+:work-product-component\\-\\-TubularComponent:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "WellheadOutletKeyID": {
+          "type": "string",
+          "title": "WellHead Outlet Identifier",
+          "description": "Identifier of the Wellhead Outlet the Umbilical is connected to"
+        },
+        "UmbilicalTypeID": {
+          "type": "string",
+          "title": "Umbilical Type Identifier",
+          "description": "Identifier of the Umbilical Type",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-TubularUmbilicalType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "Cut": {
+          "type": "boolean",
+          "title": "Cut",
+          "description": "Flag describing the existence of a cut (accidentally or intentionally) in the line"
+        },
+        "CutDate": {
+          "type": "string",
+          "title": "Cut Date",
+          "description": "The date the cut has happened",
+          "format": "date-time",
+          "x-osdu-frame-of-reference": "DateTime"
+        },
+        "CutMD": {
+          "type": "number",
+          "title": "Cut Measured Depth",
+          "description": "Measured Depth at which the cut has happened",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "ServiceTypeID": {
+          "type": "string",
+          "title": "Service Type Identifier",
+          "description": "Identifier of the Type of Service the umbilical is facilitating",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-TubularUmbilicalServiceType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        }
+      },
+      "required": [
+        "ParentWellboreID",
+        "ParentAssemblyID",
+        "ConnectedTubularComponentID"
+      ]
+    }
+  ]
+}

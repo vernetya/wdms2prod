@@ -1,0 +1,21 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "x-osdu-governance-model": "FIXED",
+  "x-osdu-governance-authorities": [
+    "IADC"
+  ],
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/BitReasonPulled.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BitReasonPulled",
+  "description": "The IADC list of reasons why a bit might have been pulled",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {}
+    }
+  ]
+}

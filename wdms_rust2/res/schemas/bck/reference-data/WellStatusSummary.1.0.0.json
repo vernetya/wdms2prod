@@ -1,0 +1,82 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "x-osdu-governance-model": "LOCAL",
+  "x-osdu-governance-authorities": [
+    "OSDU"
+  ],
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/WellStatusSummary.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "WellStatusSummary",
+  "description": "Identifies the status of a well component in a way that may combine and-or summarize concepts found in other status facets. For example, a Well Status Summary of Gas Injector Shut-in, which contains commonly desired business information, combines concepts from Product Type, Fluid Direction, and Condition.",
+  "type": "object",
+  "x-osdu-virtual-properties": {
+    "data.VirtualProperties.DefaultName": {
+      "type": "string",
+      "priority": [
+        {
+          "path": "data.Name"
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "PrimaryProductTypeID": {
+          "type": "string",
+          "description": "The Primary Product Type permitted in this summary category. Product Type [Well Product Type] is the physical product(s) that can be attributed to any well component. A Primary Product Significance identifies the Product Type that is most significant.",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-WellProductType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "SecondaryProductTypeID": {
+          "type": "string",
+          "description": "The Secondary Product Type permitted in this summary category. Product Type [Well Product Type] is the physical product(s) that can be attributed to any well component. A Secondary Product Significance identifies the Product Type that is the second most significant.",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-WellProductType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "TertiaryProductTypeID": {
+          "type": "string",
+          "description": "The Tertiary Product Type permitted in this summary category. Product Type [Well Product Type] is the physical product(s) that can be attributed to any well component. A Tertiary Product Significance identifies the Product Type that is the third most significant.",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-WellProductType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "ShowProductTypeID": {
+          "type": "string",
+          "description": "The Show Product Type permitted in this summary category. Product Type [Well Product Type] is the physical product(s) that can be attributed to any well component. A Show Product Significance identifies a Product Type present in non-commercial quantity.",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-WellProductType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "FluidDirectionID": {
+          "type": "string",
+          "description": "The Fluid Direction permitted in this summary category. Fluid Direction [Well Fluid Direction] is the flow direction of the wellhead stream. The facet value can change over the life of the well.",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-WellFluidDirection:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "RoleID": {
+          "type": "string",
+          "description": "The Well Role permitted in this summary category. Role [Well Role] is the current purpose, whether planned or actual. If there are multiple Roles among a well's components, the well may be assigned the facet value with the highest significance. The value of Role may change over the Life Cycle.",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-WellRole:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "ConditionID": {
+          "type": "string",
+          "description": "The Well Condition permitted in this summary category. Condition [Well Condition] is the operational state of a well component relative to the Role [Well Role].",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-WellCondition:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "LifecyclePhaseID": {
+          "type": "string",
+          "description": "The Lifecycle Phase [Facility State Type] permitted in this summary category.",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-FacilityStateType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "BusinessIntentionID": {
+          "type": "string",
+          "description": "The Business Intention permitted in this summary category. Business Intention [Well Business Intention] is the general purpose for which resources are approved for drilling a new well or subsequent wellbore(s).",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-WellBusinessIntention:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "PlayTypeID": {
+          "type": "string",
+          "description": "Play Type is the focus or area conducive to hydrocarbon discovery and includes the related activities for the development and production of the reservoir.",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-PlayType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        }
+      }
+    }
+  ]
+}

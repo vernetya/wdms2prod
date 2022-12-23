@@ -1,0 +1,326 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/master-data/SeismicAcquisitionSurvey.1.2.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SeismicAcquisitionSurvey",
+  "description": "A seismic acquisition project is a type of business project that deploys resources to the field to record seismic data.  It may be referred to as a field survey, acquisition survey, or field program.  It is not the same as the geometry of the deployed equipment (nav), which is a work product component.",
+  "type": "object",
+  "x-osdu-virtual-properties": {
+    "data.VirtualProperties.DefaultLocation": {
+      "type": "object",
+      "priority": [
+        {
+          "path": "data.SpatialLocation"
+        }
+      ]
+    },
+    "data.VirtualProperties.DefaultName": {
+      "type": "string",
+      "priority": [
+        {
+          "path": "data.ProjectName"
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractMaster.1.1.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractProject.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractProjectActivity.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "SeismicGeometryTypeID": {
+          "type": "string",
+          "description": "Reference to the standard values for the general layout of the acquisition.  This is an hierarchical value.  The top value is like 2D, 3D, 4D, Borehole, Passive.  The second value is like NATS, WATS, Brick, Crosswell.  Nodes are separated by forward slash.",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-SeismicGeometryType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "AcquisitionTypeID": {
+          "type": "string",
+          "title": "Acquisition Type ID",
+          "description": "Acquisition approach used Conventional, Wide Azimuth, Multi Azimuth etc.",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-SeismicAcquisitionType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "OperatingEnvironmentID": {
+          "type": "string",
+          "description": "Identifies the setting of acquisition (land, marine, transition zone).",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-OperatingEnvironment:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "AreaCalculated": {
+          "type": "number",
+          "description": "The calculated are covered by the survey. This value is calculated during the loading of the survey.",
+          "x-osdu-frame-of-reference": "UOM:area"
+        },
+        "AreaNominal": {
+          "type": "number",
+          "description": "The nominal area covered by the survey. This value is usually entered by the end user.",
+          "x-osdu-frame-of-reference": "UOM:area"
+        },
+        "ShotpointIncrementDistance": {
+          "type": "number",
+          "description": "DEPRECATED: Use SourceConfigurations[].ShotpointSpacing.  Horizontal distance between shotpoint locations.",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "EnergySourceTypeID": {
+          "type": "string",
+          "description": "DEPRECATED: Use SourceConfigurations[].EnergySourceTypeID.Seismic Source type. E.g.: Airgun, Vibroseis, Dynamite, Watergun.",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-SeismicEnergySourceType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "SourceArrayCount": {
+          "type": "integer",
+          "description": "DEPRECATED: Use SourceConfigurations[].SourceArrayCount. Number of energy sources."
+        },
+        "SourceArraySeparationDistance": {
+          "type": "number",
+          "description": "DEPRECATED: Use SourceConfigurations[].SourceArraySpacing. Distance between energy Sources.",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "SampleInterval": {
+          "type": "number",
+          "description": "Vertical sampling interval of data at time of acquisition.",
+          "x-osdu-frame-of-reference": "UOM:time"
+        },
+        "RecordLength": {
+          "type": "number",
+          "description": "Length of record at time of acquisition.",
+          "x-osdu-frame-of-reference": "UOM:time"
+        },
+        "ShootingAzimuthAngle": {
+          "type": "number",
+          "description": "Orientation of plane between source and receivers.",
+          "x-osdu-frame-of-reference": "UOM:plane angle"
+        },
+        "CableCount": {
+          "type": "integer",
+          "description": "DEPRECATED: Use ReceiverConfigurations[].CableCount. Number of receiver arrays (lines)."
+        },
+        "CableLength": {
+          "type": "number",
+          "description": "DEPRECATED: Use ReceiverConfigurations[].CableLength. Total length of receiver array.",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "CableSpacingDistance": {
+          "type": "number",
+          "description": "DEPRECATED: Use ReceiverConfigurations[].CableSpacing. Horizontal distance between receiver arrays.",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "MinOffsetDistance": {
+          "type": "number",
+          "description": "Horizontal distance between source and first receiver.",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "MaxOffsetDistance": {
+          "type": "number",
+          "description": "Horizontal distance between source and last receiver.",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "FoldCount": {
+          "type": "integer",
+          "description": "The number of times a point in the subsurface is sampled.  It measures of the redundancy of common midpoint seismic data."
+        },
+        "VesselNames": {
+          "type": "array",
+          "description": "DEPRECATED: use VesselNames in SourceConfigurations and ReceiverConfigurations. List of names of the seismic acquisition (source and streamer) vessels used (marine environment only).",
+          "items": {
+            "type": "string"
+          }
+        },
+        "SourceConfigurations": {
+          "type": "array",
+          "description": "The seismic source configurations used for this acquisition project.",
+          "x-osdu-indexing": {
+            "type": "nested"
+          },
+          "items": {
+            "type": "object",
+            "title": "SeismicSourceConfiguration",
+            "description": "Parameters characterizing the seismic source configuration.",
+            "properties": {
+              "VesselName": {
+                "type": "string",
+                "title": "Vessel Name",
+                "description": "Name of the source vessel (may be the same as the receiver).  In the case of a VSP, this may be a platform or rig."
+              },
+              "ShotpointSpacing": {
+                "type": "number",
+                "title": "Shotpoint Spacing",
+                "description": "Horizontal distance between shotpoint locations.",
+                "x-osdu-frame-of-reference": "UOM:length"
+              },
+              "EnergySourceTypeID": {
+                "type": "string",
+                "title": "Energy Source Type ID",
+                "description": "Seismic Source type. E.g.: Airgun, Vibroseis, Dynamite,Watergun.",
+                "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-SeismicEnergySourceType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+              },
+              "SourceArrayCount": {
+                "type": "integer",
+                "title": "Source Array Count",
+                "description": "Number of energy sources."
+              },
+              "SourceArraySpacing": {
+                "type": "number",
+                "title": "Source Array Spacing",
+                "description": "Distance between energy sources.",
+                "x-osdu-frame-of-reference": "UOM:length"
+              },
+              "SourceArrayDepth": {
+                "type": "number",
+                "title": "Source Array Depth",
+                "description": "Depth of the energy source.",
+                "x-osdu-frame-of-reference": "UOM:length"
+              },
+              "SourceArrayVolume": {
+                "type": "number",
+                "title": "Source Array Volume",
+                "description": "Volume of the energy source.",
+                "x-osdu-frame-of-reference": "UOM:volume"
+              },
+              "SourceArraySweepFreqMin": {
+                "type": "number",
+                "title": "Source Array Sweep Frequency Minimum",
+                "description": "Minimum frequency of the vibroseis source.",
+                "x-osdu-frame-of-reference": "UOM:frequency"
+              },
+              "SourceArraySweepFreqMax": {
+                "type": "number",
+                "title": "Source Array Sweep Frequency Maximum",
+                "description": "Maximum frequency of the vibroseis source.",
+                "x-osdu-frame-of-reference": "UOM:frequency"
+              },
+              "SourceArraySweepLength": {
+                "type": "number",
+                "title": "Source Array Sweep Length",
+                "description": "Length of the vibroseis source sweep.",
+                "x-osdu-frame-of-reference": "UOM:time"
+              },
+              "Remarks": {
+                "type": "string",
+                "title": "Remarks",
+                "description": "Text remarks regarding the Seismic source configuration."
+              },
+              "SourceWellboreID": {
+                "type": "string",
+                "title": "Source Wellbore ID",
+                "description": "The relationship to the wellbore, in which the source or sources are located.",
+                "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Wellbore:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+              },
+              "SourceArrayMinDepth": {
+                "type": "number",
+                "title": "Source Minimum Depth",
+                "description": "Minimum depth of Sources in a wellbore. Used in conjunction with VSP acquisition.",
+                "x-osdu-frame-of-reference": "UOM:length"
+              },
+              "SourceArrayMaxDepth": {
+                "type": "number",
+                "title": "Receiver Maximum Depth",
+                "description": "Maximum depth of receivers in a wellbore. Used in conjunction with VSP acquisition.",
+                "x-osdu-frame-of-reference": "UOM:length"
+              }
+            }
+          }
+        },
+        "ReceiverConfigurations": {
+          "type": "array",
+          "description": "The seismic receiver configurations used for this acquisition project.",
+          "x-osdu-indexing": {
+            "type": "nested"
+          },
+          "items": {
+            "type": "object",
+            "title": "SeismicReceiverConfiguration",
+            "description": "Parameters characterizing the seismic receiver configuration.",
+            "properties": {
+              "VesselName": {
+                "type": "string",
+                "title": "Vessel Name",
+                "description": "Name of the receiver vessel (may be the same as the source).  In the case of a VSP, this may be a platform or rig."
+              },
+              "CableCount": {
+                "type": "integer",
+                "title": "Cable Count",
+                "description": "Number of receiver arrays (lines)."
+              },
+              "CableLength": {
+                "type": "number",
+                "title": "Cable Length",
+                "description": "Total length of receiver array.",
+                "x-osdu-frame-of-reference": "UOM:length"
+              },
+              "CableSpacing": {
+                "type": "number",
+                "title": "Cable Spacing",
+                "description": "Horizontal distance between receiver arrays.",
+                "x-osdu-frame-of-reference": "UOM:length"
+              },
+              "CableDepth": {
+                "type": "number",
+                "title": "Cable Depth",
+                "description": "Marine seismic cable towing depth below sea surface  (Positive Down).",
+                "x-osdu-frame-of-reference": "UOM:length"
+              },
+              "ReceiverTypeID": {
+                "type": "string",
+                "title": "Receiver Type ID",
+                "description": "The type of receivers, e.g. geophones, hydrophones, ocean bottom seismometers.",
+                "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-SeismicReceiverType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+              },
+              "ReceiverCount": {
+                "type": "integer",
+                "title": "Receiver Count",
+                "description": "Number of receivers on a cable."
+              },
+              "ReceiverSpacingInterval": {
+                "type": "number",
+                "title": "Receiver Spacing",
+                "description": "Distance between receivers on same cable.",
+                "x-osdu-frame-of-reference": "UOM:length"
+              },
+              "ReceiverGroupSpacing": {
+                "type": "number",
+                "title": "Receiver Group Spacing",
+                "description": "Distance between receiver groups on the same cable.",
+                "x-osdu-frame-of-reference": "UOM:length"
+              },
+              "Remarks": {
+                "type": "string",
+                "title": "Remarks",
+                "description": "Text remarks regarding the Seismic Receiver configuration."
+              },
+              "WellboreID": {
+                "type": "string",
+                "title": "Wellbore",
+                "description": "The relationship to the wellbore, in which the receivers are located. Used in conjunction with VSP acquisition.",
+                "x-osdu-attribution-authority": "OSDU",
+                "x-osdu-attribution-revision": "evergreen",
+                "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Wellbore:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+              },
+              "WellboreReceiverMinDepth": {
+                "type": "number",
+                "title": "Wellbore Receiver Minimum Depth",
+                "description": "Minimum depth of receivers in a wellbore. Used in conjunction with VSP acquisition.",
+                "x-osdu-frame-of-reference": "UOM:length"
+              },
+              "WellboreReceiverMaxDepth": {
+                "type": "number",
+                "title": "Wellbore Receiver Maximum Depth",
+                "description": "Maximum depth of receivers in a wellbore. Used in conjunction with VSP acquisition.",
+                "x-osdu-frame-of-reference": "UOM:length"
+              }
+            }
+          }
+        },
+        "VerticalMeasurement": {
+          "$ref": "../abstract/AbstractFacilityVerticalMeasurement.1.0.0.json",
+          "description": "The vertical measurement reference for VSP surveys, which defines the vertical reference datum for the measured depths."
+        }
+      }
+    }
+  ]
+}

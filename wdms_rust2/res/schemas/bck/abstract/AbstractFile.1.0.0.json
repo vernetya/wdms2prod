@@ -1,0 +1,32 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/abstract/AbstractFile.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AbstractFile",
+  "description": "The schema fragment representing single files",
+  "type": "object",
+  "properties": {
+    "DatasetProperties": {
+      "type": "object",
+      "title": "Dataset Properties",
+      "description": "The dataset properties for a single file.",
+      "properties": {
+        "FileSourceInfo": {
+          "$ref": "../abstract/AbstractFileSourceInfo.1.0.0.json",
+          "title": "File Source Info",
+          "description": "Information about the single file."
+        }
+      }
+    },
+    "Checksum": {
+      "type": "string",
+      "title": "MD5 Checksum",
+      "description": "MD5 checksum of file bytes - a 32 byte hexadecimal number.",
+      "example": "d41d8cd98f00b204e9800998ecf8427e",
+      "pattern": "^[0-9a-fA-F]{32}"
+    }
+  },
+  "required": [
+    "DatasetProperties"
+  ]
+}

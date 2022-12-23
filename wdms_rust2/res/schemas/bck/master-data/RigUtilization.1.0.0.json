@@ -1,0 +1,177 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/master-data/RigUtilization.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Rig Utilization",
+  "description": "The utilization of a rig during the drilling phase of a section",
+  "type": "object",
+  "x-osdu-virtual-properties": {
+    "data.VirtualProperties.DefaultLocation": {
+      "type": "object",
+      "priority": [
+        {
+          "path": "data.SpatialLocation"
+        }
+      ]
+    },
+    "data.VirtualProperties.DefaultName": {
+      "type": "string",
+      "priority": [
+        {
+          "path": "data.ProjectName"
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractMaster.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractProject.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "HoleSectionId": {
+          "type": "string",
+          "title": "Hole Section ID",
+          "description": "Identifier of the Hole Section that is being drilled",
+          "pattern": "^[\\w\\-\\.]+:master-data\\-\\-HoleSection:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "RigID": {
+          "type": "string",
+          "title": "Rig ID",
+          "description": "The rig that is being utilized to drill this depth range of this section.",
+          "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Rig:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "StartHoleDepth": {
+          "type": "number",
+          "title": "Start Hole Depth",
+          "description": "Measured depth of the wellbore when operations performed with this rig started. Depth relative to Planned wellbore ZDP. Navigate via HoleSectionId and WellboreID to the side-car WellPlanningWellbore, which holds the depth reference in data.VerticalMeasurement.",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "EndHoleDepth": {
+          "type": "number",
+          "title": "End Hole Depth",
+          "description": "Measured depth of the wellbore when operations performed with this rig ended. Depth relative to Planned wellbore ZDP. Navigate via HoleSectionId and WellboreID to the side-car WellPlanningWellbore, which holds the depth reference in data.VerticalMeasurement.",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "StartDateActivity": {
+          "type": "string",
+          "title": "Dtm Start",
+          "description": "The start date and time for the activity that this rig was utilized for",
+          "format": "date-time",
+          "x-osdu-frame-of-reference": "DateTime"
+        },
+        "EndDateActivity": {
+          "type": "string",
+          "title": "Dtm End",
+          "description": "The end date and time for the activity that this rig was utilized for",
+          "format": "date-time",
+          "x-osdu-frame-of-reference": "DateTime"
+        },
+        "RequiredHoistingCapacity": {
+          "type": "number",
+          "title": "Required Hoisting Capacity",
+          "description": "Required hoisting capacity based on derrick / drawworks",
+          "x-osdu-frame-of-reference": "UOM:mass"
+        },
+        "RequiredStandpipePressure": {
+          "type": "number",
+          "title": "Required Standpipe Pressure",
+          "description": "Required Standpipe pressure",
+          "x-osdu-frame-of-reference": "UOM:pressure"
+        },
+        "MaxWaterDepth": {
+          "type": "number",
+          "title": "Max Water Depth",
+          "description": "Required maximum workable water depth for the rig.",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "RiserInsideDiameter": {
+          "type": "string",
+          "title": "Riser Inside Diameter",
+          "description": "Nominal inside diameter of the riser",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "RiserWorkingPressure": {
+          "type": "number",
+          "title": "Riser Working Pressure",
+          "description": "Designed riser working pressure.",
+          "x-osdu-frame-of-reference": "UOM:pressure"
+        },
+        "TopDriveTorqueRating": {
+          "type": "number",
+          "title": "Top Drive Torque Rating",
+          "description": "Required maximum torque for the top drive.",
+          "x-osdu-frame-of-reference": "UOM:moment of force"
+        },
+        "RequiredFlowRate": {
+          "type": "number",
+          "title": "Required Flow Rate",
+          "description": "Required mud flow rates delivered by the pump system.",
+          "x-osdu-frame-of-reference": "UOM:volume per time"
+        },
+        "MudPumps": {
+          "type": "array",
+          "title": "Mud Pumps",
+          "description": "Mud pump equipment on the rig",
+          "items": {
+            "type": "object",
+            "title": "Mud Pump",
+            "description": "Pumps present on the rig",
+            "properties": {
+              "Name": {
+                "type": "string",
+                "title": "Name",
+                "description": "The name of the mud pump (model)",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "Number": {
+                "type": "integer",
+                "title": "Number",
+                "description": "Number of pump of that type on the rig.",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "MaxPower": {
+                "type": "number",
+                "title": "Max Power",
+                "description": "Maximum power defined by the manufacturer.",
+                "x-osdu-frame-of-reference": "UOM:power",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "WorkingPower": {
+                "type": "number",
+                "title": "Working Power",
+                "description": "Maximum power authorized by the drilling contractor",
+                "x-osdu-frame-of-reference": "UOM:power",
+                "x-osdu-attribution-authority": "The Open Group",
+                "x-osdu-attribution-publication": "The OSDU Data Platform",
+                "x-osdu-attribution-revision": "evergreen"
+              },
+              "MaxPumpPressure": {
+                "type": "number",
+                "title": "Maximum Pump Pressure",
+                "description": "Maximum required/delivered pressure from/by the pump",
+                "x-osdu-frame-of-reference": "UOM:pressure"
+              },
+              "MaxPumpFlowrate": {
+                "type": "number",
+                "title": "Maximum Pump Flowrate",
+                "description": "Maximum required/delivered flowrate from/by the pump",
+                "x-osdu-frame-of-reference": "UOM:volume per time"
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

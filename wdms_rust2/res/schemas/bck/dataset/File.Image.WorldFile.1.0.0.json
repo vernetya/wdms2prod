@@ -1,0 +1,26 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/dataset/File.Image.WorldFile.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "File.Image.WorldFile",
+  "description": "A file accompanying a File.Image.JPEG, File.Image.PNG or File.Image.TIFF containing the original pixel to 'world' coordinate transformation instructions. Typical file extensions are .jgw, .j2w, .pgw, .tfw, depending on the image type in context.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractDataset.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractFile.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "SpatialReference": {
+          "$ref": "../abstract/AbstractSpatialReference.1.0.0.json",
+          "title": "Spatial Reference",
+          "description": "The geo-spatial reference for the data in the geo-referenced image file. The definition typically augments the information provided in the .jgw, .j2w, .pgw, .tfw  'world file'. Augmentation examples: 1) The designated CRS identified by CoordinateReferenceSystemID can be an early BoundCRS providing the selected transformation to WGS 84. 2) If the dataset represents 3-dimensional coordinates, the VerticalCoordinateReferenceSystemID provides the vertical reference. 3) If no vertical CRS is defined, the vertical unit is given by PersistableReferenceUnitZ."
+        }
+      }
+    }
+  ]
+}

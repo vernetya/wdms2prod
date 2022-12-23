@@ -1,0 +1,16 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/DimensionType.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DimensionType",
+  "description": "Geometry along which a velocity model is defined, such as line (could be checkshot), surface, volume, time series (for 4D/time lapse). Ex. 1D, 2D, 3D, 1D_TL, 2D_TL, and 3D_TL.",
+  "x-osdu-governance-authorities": [
+    "OSDU"
+  ],
+  "x-osdu-governance-model": "OPEN",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    }
+  ]
+}

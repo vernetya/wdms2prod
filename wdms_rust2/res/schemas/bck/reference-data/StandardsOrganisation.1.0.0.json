@@ -1,0 +1,21 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "x-osdu-governance-model": "OPEN",
+  "x-osdu-governance-authorities": [
+    "OSDU"
+  ],
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/StandardsOrganisation.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "StandardsOrganisation",
+  "description": "The reference-data type holding a StandardsOrganisation, e.g. ISO, IOGP, Energistics, etc. The main purpose is to define organisations, which provide alias names to reference-data.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {}
+    }
+  ]
+}

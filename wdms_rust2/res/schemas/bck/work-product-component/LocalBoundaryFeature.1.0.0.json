@@ -1,0 +1,27 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/work-product-component/LocalBoundaryFeature.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "LocalBoundaryFeature",
+  "description": "An interface between two geological objects, such as horizons and faults in the scope of a model. It is a surface object. The scope can be widened by establishing a relationship to a master-data--BoundaryFeature instance.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractWPCGroupType.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractWorkProductComponent.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "BoundaryFeatureID": {
+          "type": "string",
+          "title": "Boundary Feature ID",
+          "description": "When populated, the boundary feature has a wider scope and allows boundary feature correlations across models.",
+          "pattern": "^[\\w\\-\\.]+:master-data\\-\\-BoundaryFeature:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        }
+      }
+    }
+  ]
+}

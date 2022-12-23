@@ -1,0 +1,58 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/work-product-component/SubRepresentation.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SubRepresentation",
+  "description": "An ordered list of indexable elements and/or indexable element pairs of existing representations",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractWPCGroupType.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractWorkProductComponent.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractRepresentation.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "IndexableElementID": {
+          "type": "string",
+          "title": "Indexable Element Type ID",
+          "description": "The topological elements kind which are selected",
+          "format": "uri-reference",
+          "example": "namespace:reference-data--IndexableElement:cells:",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-IndexableElement:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "NestedIndexableElementID": {
+          "type": "string",
+          "title": "Nested Indexable element Type ID",
+          "description": "The topological element kind nested inside the first given indexable element kind  which are selected. For example, it allows to select all top front left corner of all cells of an IJK grid",
+          "format": "uri-reference",
+          "example": "namespace:reference-data--IndexableElement:nodes:",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-IndexableElement:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "SupportingRepresentationIDs": {
+          "type": "array",
+          "title": "Array of references to supporting representations",
+          "description": "References to the representations which this subrepresentation is based on.",
+          "example": [
+            "namespace:work-product-component--IjkGridRepresentation:85348741-3433-406B-9189-22B298C3E2D2:"
+          ],
+          "items": {
+            "type": "string",
+            "pattern": "^[\\w\\-\\.]+:work-product-component\\-\\-[\\w\\-\\.]+:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+          }
+        },
+        "ElementCount": {
+          "type": "integer",
+          "title": "Count of elements",
+          "description": "The count of elements in this subrepresentation",
+          "example": 10000
+        }
+      }
+    }
+  ]
+}

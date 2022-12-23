@@ -1,0 +1,37 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/abstract/AbstractLegalTags.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Legal Meta Data",
+  "description": "Legal meta data like legal tags, relevant other countries, legal status. This structure is included by the SystemProperties \"legal\", which is part of all OSDU records. Not extensible.",
+  "type": "object",
+  "properties": {
+    "legaltags": {
+      "title": "Legal Tags",
+      "description": "The list of legal tags, which resolve to legal properties (like country of origin, export classification code, etc.) and rules with the help of the Compliance Service.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "otherRelevantDataCountries": {
+      "title": "Other Relevant Data Countries",
+      "description": "The list of other relevant data countries as an array of two-letter country codes, see https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2.",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Z]{2}$"
+      }
+    },
+    "status": {
+      "title": "Legal Status",
+      "description": "The legal status. Set by the system after evaluation against the compliance rules associated with the \"legaltags\" using the Compliance Service.",
+      "type": "string",
+      "pattern": "^(compliant|uncompliant)$"
+    }
+  },
+  "required": [
+    "legaltags",
+    "otherRelevantDataCountries"
+  ],
+  "additionalProperties": false
+}

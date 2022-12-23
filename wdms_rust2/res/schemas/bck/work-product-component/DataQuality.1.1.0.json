@@ -1,0 +1,58 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "x-osdu-supported-file-formats": [
+    "csv"
+  ],
+  "$id": "https://schema.osdu.opengroup.org/json/work-product-component/DataQuality.1.1.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DataQuality",
+  "description": "This is used to store result from a run of Data Quality Metric Evaluation engine. Captures summary information, such as which Business rule-set(s) and rule(s) have been used, when this was run and by whom. Detailed result (such as which rule failed, for which meta data item and what was offending value causing the rule to fail) is meant to be made available in a file that is linked to this work-product component. Through Lineage Assertion, this can relate to the entities which were used for the run of Evaluation engine, such as a collection of wells whose meta data were inspected by using a set of rules.",
+  "type": "object",
+  "x-osdu-virtual-properties": {
+    "data.VirtualProperties.DefaultLocation": {
+      "type": "object",
+      "priority": [
+        {
+          "path": "data.SpatialArea"
+        },
+        {
+          "path": "data.SpatialPoint"
+        }
+      ]
+    },
+    "data.VirtualProperties.DefaultName": {
+      "type": "string",
+      "priority": [
+        {
+          "path": "data.Name"
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractWPCGroupType.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractWorkProductComponent.1.1.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "EvaluatedRecordID": {
+          "type": "string",
+          "description": "The reference to the evaluated data record. The record version number is required.",
+          "pattern": "^[\\w\\-\\.]+:(master-data\\-\\-[\\w\\-\\.]+|work-product\\-\\-[\\w\\-\\.]+|work-product-component\\-\\-[\\w\\-\\.]+):[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "BusinessRules": {
+          "$ref": "../abstract/AbstractBusinessRule.1.0.0.json",
+          "description": "The BusinessRules on which this quality evaluation is based on combined with the run status results."
+        },
+        "QualityMetric": {
+          "$ref": "../abstract/AbstractQualityMetric.1.1.0.json",
+          "description": "The list of evaluated quality metrics for the evaluated data record."
+        }
+      }
+    }
+  ]
+}

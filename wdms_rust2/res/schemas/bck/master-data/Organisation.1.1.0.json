@@ -1,0 +1,85 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/master-data/Organisation.1.1.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Organisation",
+  "description": "A legal or administrative body, institution, or company, or any of its divisions.",
+  "type": "object",
+  "x-osdu-virtual-properties": {
+    "data.VirtualProperties.DefaultLocation": {
+      "type": "object",
+      "priority": [
+        {
+          "path": "data.SpatialLocation"
+        }
+      ]
+    },
+    "data.VirtualProperties.DefaultName": {
+      "type": "string",
+      "priority": [
+        {
+          "path": "data.OrganisationName"
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractMaster.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "OrganisationID": {
+          "type": "string",
+          "title": "External Organisation Identifier",
+          "description": "Native identifier from a Master Data Management System or other trusted source external to OSDU - stored here in order to allow for multi-system connection and synchronization. If used, the \"Source\" property should identify that source system."
+        },
+        "OrganisationName": {
+          "type": "string",
+          "description": "Text which identifies an organisation."
+        },
+        "OrganisationNameAliases": {
+          "type": "array",
+          "description": "DEPRECATED: please use data.NameAliases. Alternative names, including historical, by which this organisation entity is/has been known.",
+          "items": {
+            "$ref": "../abstract/AbstractAliasNames.1.0.0.json"
+          }
+        },
+        "InternalOrganisationIndicator": {
+          "type": "boolean",
+          "description": "Indicates if the organisation is internal to the enterprise."
+        },
+        "OrganisationPurposeDescription": {
+          "type": "string",
+          "description": "The reason why the organization was formed."
+        },
+        "OrganisationDescription": {
+          "type": "string",
+          "description": "Textual description of the nature of the organisation."
+        },
+        "EffectiveDate": {
+          "type": "string",
+          "description": "The date and time at which a given organisation becomes effective.",
+          "format": "date-time"
+        },
+        "TerminationDate": {
+          "type": "string",
+          "description": "The date and time at which a given organisation is no longer in effect.",
+          "format": "date-time"
+        },
+        "OrganisationTypeID": {
+          "type": "string",
+          "description": "Category the organisational structure fits into. Possible values - Operating Unit, Operating sub Unit, A Business, A Department, Government Agency, etc.",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-OrganisationType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "ParentOrganisationID": {
+          "type": "string",
+          "title": "Parent Organisation ID",
+          "description": "If populated, this is the parent organisation of the current organisation.",
+          "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Organisation:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        }
+      }
+    }
+  ]
+}

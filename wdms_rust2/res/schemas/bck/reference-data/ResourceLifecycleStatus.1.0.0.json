@@ -1,0 +1,16 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/ResourceLifecycleStatus.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ResourceLifecycleStatus",
+  "description": "Used to describe the resource lifecycle statuses, where the resource is in the process to ingest and release it.",
+  "x-osdu-governance-authorities": [
+    "OSDU"
+  ],
+  "x-osdu-governance-model": "FIXED",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    }
+  ]
+}

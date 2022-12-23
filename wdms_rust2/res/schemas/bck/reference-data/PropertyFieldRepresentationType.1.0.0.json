@@ -1,0 +1,16 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/PropertyFieldRepresentationType.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PropertyFieldRepresentationType",
+  "description": "The type of topology used to represent the discrete velocity observations, such as Grid or Mesh.",
+  "x-osdu-governance-authorities": [
+    "OSDU"
+  ],
+  "x-osdu-governance-model": "OPEN",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    }
+  ]
+}

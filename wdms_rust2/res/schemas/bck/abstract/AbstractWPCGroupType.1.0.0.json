@@ -1,0 +1,66 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/abstract/AbstractWPCGroupType.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AbstractWPCGroupType",
+  "description": "Generic reference object containing the universal group-type properties of a Work Product Component for inclusion in data type specific Work Product Component objects",
+  "type": "object",
+  "properties": {
+    "Datasets": {
+      "type": "array",
+      "description": "The record id, which identifies this OSDU File or dataset resource.",
+      "items": {
+        "type": "string",
+        "pattern": "^[\\w\\-\\.]+:dataset\\-\\-[\\w\\-\\.]+:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+      }
+    },
+    "Artefacts": {
+      "type": "array",
+      "description": "An array of Artefacts - each artefact has a Role, Resource tuple. An artefact is distinct from the file, in the sense certain valuable information is generated during loading process (Artefact generation process). Examples include retrieving location data, performing an OCR which may result in the generation of artefacts which need to be preserved distinctly",
+      "x-osdu-indexing": {
+        "type": "flattened"
+      },
+      "items": {
+        "type": "object",
+        "title": "Artefacts",
+        "description": "An array of Artefacts - each artefact has a Role, Resource tuple. An artefact is distinct from the file, in the sense certain valuable information is generated during loading process (Artefact generation process). Examples include retrieving location data, performing an OCR which may result in the generation of artefacts which need to be preserved distinctly",
+        "properties": {
+          "RoleID": {
+            "type": "string",
+            "description": "The SRN of this artefact's role.",
+            "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-ArtefactRole:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+          },
+          "ResourceKind": {
+            "type": "string",
+            "description": "The kind or schema ID of the artefact. Resolvable with the Schema Service.",
+            "pattern": "^[\\w\\-\\.]+:[\\w\\-\\.]+:[\\w\\-\\.]+:[0-9]+.[0-9]+.[0-9]+$"
+          },
+          "ResourceID": {
+            "type": "string",
+            "description": "The SRN which identifies this OSDU Artefact resource.",
+            "pattern": "^[\\w\\-\\.]+:dataset\\-\\-[\\w\\-\\.]+:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+          }
+        }
+      }
+    },
+    "IsExtendedLoad": {
+      "type": "boolean",
+      "description": "A flag that indicates if the work product component is undergoing an extended load.  It reflects the fact that the work product component is in an early stage and may be updated before finalization."
+    },
+    "IsDiscoverable": {
+      "type": "boolean",
+      "description": "A flag that indicates if the work product component is searchable, which means covered in the search index."
+    },
+    "TechnicalAssurances": {
+      "type": "array",
+      "title": "Technical Assurances",
+      "description": "Describes a record's overall suitability for general business consumption based on data quality. Clarifications: Since Certified is the highest classification of suitable quality, any further change or versioning of a Certified record should be carefully considered and justified. If a Technical Assurance value is not populated then one can assume the data has not been evaluated or its quality is unknown (=Unevaluated). Technical Assurance values are not intended to be used for the identification of a single \"preferred\" or \"definitive\" record by comparison with other records.",
+      "x-osdu-indexing": {
+        "type": "nested"
+      },
+      "items": {
+        "$ref": "../abstract/AbstractTechnicalAssurance.1.0.0.json"
+      }
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "x-osdu-governance-model": "LOCAL",
+  "x-osdu-governance-authorities": [
+    "OSDU"
+  ],
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/SatelliteMission.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SatelliteMission",
+  "description": "The reference value type defining the satellite mission and the operational period",
+  "type": "object",
+  "x-osdu-virtual-properties": {
+    "data.VirtualProperties.DefaultName": {
+      "type": "string",
+      "priority": [
+        {
+          "path": "data.Name"
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "OperationalPeriod": {
+          "type": "array",
+          "title": "OperationalPeriod",
+          "description": "An array which lists the start and end year of a particular satellite mission",
+          "x-osdu-indexing": {
+            "type": "nested"
+          },
+          "items": {
+            "type": "object",
+            "title": "OperationalPeriod",
+            "description": "Defines the start and end year of the satellite mission",
+            "properties": {
+              "StartYear": {
+                "type": "integer",
+                "title": "Start Year",
+                "description": "The year that the satellite mission became operational or started",
+                "example": 1999
+              },
+              "EndYear": {
+                "type": "integer",
+                "title": "End Year",
+                "description": "The year that the satellite mission ceased or ended. Leave blank if the mission is still active.",
+                "example": 2020
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

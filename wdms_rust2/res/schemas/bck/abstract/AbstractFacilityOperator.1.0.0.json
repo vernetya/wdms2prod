@@ -1,0 +1,31 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/abstract/AbstractFacilityOperator.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AbstractFacilityOperator",
+  "description": "The organisation that was responsible for a facility at some point in time.",
+  "type": "object",
+  "properties": {
+    "FacilityOperatorID": {
+      "description": "Internal, unique identifier for an item 'AbstractFacilityOperator'. This identifier is used by 'AbstractFacility.CurrentOperatorID' and 'AbstractFacility.InitialOperatorID'.",
+      "type": "string",
+      "title": "Facility Operator ID"
+    },
+    "FacilityOperatorOrganisationID": {
+      "description": "The company that currently operates, or previously operated the facility",
+      "type": "string",
+      "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Organisation:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+    },
+    "EffectiveDateTime": {
+      "description": "The date and time at which the facility operator becomes effective.",
+      "type": "string",
+      "format": "date-time",
+      "x-osdu-frame-of-reference": "DateTime"
+    },
+    "TerminationDateTime": {
+      "description": "The date and time at which the facility operator is no longer in effect. If the operator is still effective, the 'TerminationDateTime' is left absent.",
+      "type": "string",
+      "format": "date-time",
+      "x-osdu-frame-of-reference": "DateTime"
+    }
+  }
+}

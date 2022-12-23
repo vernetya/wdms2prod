@@ -1,0 +1,58 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/work-product-component/Document.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Document",
+  "description": "A document can be any document that is required to be stored in an electronic format. Examples of this could be daily drilling reports, drilling schematics, or material quality analysis reports.",
+  "type": "object",
+  "x-osdu-supported-file-formats": [
+    "pdf",
+    "csv",
+    "txt",
+    "docx",
+    "xlsx"
+  ],
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractWPCGroupType.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractWorkProductComponent.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "DocumentTypeID": {
+          "description": "The kind of document--from a business standpoint, e.g., seismic processing report, etc.",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-DocumentType:[\\w\\-\\.\\:\\%]+:[0-9]*$",
+          "type": "string"
+        },
+        "NumberOfPages": {
+          "description": "Number of pages in the document, useful in cases where if it was described in the acquired manifest as opposed to a derived/calculated value",
+          "type": "integer"
+        },
+        "SubTitle": {
+          "description": "The sub-title of the document.",
+          "type": "string"
+        },
+        "DocumentSubject": {
+          "description": "A description text or an array of subjects covered by the document. If present this information must compliment the Tag and SubTitle",
+          "type": "string"
+        },
+        "DatePublished": {
+          "description": "The UTC date time and date of the document publication",
+          "type": "string",
+          "format": "date-time"
+        },
+        "DateModified": {
+          "description": "The UTC date time and date of the document when it was last modified",
+          "type": "string",
+          "format": "date-time"
+        },
+        "DocumentLanguage": {
+          "description": "Document language as listed in the ISO 639-3 https://en.wikipedia.org/wiki/ISO_639, https://en.wikipedia.org/wiki/List_of_ISO_639-3_codes",
+          "type": "string"
+        }
+      }
+    }
+  ]
+}

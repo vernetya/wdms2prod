@@ -1,0 +1,111 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "x-osdu-supported-file-formats": [
+    "WITSML",
+    "RESQML",
+    "csv"
+  ],
+  "$id": "https://schema.osdu.opengroup.org/json/work-product-component/WellboreMarkerSet.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "WellboreMarkerSet",
+  "description": "Wellbore Markers identify the depth in a wellbore, measured below a reference elevation, at which a person or an automated process identifies a noteworthy observation, which is usually a change in the rock that intersects that wellbore. Formation Marker data includes attributes/properties that put these depths in context. Formation Markers are sometimes known as picks or formation tops.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractWPCGroupType.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractWorkProductComponent.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "WellboreID": {
+          "type": "string",
+          "description": "Wellbore ID",
+          "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Wellbore:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "VerticalMeasurement": {
+          "$ref": "../abstract/AbstractFacilityVerticalMeasurement.1.0.0.json",
+          "description": "References an entry in the Vertical Measurement array for the Wellbore identified by WellboreID, which defines the vertical reference datum for all marker measured depths of the Wellbore Marker Set Markers array."
+        },
+        "Markers": {
+          "type": "array",
+          "x-osdu-indexing": {
+            "type": "nested"
+          },
+          "items": {
+            "type": "object",
+            "properties": {
+              "MarkerName": {
+                "type": "string",
+                "description": "Name of the Marker"
+              },
+              "MarkerMeasuredDepth": {
+                "type": "number",
+                "description": "The depth at which the Marker was noted.",
+                "x-osdu-frame-of-reference": "UOM:length"
+              },
+              "MarkerDate": {
+                "type": "string",
+                "description": "Timestamp of the date and time when the when the Marker was interpreted.",
+                "format": "date-time",
+                "x-osdu-frame-of-reference": "DateTime"
+              },
+              "MarkerObservationNumber": {
+                "type": "number",
+                "description": "Any observation number that distinguishes a Marker observation from others with same Marker name, date."
+              },
+              "MarkerInterpreter": {
+                "type": "string",
+                "description": "The name of the Marker interpreter (could be a person or vendor)."
+              },
+              "MarkerTypeID": {
+                "type": "string",
+                "description": "Marker Type Reference Type. Possible values - Biostratigraphy, Lithostratigraphy, seismic, depth of well, sequence, flow unit",
+                "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-MarkerType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+              },
+              "FeatureTypeID": {
+                "type": "string",
+                "description": "Feature Type Reference Type. Possible values - Base, top, fault, salt, reef, sea floor",
+                "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-FeatureType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+              },
+              "FeatureName": {
+                "type": "string",
+                "description": "Name of the feature the marker is characterizing"
+              },
+              "PositiveVerticalDelta": {
+                "type": "number",
+                "description": "The distance vertically above the Marker position that marks the limit of the high confidence range for the Marker pick.",
+                "x-osdu-frame-of-reference": "UOM:length"
+              },
+              "NegativeVerticalDelta": {
+                "type": "number",
+                "description": "The distance vertically below the Marker position that marks the limit of the high confidence range for the Marker pick.",
+                "x-osdu-frame-of-reference": "UOM:length"
+              },
+              "SurfaceDipAngle": {
+                "type": "number",
+                "description": "Dip angle for the Wellbore Marker.",
+                "x-osdu-frame-of-reference": "UOM:plane angle"
+              },
+              "SurfaceDipAzimuth": {
+                "type": "number",
+                "description": "Dip azimuth for the Wellbore Marker.",
+                "x-osdu-frame-of-reference": "UOM:plane angle"
+              },
+              "Missing": {
+                "type": "string"
+              },
+              "GeologicalAge": {
+                "type": "string",
+                "description": "Associated geological age",
+                "x-osdu-frame-of-reference": "UOM:geologic time"
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

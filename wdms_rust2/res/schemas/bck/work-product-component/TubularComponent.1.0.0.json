@@ -1,0 +1,165 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/work-product-component/TubularComponent.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TubularComponent",
+  "description": "Well Tubular data contains information on the tubular assemblies and their components for the well, wellbore, or wellbore completion (as appropriate). The tubulars can be tubing, casing or liners or other related equipment which is installed into the well. Tubulars can also be equipment which is lowered into the well in the context of drilling, which is then pulled back out.",
+  "type": "object",
+  "x-osdu-supported-file-formats": [
+    "WITSML"
+  ],
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractWPCGroupType.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractWorkProductComponent.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "ParentWellboreID": {
+          "type": "string",
+          "description": "Identifier of the wellbore the Component is standing in.",
+          "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Wellbore:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "ParentAssemblyID": {
+          "type": "string",
+          "description": "Identifier of the Assembly the component is taking part on.",
+          "pattern": "^[\\w\\-\\.]+:work-product-component\\-\\-TubularAssembly:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "TubularComponentSequence": {
+          "description": "The sequence within which the components entered the hole. That is, a sequence number of 1 entered first, 2 entered next, etc.",
+          "type": "integer"
+        },
+        "TubularComponentNominalSize": {
+          "description": "Nominal size (diameter) of the component, e.g. 9.625\", 12.25",
+          "type": "number",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "TubularComponentNominalWeight": {
+          "description": "Nominal weight of the component.",
+          "type": "number",
+          "x-osdu-frame-of-reference": "UOM:force"
+        },
+        "TubularComponentLength": {
+          "description": "Total Length of the component",
+          "type": "number",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "MaximumOuterDiameter": {
+          "description": "This is the maximum outer diameter of the component.",
+          "type": "number",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "DriftDiameter": {
+          "description": "The drift diameter is the inside diameter (ID) that the pipe manufacturer guarantees per specifications. Note that the nominal inside diameter is not the same as the drift diameter but is always slightly larger. The drift diameter is used by the well planner to determine what size tools or casing strings can later be run through the casing, whereas the nominal inside diameter is used for fluid volume calculations such as mud circulating times and cement slurry placement calculations.",
+          "type": "number",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "InnerDiameter": {
+          "description": "Nominal inner diameter of the component.",
+          "type": "number",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "ManufacturerID": {
+          "type": "string",
+          "description": "Unique identifier for the manufacturer of this equipment.",
+          "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Organisation:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "SupplierID": {
+          "type": "string",
+          "description": "Unique identifier for the supplier of this equipment.",
+          "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Organisation:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "Model": {
+          "type": "string",
+          "description": "Name of the component Model as defined per the operating company"
+        },
+        "SerialNumber": {
+          "type": "string",
+          "description": "Serial Number of the component as provided by the manufacturer and/or the supplier"
+        },
+        "SectionTypeID": {
+          "description": "Identifier of the Section Type.",
+          "type": "string",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-SectionType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "TubularComponentTypeID": {
+          "description": "Specifies the types of components that can be used in a tubular string. These are used to specify the type of component and multiple components are used to define a tubular string (Tubular).",
+          "type": "string",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-TubularComponentType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "TubularComponentMaterialTypeID": {
+          "description": "Specifies the material type constituting the component.",
+          "type": "string",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-MaterialType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "TubularComponentTubingGradeID": {
+          "description": "Id of tubing grade - eg. the tensile strength of the tubing material. A system of classifying the material specifications for steel alloys used in the manufacture of tubing.",
+          "type": "string",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-TubularComponentGrade:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "TubularComponentTubingGradeStrength": {
+          "description": "The tensile strength of the tubing material. A system of classifying the material specifications for steel alloys used in the manufacture of tubing.",
+          "type": "number",
+          "x-osdu-frame-of-reference": "UOM:pressure"
+        },
+        "TubularComponentTubingStrength": {
+          "description": "The axial load required to yield the pipe.",
+          "type": "number",
+          "x-osdu-frame-of-reference": "UOM:pressure"
+        },
+        "PilotHoleSize": {
+          "description": "Size of the Pilot Hole",
+          "type": "number",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "TubularComponentBoxPinConfigID": {
+          "description": "ID of Reference Object for type of collar used to couple the tubular with another tubing string.",
+          "type": "string",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-TubularComponentPinBoxType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "TubularComponentTopConnectionTypeID": {
+          "description": "Id of the Top Connection Type",
+          "type": "string",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-TubularComponentConnectionType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "TubularComponentBottomConnectionTypeID": {
+          "description": "Id of the Bottom Connection Type",
+          "type": "string",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-TubularComponentConnectionType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "TubularComponentTopMD": {
+          "description": "The measured depth of the top from the specific component",
+          "type": "number",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "TubularComponentBaseMD": {
+          "description": "The measured depth of the base from the specific component",
+          "type": "number",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "TubularComponentTopReportedTVD": {
+          "description": "Depth of the top of the component measured from the Well-Head",
+          "type": "number",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "TubularComponentBaseReportedTVD": {
+          "description": "Depth of the base of the component measured from the Well-Head",
+          "type": "number",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "PackerSetDepthTVD": {
+          "description": "The depth the packer equipment was set to seal the casing or tubing.",
+          "type": "number",
+          "x-osdu-frame-of-reference": "UOM:length"
+        },
+        "ShoeDepthTVD": {
+          "description": " Depth of the tubing shoe measured from the surface.",
+          "type": "number",
+          "x-osdu-frame-of-reference": "UOM:length"
+        }
+      }
+    }
+  ]
+}

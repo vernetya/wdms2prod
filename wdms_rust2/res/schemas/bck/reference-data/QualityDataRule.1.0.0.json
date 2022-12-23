@@ -1,0 +1,55 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/QualityDataRule.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "x-osdu-governance-authorities": [
+    "namespace:reference-data/OrganisationType:osdu"
+  ],
+  "x-osdu-governance-model": "LOCAL",
+  "title": "QualityDataRule",
+  "description": "Generic reference object quality rule",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "ExternalRuleID": {
+          "description": "Unique identifier to an external data rule, e.g. PPDM rule ID number.",
+          "type": "string"
+        },
+        "DataRuleStatement": {
+          "description": "Expression of data rule",
+          "type": "string"
+        },
+        "DataRuleRevision": {
+          "description": "Revision version number",
+          "type": "string"
+        },
+        "DataRuleStatus": {
+          "description": "status of the business rule such as Published",
+          "type": "string"
+        },
+        "DataRuleCreatedOn": {
+          "description": "Date of creation of data rule independent of OSDU",
+          "type": "string",
+          "format": "date-time"
+        },
+        "DataRuleCreatedBy": {
+          "description": "User that created the rule independent of OSDU",
+          "type": "string"
+        },
+        "DataRulePublishedOn": {
+          "description": "Timestamp of the time when the data rule was published independent of OSDU.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "DataRuleUpdatedOn": {
+          "description": "Timestamp of the time when the data rule was updated independent of OSDU.",
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  ]
+}

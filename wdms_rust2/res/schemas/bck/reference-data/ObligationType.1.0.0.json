@@ -1,0 +1,16 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/ObligationType.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ObligationType",
+  "description": "An article or clause [OSDU calls this Obligation Type] that introduces a condition or term which the fulfillment of an agreement depends (provides operational and/or earning requirements) A kind of commitment or duty that in specific scenarios requires a particular course of action as defined in an agreement.",
+  "x-osdu-governance-authorities": [
+    "PPDM"
+  ],
+  "x-osdu-governance-model": "LOCAL",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    }
+  ]
+}

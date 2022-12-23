@@ -1,0 +1,24 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/abstract/AbstractGeoPoliticalContext.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AbstractGeoPoliticalContext",
+  "description": "A single, typed geo-political entity reference, which is 'abstracted' to AbstractGeoContext and then aggregated by GeoContexts properties.",
+  "type": "object",
+  "properties": {
+    "GeoPoliticalEntityID": {
+      "type": "string",
+      "description": "Reference to GeoPoliticalEntity.",
+      "pattern": "^[\\w\\-\\.]+:master-data\\-\\-GeoPoliticalEntity:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+    },
+    "GeoTypeID": {
+      "type": "string",
+      "description": "The GeoPoliticalEntityType reference of the GeoPoliticalEntity (via GeoPoliticalEntityID) for application convenience.",
+      "x-osdu-is-derived": {
+        "RelationshipPropertyName": "GeoPoliticalEntityID",
+        "TargetPropertyName": "GeoPoliticalEntityTypeID"
+      },
+      "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-GeoPoliticalEntityType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+    }
+  }
+}

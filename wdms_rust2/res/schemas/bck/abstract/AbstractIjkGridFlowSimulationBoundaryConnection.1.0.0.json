@@ -1,0 +1,69 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/abstract/AbstractIjkGridFlowSimulationBoundaryConnection.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AbstractIjkGridFlowSimulationBoundaryConnection",
+  "description": "This structure intends to define the reservoir boundary connection in an IJK grid such as aquifer connection. It can be reused in various Ijk Grid flow simulation related representations which need some boundary connections.",
+  "type": "object",
+  "properties": {
+    "GridID": {
+      "type": "string",
+      "title": "Grid ID",
+      "description": "The grid which is in connection",
+      "format": "uri-reference",
+      "example": "namespace:work-product-component--IjkGridRepresentation:85348741-3433-406B-9189-22B298C3E2D2:",
+      "pattern": "^[\\w\\-\\.]+:work-product-component\\-\\-IjkGridRepresentation:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+    },
+    "LowerI": {
+      "type": "integer",
+      "title": "Lower I index",
+      "description": "The lower included I index of the box of the grid in connection",
+      "example": 5
+    },
+    "UpperI": {
+      "type": "integer",
+      "title": "Upper I index",
+      "description": "The upper included I index of the box of the grid in connection",
+      "example": 10
+    },
+    "LowerJ": {
+      "type": "integer",
+      "title": "Lower J index",
+      "description": "The lower included J index of the box of the grid in connection",
+      "example": 1
+    },
+    "UpperJ": {
+      "type": "integer",
+      "title": "Upper J index",
+      "description": "The upper included J index of the box of the grid in connection",
+      "example": 1
+    },
+    "LowerK": {
+      "type": "integer",
+      "title": "Lower K index",
+      "description": "The lower included K index of the box of the grid in connection",
+      "example": 1
+    },
+    "UpperK": {
+      "type": "integer",
+      "title": "Upper K index",
+      "description": "The upper included K index of the box of the grid in connection",
+      "example": 10
+    },
+    "Face": {
+      "type": "string",
+      "title": "Face",
+      "description": "The faces of the box of the grid which are in connection",
+      "format": "uri-reference",
+      "example": "namespace:reference-data--IjkCellFace:J_MINUS:",
+      "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-IjkCellFace:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+    },
+    "TransmissibilityMultiplier": {
+      "type": "number",
+      "title": "Transmissibility multiplier",
+      "description": "The transmissibility multiplier of the connection",
+      "example": 0.75,
+      "x-osdu-frame-of-reference": "UOM:dimensionless"
+    }
+  }
+}

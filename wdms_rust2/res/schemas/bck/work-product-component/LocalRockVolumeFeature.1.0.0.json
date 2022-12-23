@@ -1,0 +1,27 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/work-product-component/LocalRockVolumeFeature.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "LocalRockVolumeFeature",
+  "description": "A volume of rock that is identified based on some specific attribute, like its mineral content or other physical characteristic. It exists typically in the scope of a model, can be associated with a master-data--RockVolumeFeature for regional correlations.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractWPCGroupType.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractWorkProductComponent.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "RockVolumeFeatureID": {
+          "type": "string",
+          "title": "Rock Volume Feature ID",
+          "description": "When populated, the rock volume feature has a wider scope and allows rock volume feature correlations across models.",
+          "pattern": "^[\\w\\-\\.]+:master-data\\-\\-RockVolumeFeature:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/type/Type.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Type",
+  "description": "The generic type entity.",
+  "type": "object",
+  "x-osdu-governance-model": "OPEN",
+  "properties": {
+    "Description": {
+      "title": "Concept Description",
+      "description": "A detailed description of the concept represented by the type and, if necessary, with relationships to other concepts/types defined in the ecosystem.",
+      "type": "string"
+    },
+    "Schema": {
+      "title": "JSON Schema",
+      "description": "The JSON schema version.",
+      "type": "string",
+      "example": "http://json-schema.org/draft-07/schema#"
+    },
+    "NaturalKeys": {
+      "title": "Natural Keys",
+      "description": "Identifies the natural keys if declared. The keys are identified via the dot notation; example: assume the ProjectName is the natural key for a SeismicAcquisitionSurvey then the natural key reference would be \"[data.ProjectName]\".",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "SchemaID": {
+      "title": "Schema ID",
+      "description": "The schema ID corresponding to the type",
+      "type": "string",
+      "example": "https://schema.osdu.opengroup.org/json/type/Type.1.0.0.json"
+    },
+    "Name": {
+      "title": "Type Name",
+      "x-osdu-natural-key": 0,
+      "description": "The name of the type, or entity type name. The name represents a concept. It is expected that the concept, e.g. Wellbore, can be described by multiple different schemas, which are closely associated with the original data source. Eventually one normalized schema kind is identified, into which the individual contributions can be merged. It is expected that this schema is or is close to the OSDU data definition where defined.",
+      "type": "string"
+    },
+    "SchemaKind": {
+      "title": "Schema Kind",
+      "description": "The latest schema kind as registered with the schema service. The evaluation is based on the semantic version number of the schema.",
+      "type": "string",
+      "example": "osdu:wks:SomeType:2.5.110"
+    },
+    "IsReferenceValueType": {
+      "title": "Reference Value Type Flag",
+      "description": "The flag indicating that this type is a reference value type.",
+      "type": "boolean"
+    },
+    "GovernanceAuthorities": {
+      "title": "Governance Authorities",
+      "description": "The Authorities governing the contents.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "GovernanceModel": {
+      "title": "Governance for Reference Values",
+      "description": "The style of governance (only relevant for IsReferenceValueType==true) - it can be FIXED (content must not be augmented), OPEN (additions and changes allowed) or LOCAL (content is exclusively governed by operator).",
+      "type": "string",
+      "enum": ["FIXED", "OPEN", "LOCAL"]
+    }
+  }
+}

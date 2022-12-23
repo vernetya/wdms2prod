@@ -1,0 +1,67 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "x-osdu-supported-file-formats": [
+    "RESQML"
+  ],
+  "x-osdu-governance-authorities": [
+    "OSDU",
+    "Energistics"
+  ],
+  "$id": "https://schema.osdu.opengroup.org/json/work-product-component/RockFluidUnitInterpretation.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RockFluidUnitInterpretation",
+  "description": "A type of rock fluid feature-interpretation , this class identifies a rock fluid feature by its phase.",
+  "type": "object",
+  "x-osdu-virtual-properties": {
+    "data.VirtualProperties.DefaultLocation": {
+      "type": "object",
+      "priority": [
+        {
+          "path": "data.SpatialArea"
+        },
+        {
+          "path": "data.SpatialPoint"
+        }
+      ]
+    },
+    "data.VirtualProperties.DefaultName": {
+      "type": "string",
+      "priority": [
+        {
+          "path": "data.Name"
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractWPCGroupType.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractWorkProductComponent.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractGeologicUnitInterpretation.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractInterpretation.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "FeatureID": {
+          "type": "string",
+          "title": "Local Rock Volume Feature ID",
+          "description": "The reference to a local rock volume feature, with which this interpretation is associated.",
+          "pattern": "^[\\w\\-\\.]+:(master-data\\-\\-RockVolumeFeature|work-product-component\\-\\-LocalRockVolumeFeature):[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "FluidPhaseTypeID": {
+          "type": "string",
+          "title": "Fluid Phase Type ID",
+          "description": "The reference to the fluid phase type",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-FluidPhaseType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        }
+      }
+    }
+  ]
+}

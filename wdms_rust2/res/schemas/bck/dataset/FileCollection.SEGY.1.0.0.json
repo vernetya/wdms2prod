@@ -1,0 +1,30 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/dataset/FileCollection.SEGY.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "FileCollection.SEGY",
+  "description": "A generic representation for  SEGY dataset represented as set of files, e.g. representing original tape reels.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractDataset.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractFileCollection.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractVectorHeaderMapping.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "SEGYRevision": {
+          "type": "string",
+          "title": "SEG-Y Revision",
+          "description": "The SEG-Y standard revision the SEG-Y file set is conforming to.",
+          "example": "rev 0"
+        }
+      }
+    }
+  ]
+}

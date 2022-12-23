@@ -1,0 +1,152 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/work-product-component/GenericProperty.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Generic Property",
+  "description": "The reservoir property representation record, derived from the RESQML AbstractProperty. In RESQML, all subsurface or surface values tied to specific topological locations (or IndexableElements) in a model are carried by any concrete data object that derives from abstract property (contained in the properties package) attached to one or more representations. A representation can have several properties and provides the indexable elements for these lists of values (for more information see IndexableElement).",
+  "type": "object",
+  "x-osdu-virtual-properties": {
+    "data.VirtualProperties.DefaultLocation": {
+      "type": "object",
+      "priority": [
+        {
+          "path": "data.SpatialArea"
+        },
+        {
+          "path": "data.SpatialPoint"
+        }
+      ]
+    },
+    "data.VirtualProperties.DefaultName": {
+      "type": "string",
+      "priority": [
+        {
+          "path": "data.Name"
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractWPCGroupType.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractWorkProductComponent.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractReferencePropertyType.1.1.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "PropertyTopologyID": {
+          "type": "string",
+          "title": "PropertyTopologyID",
+          "description": "The srn of the topology the property refers to (WPC srn)",
+          "format": "json-pointer",
+          "x-osdu-attribution-authority": "The Open Group",
+          "x-osdu-attribution-publication": "The OSDU Data Platform",
+          "pattern": "^[\\w\\-\\.]+:(work-product-component\\-\\-GenericRepresentation|work-product-component\\-\\-GpGridRepresentation|work-product-component\\-\\-GridConnectionSetRepresentation|work-product-component\\-\\-IjkGridRepresentation|work-product-component\\-\\-SubRepresentation|work-product-component\\-\\-UnstructuredColumnLayerGridRepresentation|work-product-component\\-\\-UnstructuredGridRepresentation|work-product-component\\-\\-SeismicHorizon|work-product-component\\-\\-SeismicFault):[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "IndexableElementID": {
+          "type": "string",
+          "title": "IndexableElementID",
+          "description": "Indexable elements are used to link property values and geometry to a representation - for instance a property could be attached to a flow grid's cell or face, or to a Triangulated surface's point",
+          "example": "namespace:reference-data--IndexableElement:Node:",
+          "x-osdu-attribution-authority": "Energistics",
+          "x-osdu-attribution-publication": "The OSDU Data Platform",
+          "x-osdu-existing-standard": "RESQML",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-IndexableElement:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "MaxValue": {
+          "type": "number",
+          "title": "MaxValue",
+          "description": "Maximum value of the Property",
+          "example": 50,
+          "x-osdu-attribution-authority": "The Open Group",
+          "x-osdu-attribution-publication": "The OSDU Data Platform"
+        },
+        "MeanValue": {
+          "type": "number",
+          "title": "MeanValue",
+          "description": "Mean value of the Property",
+          "example": 25,
+          "x-osdu-attribution-authority": "The Open Group",
+          "x-osdu-attribution-publication": "The OSDU Data Platform"
+        },
+        "MinValue": {
+          "type": "number",
+          "title": "MinValue",
+          "description": "Minimum value of the Property",
+          "example": 0,
+          "x-osdu-attribution-authority": "The Open Group",
+          "x-osdu-attribution-publication": "The OSDU Data Platform"
+        },
+        "StdDeviation": {
+          "type": "number",
+          "title": "StdDeviation",
+          "description": "Standard deviation value of the Property",
+          "example": 10,
+          "x-osdu-attribution-authority": "The Open Group",
+          "x-osdu-attribution-publication": "The OSDU Data Platform"
+        },
+        "PropertyUnitID": {
+          "type": "string",
+          "title": "PropertyUnit",
+          "description": "Unit of Measure of the property",
+          "example": "namespace:reference-data--UnitOfMeasure:Mpsi:",
+          "x-osdu-attribution-authority": "The Open Group",
+          "x-osdu-attribution-publication": "The OSDU Data Platform",
+          "x-osdu-existing-standard": "FrameOfReference",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-UnitOfMeasure:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "ClassificationTableID": {
+          "type": "string",
+          "title": "ClassificationTableID",
+          "description": "The srn of the Column Based Table associated to a categorical property. Can be based on a defined dictionary of rock types",
+          "format": "json-pointer",
+          "x-osdu-attribution-authority": "Energistics",
+          "x-osdu-attribution-publication": "The OSDU Data Platform",
+          "pattern": "^[\\w\\-\\.]+:work-product-component\\-\\-ColumnBasedTable:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "RealizationIndices": {
+          "type": "array",
+          "title": "RealizationIndices",
+          "description": "Optional element indicating the realization index (metadata). Used if the property is the result of a multi-realization process.",
+          "x-osdu-attribution-authority": "Energistics",
+          "x-osdu-attribution-publication": "The OSDU Data Platform",
+          "items": {
+            "type": "number"
+          }
+        },
+        "TimeValues": {
+          "type": "array",
+          "title": "TimeValues",
+          "description": "Always present when attached to time values, even when time values defined through time series (array of date-times). If the property is attached to a time-series object, denormalized array of time to ease search",
+          "x-osdu-frame-of-reference": "DateTime",
+          "x-osdu-attribution-authority": "Energistics",
+          "x-osdu-attribution-publication": "The OSDU Data Platform",
+          "items": {
+            "type": "string"
+          }
+        },
+        "TimeIndices": {
+          "type": "number",
+          "title": "TimeIndices",
+          "description": "When using time series, allow to associate a single stamp to the property, if not present the property contains all time stamps of the time series.",
+          "x-osdu-attribution-authority": "Energistics",
+          "x-osdu-attribution-publication": "The OSDU Data Platform"
+        },
+        "TimeSeriesID": {
+          "type": "string",
+          "title": "TimeSeriesID",
+          "description": "Time series the property is associated to (srn)",
+          "format": "json-pointer",
+          "x-osdu-attribution-authority": "Energistics",
+          "x-osdu-attribution-publication": "The OSDU Data Platform",
+          "pattern": "^[\\w\\-\\.]+:work-product-component\\-\\-TimeSeries:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        }
+      }
+    }
+  ]
+}

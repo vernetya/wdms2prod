@@ -1,0 +1,16 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/ResourceCurationStatus.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ResourceCurationStatus",
+  "description": "Used to describe the resource curation statuses.",
+  "x-osdu-governance-authorities": [
+    "OSDU"
+  ],
+  "x-osdu-governance-model": "FIXED",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    }
+  ]
+}

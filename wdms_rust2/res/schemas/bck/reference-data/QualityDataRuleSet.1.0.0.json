@@ -1,0 +1,42 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/QualityDataRuleSet.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "QualityDataRuleSet",
+  "description": "A set of data quality rules to assess a specific aspect in the trustworthiness of data.",
+  "x-osdu-governance-authorities": [
+    "None"
+  ],
+  "x-osdu-governance-model": "LOCAL",
+  "type": "object",
+  "properties": {
+    "Name": {
+      "description": "Name of the data ruleset. For example, QualityDataRuleSet collection 1 for wellbore",
+      "type": "string"
+    },
+    "Description": {
+      "description": "A description of the QualityDataRuleSet.",
+      "type": "string"
+    },
+    "DataRules": {
+      "description": "The list of QualityDataRule items that this QualityDataRuleSet consists of.",
+      "type": "array",
+      "x-osdu-indexing": {
+        "type": "flattened"
+      },
+      "items": {
+        "type": "object",
+        "properties": {
+          "DataRuleID": {
+            "type": "string",
+            "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-QualityDataRule:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+          },
+          "DataRulePurposeClass": {
+            "description": "Indicated if the QualityDataRule is required to pass or for information.",
+            "type": "string",
+            "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-DataRulePurposeType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+          }
+        }
+      }
+    }
+  }
+}

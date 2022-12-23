@@ -1,0 +1,39 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/work-product-component/SealedSurfaceFramework.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SealedSurfaceFramework",
+  "description": "Sealed structural model representations associated to geometric elements such as faults, horizons, and intrusions on a scale of meters to kilometers.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractWPCGroupType.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractWorkProductComponent.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractRepresentation.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "InterpretationID": {
+          "type": "string",
+          "title": "ID of the interpretation",
+          "description": "The reference to the StructuralOrganizationInterpretation this framework belongs to.",
+          "pattern": "^[\\w\\-\\.]+:work-product-component\\-\\-StructuralOrganizationInterpretation:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "GenericRepresentationIDs": {
+          "type": "array",
+          "title": "IDs of the generic representations",
+          "description": "List of Generic Representations linked to structural model inputs and outputs, for example fault sticks and triangulated surfaces, Horizon data points and triangulated surfaces, geobody boundary triangulated surfaces.",
+          "items": {
+            "type": "string",
+            "pattern": "^[\\w\\-\\.]+:work-product-component\\-\\-GenericRepresentation:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+          }
+        }
+      }
+    }
+  ]
+}

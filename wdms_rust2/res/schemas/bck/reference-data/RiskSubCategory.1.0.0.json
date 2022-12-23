@@ -1,0 +1,28 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "x-osdu-governance-model": "FIXED",
+  "x-osdu-governance-authorities": [
+    "WITSML"
+  ],
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/RiskSubCategory.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Risk Sub Category",
+  "description": "The reference values for risk sub-categories following the WITSML standard.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "RiskCategoryID": {
+          "type": "string",
+          "title": "Risk Category ID",
+          "description": "General category of the described risk such as \"Reservoir\", \"Overburden\", \"Life of Well\", \"Drilling\", \"Completion\" or \"Opportunity\"",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-RiskCategory:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        }
+      }
+    }
+  ]
+}

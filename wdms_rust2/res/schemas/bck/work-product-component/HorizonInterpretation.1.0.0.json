@@ -1,0 +1,50 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/work-product-component/HorizonInterpretation.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "HorizonInterpretation",
+  "description": "Geologic information associated to horizon-related object types (marker, seismic picks, modeled objects etc\u2026)",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractWPCGroupType.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractWorkProductComponent.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractInterpretation.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "isConformableAbove": {
+          "type": "boolean",
+          "title": "isConformableAbove",
+          "description": "Defines whether the stratigraphic unit above the horizon is conformable"
+        },
+        "isConformableBelow": {
+          "type": "boolean",
+          "title": "isConformableBelow",
+          "description": "Defines whether the stratigraphic unit below the horizon is conformable"
+        },
+        "StratigraphicRoleTypeID": {
+          "type": "string",
+          "title": "StratigraphicRoleTypeID",
+          "description": "Describes the horizon stratigraphic role (chronostratigraphic, lithostratigraphic, biostratigraphic)",
+          "format": "uri-reference",
+          "example": "namespace:reference-data--StratigraphicRoleType:Lithostratigraphic:",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-StratigraphicRoleType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "SequenceStratigraphySurfaceTypeID": {
+          "type": "string",
+          "title": "SequenceStratigraphySurfaceTypeID",
+          "description": "Describes the horizon sequence stratigraphic information (flooding, ravinement, maximum flooding, transgressive)",
+          "format": "uri-reference",
+          "example": "namespace:reference-data--SequenceStratigraphySurfaceType:MaximumFlooding:",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-SequenceStratigraphySurfaceType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        }
+      }
+    }
+  ]
+}

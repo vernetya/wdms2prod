@@ -1,0 +1,37 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/work-product-component/TimeSeries.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Time Series",
+  "description": "Stores an ordered list of times, for example used for time-dependent properties (saturation) or geometries (varying reservoir geometry through time).",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractWPCGroupType.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractWorkProductComponent.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "UTCDateTimeValues": {
+          "type": "array",
+          "title": "UTCDateTimeValues",
+          "description": "Array of datetime in iso-format (in ascending order) \"yyyy-MM-dd  HH:mm\\\":\\\"UTC\\\",\\\"type\\\":\\\"DTM\\\"",
+          "items": {
+            "type": "string"
+          }
+        },
+        "GeologicTimeValues": {
+          "type": "array",
+          "title": "GeologicTimeValues",
+          "description": "Array of geologic time values in Year (annums). This value must be positive if it represents a Geological Event in the past.\nMust be negative if it represents a geological event in the future.",
+          "items": {
+            "type": "number"
+          }
+        }
+      }
+    }
+  ]
+}

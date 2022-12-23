@@ -1,0 +1,26 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/SeismicGeometryType.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SeismicGeometryType",
+  "description": "Standard values for the general geometrical layout of the seismic acquisition survey.  This is an hierarchical value.  The top value is like 2D, 3D, 4D, Borehole, Passive.  The second value is like NATS, WATS, Brick, Crosswell.",
+  "x-osdu-governance-authorities": [
+    "OSDU"
+  ],
+  "x-osdu-governance-model": "OPEN",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "ParentID": {
+          "type": "string",
+          "description": "Resource ID of the parent geometry type in a two-level hierarchy (only one deep permitted).",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-SeismicGeometryType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/abstract/AbstractBusinessRule.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AbstractBusinessRule",
+  "description": "The business rule is a collection of one or more data rule sets with their run status as well as a collection of individual rules with their run status.",
+  "type": "object",
+  "properties": {
+    "DataRuleSets": {
+      "type": "array",
+      "title": "Data Rule Sets",
+      "description": "The list of data rule sets that is relevant for this business process. Each data rule set reference is associated with a run-status.",
+      "x-osdu-indexing": {
+        "type": "nested"
+      },
+      "items": {
+        "type": "object",
+        "title": "DataRuleSets",
+        "description": "The list of data rule sets that is relevant for this business process. Each data rule set reference is associated with a run-status.",
+        "properties": {
+          "DataRuleSetID": {
+            "type": "string",
+            "title": "DataRuleSet ID",
+            "description": "The relationship to the QualityDataRuleSet.",
+            "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-QualityDataRuleSet:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+          },
+          "DataRuleSetRunStatus": {
+            "type": "boolean",
+            "title": "DataRuleSet Run Status",
+            "description": "True if data ruleset rule has passed, False if data ruleset rule dit not pass."
+          }
+        }
+      }
+    },
+    "DataRules": {
+      "type": "array",
+      "title": "Date Rules",
+      "description": "The list of individual data rules that is relevant for this business process. Each data rule reference is associated with a run-status.",
+      "x-osdu-indexing": {
+        "type": "nested"
+      },
+      "items": {
+        "type": "object",
+        "title": "DataRules",
+        "description": "The list of individual data rules that is relevant for this business process. Each data rule reference is associated with a run-status.",
+        "properties": {
+          "DataRuleID": {
+            "type": "string",
+            "title": "DataRule ID",
+            "description": "The relationship to the individual QualityDataRule.",
+            "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-QualityDataRule:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+          },
+          "DataRuleRunStatus": {
+            "type": "boolean",
+            "title": "DataRule Run Status",
+            "description": "True if data rule has passed, False if data rule did not pass."
+          }
+        }
+      }
+    }
+  }
+}

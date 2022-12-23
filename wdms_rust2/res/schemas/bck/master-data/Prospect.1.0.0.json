@@ -1,0 +1,56 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/master-data/Prospect.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Prospect",
+  "description": "A named area or location, likely containing commercial deposits of a mineral, that is a candidate for extraction.  This normally means a candidate drilling location..",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractMaster.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "ProspectID": {
+          "type": "string",
+          "title": "External Prospect Identifier",
+          "description": "Native identifier from a Master Data Management System or other trusted source external to OSDU - stored here in order to allow for multi-system connection and synchronization. If used, the \"Source\" property should identify that source system."
+        },
+        "ProspectName": {
+          "type": "string",
+          "description": "Preferred name for a Prospect, which may or may not coincide with a well or field."
+        },
+        "ProspectNameAliases": {
+          "type": "array",
+          "description": "DEPRECATED: please use data.NameAliases. Set of alternative names for a Prospect.",
+          "items": {
+            "$ref": "../abstract/AbstractAliasNames.1.0.0.json"
+          }
+        },
+        "ProspectDescription": {
+          "type": "string",
+          "description": "Textual description about a Prospect."
+        },
+        "EffectiveDate": {
+          "type": "string",
+          "description": "Date when a Prospect goes into effect.",
+          "format": "date-time",
+          "x-osdu-frame-of-reference": "DateTime"
+        },
+        "TerminationDate": {
+          "type": "string",
+          "description": "Date when a Prospect is no longer in effect.",
+          "format": "date-time",
+          "x-osdu-frame-of-reference": "DateTime"
+        },
+        "ProspectTypeID": {
+          "type": "string",
+          "title": "Prospect Type ID",
+          "description": "The type of prospect as defined in ProspectType.",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-ProspectType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        }
+      }
+    }
+  ]
+}

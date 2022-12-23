@@ -1,0 +1,16 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/InterpolationMethod.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "InterpolationMethod",
+  "description": "Mathematical form of velocity interpolation between discretely sample nodes, such as linear in space, bicubic spline, linear in time, trilinear, horizon-based, constant vertically up, constant vertically down, constant vertically both ways.",
+  "x-osdu-governance-authorities": [
+    "OSDU"
+  ],
+  "x-osdu-governance-model": "OPEN",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    }
+  ]
+}

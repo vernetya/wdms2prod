@@ -1,0 +1,23 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/abstract/AbstractGeoContext.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AbstractGeoContext",
+  "description": "A geographic context to an entity. It can be either a reference to a GeoPoliticalEntity, Basin, Field, Play or Prospect.",
+  "oneOf": [
+    {
+      "$ref": "AbstractGeoPoliticalContext.1.0.0.json"
+    },
+    {
+      "$ref": "AbstractGeoBasinContext.1.0.0.json"
+    },
+    {
+      "$ref": "AbstractGeoFieldContext.1.0.0.json"
+    },
+    {
+      "$ref": "AbstractGeoPlayContext.1.0.0.json"
+    },
+    {
+      "$ref": "AbstractGeoProspectContext.1.0.0.json"
+    }
+  ]
+}

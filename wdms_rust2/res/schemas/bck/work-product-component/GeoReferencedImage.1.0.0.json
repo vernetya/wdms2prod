@@ -1,0 +1,67 @@
+{
+  "x-osdu-review-status": "Accepted",
+  "$id": "https://schema.osdu.opengroup.org/json/work-product-component/GeoReferencedImage.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "GeoReferencedImage",
+  "description": "An image representation which contains a coordinate reference system or relates the image map or aerial photo image to a coordinate reference system. With this reference it is possible to compute world coordinates for each image pixel position. The mapping from pixel to world coordinates is often provided by companion file, a so-called world file, see: https://en.wikipedia.org/wiki/World_file.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractWPCGroupType.1.0.0.json"
+    },
+    {
+      "$ref": "../abstract/AbstractWorkProductComponent.1.0.0.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "SourceBinGridExternalID": {
+          "type": "string",
+          "title": "Source Bin Grid External ID",
+          "description": "External identifier of the source bin grid as stored in a corporate database/application. This may be an integer in some systems or may be a string (e.g., the survey name if sourced from an application that does not use numbers)."
+        },
+        "SharedBinGridID": {
+          "type": "string",
+          "title": "Shared Bin Grid ID",
+          "description": "Identifies the bin grid associated with the image file, typically derived from seismic.",
+          "pattern": "^[\\w\\-\\.]+:work-product-component\\-\\-SeismicBinGrid:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "EmbeddedBinGrid": {
+          "$ref": "../abstract/AbstractBinGrid.1.0.0.json",
+          "title": "Embedded Bin Grid",
+          "description": "The embedded bin grid definition describing the mapping from pixel coordinate system to DataCRS ('world coordinates'). BinGrid member properties are only populated if BinGridID is absent. A populated BinGridID overrides any embedded BinGrid values."
+        },
+        "EmbeddedReferenceLevel": {
+          "$ref": "../abstract/AbstractReferenceLevel.1.0.0.json",
+          "title": "Embedded Reference Level",
+          "description": "The explicit Vertical or Seismic Reference Datum for image file. Either EmbeddedVerticalReference or SharedVerticalReference must be populated if VerticalLevel is populated."
+        },
+        "SharedReferenceLevelID": {
+          "type": "string",
+          "title": "Shared Reference Level ID",
+          "description": "The relationship to a shared Vertical or Seismic Reference Datum  for image file. Either EmbeddedVerticalReference or SharedVerticalReference must be populated if VerticalLevel is populated.",
+          "pattern": "^[\\w\\-\\.]+:master-data\\-\\-ReferenceLevel:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "AssociatedObjectID": {
+          "type": "string",
+          "title": "Associated Object ID",
+          "description": "The ID of the object (master-data, reference-data, work-product-component or work-product), to which this generic image has been associated.",
+          "pattern": "^[\\w\\-\\.]+:(master-data\\-\\-[\\w\\-\\.]+|reference-data\\-\\-[\\w\\-\\.]+|work-product-component\\-\\-[\\w\\-\\.]+|work-product\\-\\-[\\w\\-\\.]+):[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "ImageTypeID": {
+          "type": "string",
+          "title": "Image Type ID",
+          "description": "The relationship to a GeoReferencedImageType record, which classifies this GeoReferencedImage, e.g., as horizontal map, vertical curtain.",
+          "example": "namespace:reference-data--GeoReferencedImageType:HorizontalMap:",
+          "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-GeoReferencedImageType:[\\w\\-\\.\\:\\%]+:[0-9]*$"
+        },
+        "VerticalLevel": {
+          "type": "number",
+          "title": "Vertical Level",
+          "description": "The vertical position of this GeoReferencedImage. The axis direction is given by the data.{Embedded|Shared}ReferenceLevel{ID} dataVerticalCoordinateReferenceSystemID. Seismic travel times are always downwards positive. Only present if a vertical stacking of images is required, usually absent.",
+          "x-osdu-frame-of-reference": "UOM:length"
+        }
+      }
+    }
+  ]
+}

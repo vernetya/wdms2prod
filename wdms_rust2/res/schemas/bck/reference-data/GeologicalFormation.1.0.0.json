@@ -1,0 +1,16 @@
+{
+  "$id": "https://schema.osdu.opengroup.org/json/reference-data/GeologicalFormation.1.0.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "GeologicalFormation",
+  "description": "The name given to a body of rock having a consistent set of physical (litho-stratigraphic), temporal (chrono-stratigraphic) or fossil (bio-stratigraphic) characteristics that distinguishes it from adjacent bodies of rock, and which occupies a particular position in the layers of rock in a geographical region.",
+  "x-osdu-governance-authorities": [
+    "None"
+  ],
+  "x-osdu-governance-model": "LOCAL",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../abstract/AbstractReferenceType.1.0.0.json"
+    }
+  ]
+}
