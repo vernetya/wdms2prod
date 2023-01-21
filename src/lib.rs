@@ -1,14 +1,13 @@
 use actix_web::middleware::Logger;
-use actix_web::{dev::Server, get, web, App, HttpResponse, HttpServer, ResponseError, Result};
+use actix_web::{dev::Server, web, App, HttpServer, Result};
 use std::net::TcpListener;
-use thiserror::Error;
 
 use env_logger;
-use log::info;
 
 pub mod config;
 mod core_client;
-use core_client::{error::CoreClientError, CoreStorageClient};
+mod routes;
+use core_client::CoreStorageClient;
 
 mod fake_core_storage;
 
@@ -25,69 +24,26 @@ pub fn build_and_start_server(
         let storage_client = CoreStorageClient::new(&cfg.host_core_storage);
 
         App::new()
+            // logger tracing
             .wrap(Logger::default())
+            // adding dependencies
             .app_data(web::Data::new(storage_client))
+            // temporary fake core storage service
             .service(fake_core_storage::get_record)
-            .service(get_well_log)
+            // actual endpoints
+            .route(
+                "/welllogs/{record_id}",
+                web::get().to(routes::crud::get_record),
+            )
             // probes
-            .route("/health_z", web::get().to(health_check))
-            .route("/liveness", web::get().to(health_check))
-            // testing
-            .route("/error", web::get().to(get_error))
+            .route("/health_z", web::get().to(routes::probes::health_check))
+            .route("/liveness", web::get().to(routes::probes::health_check))
+            // experimental
+            .service(routes::experimental::get_error)
     })
     .listen(listener)?
     .run();
     Ok(server)
-}
-
-async fn health_check() -> HttpResponse {
-    HttpResponse::Ok().finish()
-}
-
-#[derive(Error, Debug)]
-pub enum RecordStoreError {
-    #[error("core storage failure: {0}")]
-    CoreStorage(#[from] std::io::Error),
-    #[error("record invalid due to the following errors: {0}")]
-    Validation(String),
-    #[error("unknown storage error")]
-    Unknown,
-}
-
-fn do_stuff() -> Result<(), RecordStoreError> {
-    use std::fs::File;
-    File::open("invali545445d")?;
-    Ok(())
-}
-
-fn validate_record() -> Result<(), RecordStoreError> {
-    do_stuff()?;
-    Err(RecordStoreError::Validation(
-        "id cannot be null".to_string(),
-    ))
-}
-
-impl ResponseError for RecordStoreError {}
-
-async fn get_error() -> Result<HttpResponse, actix_web::Error> {
-    use std::fs::File;
-    info!("stuff");
-    validate_record()?;
-    if File::open("invali545445d").is_err() {
-        return Ok(HttpResponse::InternalServerError().finish());
-    }
-    Ok(HttpResponse::Ok().finish())
-}
-
-#[get("/welllog/{record_id}")]
-async fn get_well_log(
-    record_id: web::Path<String>,
-    storage_client: web::Data<CoreStorageClient>,
-) -> Result<HttpResponse, CoreClientError> {
-    let r_id = record_id.into_inner();
-    let response = storage_client.get_record(r_id).await?;
-
-    Ok(response.into())
 }
 
 #[cfg(test)]

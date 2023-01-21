@@ -47,7 +47,7 @@ async fn get_well_log_test() {
     let client = reqwest::Client::new();
 
     let response = client
-        .get(format!("{}/welllog/super", app_address))
+        .get(format!("{}/welllogs/super", app_address))
         .send()
         .await
         .expect("Failed to execute request.");
@@ -73,14 +73,16 @@ async fn get_well_log_test() {
 fn spawn_app() -> String {
     let listener = TcpListener::bind("127.0.0.1:0").expect("fail to bond random port");
     let port = listener.local_addr().unwrap().port();
+    let server_url = format!("http://127.0.0.1:{}", port);
     let server = wdms2prod::build_and_start_server(
         listener,
         Some(wdms2prod::config::Config {
             enable_logging: false,
+            host_core_storage: server_url.clone(),
             ..Default::default()
         }),
     )
     .expect("fail to start server");
     let _ = tokio::spawn(server);
-    format!("http://127.0.0.1:{}", port)
+    server_url
 }

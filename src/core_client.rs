@@ -2,6 +2,7 @@ use actix_web::dev::{Decompress, Payload};
 use actix_web::{http::StatusCode, web::Bytes, HttpMessage, HttpResponse}; // note Decompress == Decoder
 use awc::error::SendRequestError;
 use error::CoreClientError;
+use std::time::Duration;
 
 pub struct CoreClientResponse {
     status_code: StatusCode,
@@ -32,6 +33,7 @@ pub struct CoreStorageClient {
 impl CoreStorageClient {
     pub fn new(base_url: &str) -> Self {
         let http_client = awc::Client::builder()
+            .timeout(Duration::from_secs(10))
             .add_default_header((awc::http::header::USER_AGENT, "wdms2prod/1.0"))
             .finish();
         CoreStorageClient {
