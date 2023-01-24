@@ -6,8 +6,9 @@ use env_logger;
 
 pub mod config;
 mod core_client;
+pub mod record;
 mod routes;
-use core_client::{CoreStorageClient, error};
+use core_client::CoreStorageClient;
 
 mod fake_core_storage;
 
@@ -17,7 +18,7 @@ pub fn build_and_start_server(
 ) -> Result<Server, std::io::Error> {
     // if not specific provided, let's
     let cfg = conf.or(Some(config::load_config())).unwrap();
-    
+
     if cfg.enable_logging {
         env_logger::Builder::from_env(env_logger::Env::default().default_filter_or("debug")).init();
     }

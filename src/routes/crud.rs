@@ -1,6 +1,8 @@
 use crate::CoreStorageClient;
 use actix_web::{web, HttpResponse};
 
+use crate::record::version;
+
 pub async fn get_record(
     record_id: web::Path<String>,
     storage_client: web::Data<CoreStorageClient>,
