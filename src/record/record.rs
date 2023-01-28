@@ -97,14 +97,19 @@ pub struct Record {
 }
 
 impl Record {
-    pub fn new_unvalidated(instance: Value) -> Result<Self, (Value, String)> {
+    pub fn from_object_unvalidated(instance: Value) -> Result<Self, (Value, String)> {
         if !instance.is_object() {
             return Err((instance, "not an object".to_string()));
         }
         Ok(Self { value: instance })
     }
 
-    pub fn new_validated(instance: Value) -> Result<Self, (Value, Vec<String>)> {
+    pub fn from_json(json_str: &str) -> Result<Self, String> {
+        let doc: Value = serde_json::from_str(json_str).map_err(|err| err.to_string())?;
+        
+    }
+
+    pub fn from_object_validated(instance: Value) -> Result<Self, (Value, Vec<String>)> {
         if !instance.is_object() {
             return Err((instance, vec!["not an object".to_string()]));
         }
@@ -181,7 +186,7 @@ mod test {
     fn test_load_record() {
         let f = std::fs::File::open("res/examples/wellLog_v3_120.json").unwrap();
         let document: Value = serde_json::from_reader(f).unwrap();
-        let record = Record::new_unvalidated(document).unwrap();
+        let record = Record::from_object_unvalidated(document).unwrap();
         println!("kind => {}", record.as_map().unwrap().kind().unwrap());
     }
 
@@ -189,7 +194,7 @@ mod test {
     fn test_validate_record() {
         let f = std::fs::File::open("res/examples/wellLog_v3_120.json").unwrap();
         let document: Value = serde_json::from_reader(f).unwrap();
-        let record = Record::new_validated(document);
+        let record = Record::from_object_validated(document);
         match record {
             Ok(_) => {}
             Err((_, err)) => {
