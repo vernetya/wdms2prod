@@ -47,14 +47,18 @@ async fn get_well_log_test() {
     let client = reqwest::Client::new();
 
     let response = client
-        .get(format!("{}/welllogs/super", app_address))
+        .get(format!(
+            "{}/welllogs/osdu:work-product-component--WellLog:blablabla",
+            app_address
+        ))
         .send()
         .await
         .expect("Failed to execute request.");
 
-    assert_eq!(response.status().as_u16(), 200); //.is_success());
-
+    let status = response.status().as_u16();
     let text = response.text().await.unwrap();
+    assert_eq!(status, 200, "{}", text); //.is_success());
+
     let value = serde_json::from_str::<Value>(text.as_str());
     assert!(value.is_ok());
     let record_id = value
@@ -67,7 +71,7 @@ async fn get_well_log_test() {
         .unwrap()
         .to_string();
 
-    assert_eq!("super", record_id);
+    assert_eq!("osdu:work-product-component--WellLog:blablabla", record_id);
 }
 
 fn spawn_app() -> String {

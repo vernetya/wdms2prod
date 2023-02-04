@@ -1,3 +1,4 @@
+use crate::error::{ErrorCode, WDMSError};
 use crate::model::validation::{load_schema_validator, validation_error_descr};
 use crate::model::version::SemVer;
 use jsonschema::JSONSchema;
@@ -6,7 +7,7 @@ use std::collections::HashMap;
 use thiserror::Error;
 
 #[derive(Error, Debug)]
-pub enum RecordError {
+pub enum RecordErrorToDelete {
     #[error("parsing error: {0}")]
     Parsing(#[from] serde_json::error::Error),
     #[error("record invalid due to the following errors: {0:?}")]
@@ -91,9 +92,7 @@ impl<'a> TryFrom<&'a str> for EntityKindSlice<'a> {
 
 impl<'t> EntityKindSlice<'t> {
     /// parse kind str which should match regex
-    /// ```
     /// [\w\-\.]+:[\w\-\.]+:[\w\-\.]+:[0-9]+.[0-9]+.[0-9]+
-    /// ```
     ///
     /// kind is decomposed into [EntityKindSlice].
     ///
@@ -152,12 +151,15 @@ fn load_json_schemas() -> HashMap<&'static str, Vec<(EntityKind, JSONSchema)>> {
 
 lazy_static::lazy_static! {
     static ref SCHEMA_VALIDATORS: HashMap<&'static str, Vec<(EntityKind, JSONSchema)>> = load_json_schemas();
-    static ref COUNT: usize = SCHEMA_VALIDATORS.len();
 }
 
-fn schema_from_kind(kind: &str) -> Result<&JSONSchema, RecordError> {
+pub fn print_loaded_schemas() {
+    print!("{} schemas loaded", SCHEMA_VALIDATORS.len());
+}
+
+fn schema_from_kind(kind: &str) -> Result<&JSONSchema, WDMSError> {
     let kind_tokens = EntityKindSlice::parse(kind)
-        .ok_or(RecordError::Validation(vec!["invalid kind".to_string()]))?;
+        .ok_or_else(|| WDMSError::from_validation(format!("invalid kind: {}", kind), None))?;
     if let Some(ll) = SCHEMA_VALIDATORS.get(kind_tokens.component) {
         for (kind, schema) in ll {
             if kind.version.is_match_other(&kind_tokens.version) {
@@ -165,8 +167,11 @@ fn schema_from_kind(kind: &str) -> Result<&JSONSchema, RecordError> {
             }
         }
     }
-
-    Err(RecordError::UnknownKind(kind_tokens.into()))
+    Err(WDMSError::from_record(
+        ErrorCode::UnknownKind,
+        kind.to_string(),
+        None,
+    ))
 }
 
 pub struct RecordMap<'a> {
@@ -180,43 +185,46 @@ pub struct Record {
 }
 
 impl Record {
-    pub fn from_string(value: &str) -> Result<Self, RecordError> {
+    pub fn from_string(value: &str) -> Result<Self, WDMSError> {
         let doc: Value = serde_json::from_str(value)?;
         Self::from_json(doc)
     }
 
-    pub fn from_slice(value: &[u8]) -> Result<Self, RecordError> {
+    pub fn from_slice(value: &[u8]) -> Result<Self, WDMSError> {
         let doc: Value = serde_json::from_slice(value)?;
         Self::from_json(doc)
     }
 
-    pub fn from_json(value: Value) -> Result<Self, RecordError> {
+    pub fn from_json(value: Value) -> Result<Self, WDMSError> {
         let kind = validate_record(&value)?;
         Ok(Record { value, kind })
     }
 }
 
-fn validate_record(value: &Value) -> Result<EntityKind, RecordError> {
-    let record_map =
-        value
-            .as_object()
-            .map(|v| RecordMap { map: v })
-            .ok_or(RecordError::Validation(vec![
-                "Invalid record, an object is expected".to_string(),
-            ]))?;
+fn validate_record(value: &Value) -> Result<EntityKind, WDMSError> {
+    let record_map = value
+        .as_object()
+        .map(|v| RecordMap { map: v })
+        .ok_or_else(|| {
+            WDMSError::from_validation("Invalid record, an object is expected".to_string(), None)
+        })?;
 
-    let kind = record_map.kind().ok_or(RecordError::Validation(vec![
-        "kind field is missing".to_string()
-    ]))?;
+    let kind = record_map
+        .kind()
+        .ok_or_else(|| WDMSError::from_validation("kind field is missing".to_string(), None))?;
 
     let schema = schema_from_kind(kind)?;
 
     if let Err(r) = schema.validate(value) {
-        return Err(RecordError::Validation(
-            r.map(|t| validation_error_descr(&t)).collect::<Vec<_>>(),
+        return Err(WDMSError::from_validation(
+            r.map(|t| validation_error_descr(&t))
+                .collect::<Vec<_>>()
+                .join(", "),
+            None,
         ));
     }
-    EntityKind::try_from(kind).map_err(|_| RecordError::Validation(vec![]))
+    EntityKind::try_from(kind)
+        .map_err(|_| WDMSError::from_validation(format!("invalid kind: {}", kind), None))
 }
 
 impl<'t> RecordMap<'t> {

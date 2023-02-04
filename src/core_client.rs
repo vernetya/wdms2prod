@@ -1,27 +1,13 @@
+use crate::error;
 use actix_web::dev::{Decompress, Payload};
-use actix_web::{http::StatusCode, web::Bytes, HttpMessage, HttpResponse}; // note Decompress == Decoder
-use awc::error::SendRequestError;
-use error::CoreClientError;
+use actix_web::{http::StatusCode, web::Bytes, HttpMessage}; // note Decompress == Decoder
+use awc::error::{PayloadError, SendRequestError};
 use std::time::Duration;
+use thiserror::Error;
 
 pub struct CoreClientResponse {
-    pub status_code: StatusCode,
     pub content_type: String,
     pub payload: Bytes,
-}
-
-impl From<CoreClientResponse> for HttpResponse {
-    fn from(val: CoreClientResponse) -> Self {
-        HttpResponse::build(val.status_code)
-            .content_type(val.content_type)
-            .body(val.payload)
-    }
-}
-
-impl CoreClientResponse {
-    pub fn is_success(&self) -> bool {
-        self.status_code.is_success()
-    }
 }
 
 ///  Core storage client
@@ -43,50 +29,76 @@ impl CoreStorageClient {
     }
 
     /// fetch a record given a record id
-    pub async fn get_record(&self, r_id: String) -> Result<CoreClientResponse, CoreClientError> {
+    pub async fn get_record(&self, r_id: String) -> Result<CoreClientResponse, error::WDMSError> {
         let url = format!("{}/records/{}", self.base_url, r_id);
-        let res = self.http_client.get(url).send().await;
-        read_client_response(res).await
+        let res = self
+            .http_client
+            .get(url)
+            .send()
+            .await
+            .map_err(CoreStorageClientError::from)?;
+        match read_client_response(res).await {
+            Ok(r) => Ok(r),
+            Err(e) => Err(e.into()),
+        }
+    }
+}
+
+impl From<CoreStorageClientError> for error::WDMSError {
+    fn from(value: CoreStorageClientError) -> Self {
+        let category = error::ErrorCategory::Dependency(error::Dependency::CoreStorage);
+        let (code, description) = match &value {
+            CoreStorageClientError::SendError(_) => (
+                error::ErrorCode::SendRequest,
+                "communication error".to_string(),
+            ),
+            CoreStorageClientError::PayloadError(_) => {
+                (error::ErrorCode::Payload, "communication error".to_string())
+            }
+            CoreStorageClientError::ErrorStatusCode(c, d) => {
+                (error::ErrorCode::ErrorStatus(c.as_u16()), d.clone())
+            }
+        };
+        error::WDMSError {
+            category,
+            code,
+            description,
+            source: Some(Box::new(value)),
+        }
     }
 }
 
 async fn read_client_response(
-    res: Result<awc::ClientResponse<Decompress<Payload>>, SendRequestError>,
-) -> Result<CoreClientResponse, CoreClientError> {
-    if res.is_err() {
-        let err = res.err().unwrap();
-        return Err(CoreClientError::SendError(err));
-    }
-
-    let mut response = res.unwrap();
+    mut response: awc::ClientResponse<Decompress<Payload>>,
+) -> Result<CoreClientResponse, CoreStorageClientError> {
     let status_code = response.status();
     let content_type = response.content_type().to_string();
     match response.body().await {
-        Err(e) => Err(CoreClientError::PayloadError(e)),
-        Ok(data) => Ok(CoreClientResponse {
-            status_code,
-            content_type,
-            payload: data,
-        }),
+        Err(e) => Err(CoreStorageClientError::PayloadError(e)),
+        Ok(data) => {
+            if status_code.is_success() {
+                Ok(CoreClientResponse {
+                    content_type,
+                    payload: data,
+                })
+            } else {
+                Err(CoreStorageClientError::ErrorStatusCode(
+                    status_code,
+                    String::from_utf8_lossy(&data).into_owned(),
+                ))
+            }
+        }
     }
 }
 
-pub mod error {
-    use actix_web::error::ResponseError;
-    use awc::error::{PayloadError, SendRequestError};
-    use thiserror::Error;
+#[derive(Error, Debug)]
+enum CoreStorageClientError {
+    #[error("internal core client failure")]
+    SendError(#[from] SendRequestError),
 
-    #[derive(Error, Debug)]
-    pub enum CoreClientError {
-        #[error("internal core client failure")]
-        SendError(#[from] SendRequestError),
+    #[error("internal core client failure")]
+    PayloadError(#[from] PayloadError),
 
-        #[error("internal core client failure")]
-        PayloadError(#[from] PayloadError),
-    }
-
-    // implement trait ResponseError from actix web so it can automatically construct error
-    // http response (500 by default). It requires to impl traits fmt::Debug + fmt::Display
-    // which is provided by `thiserror` macros
-    impl ResponseError for CoreClientError {}
+    #[error("error {0}: {1}")]
+    ErrorStatusCode(StatusCode, String),
 }

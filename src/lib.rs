@@ -4,6 +4,7 @@ use std::net::TcpListener;
 
 pub mod config;
 mod core_client;
+mod error;
 pub mod model;
 mod routes;
 use core_client::CoreStorageClient;
@@ -20,6 +21,9 @@ pub fn build_and_start_server(
     if cfg.enable_logging {
         env_logger::Builder::from_env(env_logger::Env::default().default_filter_or("debug")).init();
     }
+
+    model::record::print_loaded_schemas();
+
     let server = HttpServer::new(move || {
         let storage_client = CoreStorageClient::new(&cfg.host_core_storage);
 
