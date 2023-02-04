@@ -2,7 +2,7 @@ use actix_web::{get, HttpResponse, ResponseError};
 use log::info;
 use thiserror::Error;
 
-use crate::record::version;
+use crate::model::version;
 
 #[derive(Error, Debug)]
 enum ExpCustomError {
@@ -32,8 +32,8 @@ pub async fn get_error() -> Result<HttpResponse, actix_web::Error> {
     use std::fs::File;
 
     let _t = version::SemVerToken::Some(8);
-    let s = _t.to_string();
-    let pp: version::SemVer = "1.0.5".parse().expect("");
+    let _s = _t.to_string();
+    let _pp: version::SemVer = "1.0.5".parse().expect("");
     //let _v: version::SemVer = "1.0.4".parse().expect();
     //let _v = version::SemVer::from_str("1.0.5").unwrap();
     info!("stuff");

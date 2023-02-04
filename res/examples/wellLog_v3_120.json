@@ -45,12 +45,10 @@
         "TopMeasuredDepth": 12345.6,
         "BottomMeasuredDepth": 13856.2,
         "Name": "welllogName",
-
         "SamplingDomainTypeID": "opendes:reference-data--WellLogSamplingDomainType:Depth:",
         "IsRegular": true,
         "LogRemark": "example data for API documentation",
         "SamplingInterval": 0.1
-
     },
     "id": "opendes:work-product-component--WellLog:123456",
     "kind": "osdu:wks:work-product-component--WellLog:1.2.0",
@@ -63,7 +61,8 @@
             "FR"
         ]
     },
-    "meta": [{
+    "meta": [
+        {
             "kind": "Unit",
             "name": "ft",
             "persistableReference": "{\"scaleOffset\":{\"scale\":0.3048,\"offset\":0.0},\"symbol\":\"ft\",\"baseMeasurement\":{\"ancestry\":\"Length\",\"type\":\"UM\"},\"type\":\"USO\"}",
@@ -75,7 +74,8 @@
             "propertyValues": [
                 "ft"
             ]
-        }, {
+        },
+        {
             "kind": "DateTime",
             "name": "datetime",
             "persistableReference": "{\"format\":\"yyyy-MM-ddTHH:mm:ssZ\",\"timeZone\":\"UTC\",\"type\":\"DTM\"}",

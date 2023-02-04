@@ -14,10 +14,10 @@ fn osdu_schema_ref_to_local_path(url: &Url) -> Option<String> {
         return Some(format!(
             "{}{}",
             SCHEMA_LOCAL_BASE_DIR,
-            &url_str[BASE_OSDU_SCHEMA_URL.len()..]
+            url_str.strip_prefix(BASE_OSDU_SCHEMA_URL).unwrap()
         ));
     }
-    return None;
+    None
 }
 
 impl SchemaResolver for LocalSchemaResolver {
@@ -27,10 +27,8 @@ impl SchemaResolver for LocalSchemaResolver {
         url: &Url,
         _original_reference: &str,
     ) -> Result<Arc<Value>, SchemaResolverError> {
-        let path = osdu_schema_ref_to_local_path(url).ok_or(std::io::Error::new(
-            std::io::ErrorKind::InvalidData,
-            "invalid ref",
-        ))?;
+        let path = osdu_schema_ref_to_local_path(url)
+            .ok_or_else(|| std::io::Error::new(std::io::ErrorKind::InvalidData, "invalid ref"))?;
         let f = std::fs::File::open(path)?;
         let document: Value = serde_json::from_reader(f)?;
         Ok(Arc::new(document))
@@ -42,13 +40,13 @@ pub fn load_schema_validator(filename: &str) -> Result<JSONSchema, String> {
     let file_path = format!("res/schemas/{}", filename);
     println!("load schema {}", file_path);
 
-    let f = std::fs::File::open(file_path).or_else(|e| Err(e.to_string()))?;
-    let schema: Value = serde_json::from_reader(f).or_else(|e| Err(e.to_string()))?;
+    let f = std::fs::File::open(file_path).map_err(|e| e.to_string())?;
+    let schema: Value = serde_json::from_reader(f).map_err(|e| e.to_string())?;
     JSONSchema::options()
         .with_draft(Draft::Draft7)
         .with_resolver(LocalSchemaResolver {})
         .compile(&schema)
-        .or_else(|e| Err(e.to_string()))
+        .map_err(|e| e.to_string())
 }
 
 pub fn validation_error_descr(error: &ValidationError) -> String {

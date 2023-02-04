@@ -5,16 +5,16 @@ use error::CoreClientError;
 use std::time::Duration;
 
 pub struct CoreClientResponse {
-    status_code: StatusCode,
-    content_type: String,
-    payload: Bytes,
+    pub status_code: StatusCode,
+    pub content_type: String,
+    pub payload: Bytes,
 }
 
-impl Into<HttpResponse> for CoreClientResponse {
-    fn into(self) -> HttpResponse {
-        HttpResponse::build(self.status_code)
-            .content_type(self.content_type)
-            .body(self.payload)
+impl From<CoreClientResponse> for HttpResponse {
+    fn from(val: CoreClientResponse) -> Self {
+        HttpResponse::build(val.status_code)
+            .content_type(val.content_type)
+            .body(val.payload)
     }
 }
 

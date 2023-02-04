@@ -2,11 +2,9 @@ use actix_web::middleware::Logger;
 use actix_web::{dev::Server, web, App, HttpServer, Result};
 use std::net::TcpListener;
 
-use env_logger;
-
 pub mod config;
 mod core_client;
-pub mod record;
+pub mod model;
 mod routes;
 use core_client::CoreStorageClient;
 
@@ -17,7 +15,7 @@ pub fn build_and_start_server(
     conf: Option<config::Config>,
 ) -> Result<Server, std::io::Error> {
     // if not specific provided, let's
-    let cfg = conf.or(Some(config::load_config())).unwrap();
+    let cfg = conf.unwrap_or_else(config::load_config);
 
     if cfg.enable_logging {
         env_logger::Builder::from_env(env_logger::Env::default().default_filter_or("debug")).init();
