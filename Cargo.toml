@@ -14,16 +14,25 @@ name = "wdms2prod"
 
 [dependencies]
 actix-web = "4"
-awc = "3"  # http client
-tokio = { version = "1", features = ["macros", "rt-multi-thread"] } # async runtime
+awc = "3" # http client
+tokio = { version = "1", features = [
+    "macros",
+    "rt-multi-thread",
+] } # async runtime
 futures = "0.3" # futures utils
 
 serde = { version = "1", features = ["derive"] }
 serde_json = "1.0"
-jsonschema = { version = "0.16", default-features = false, features = ["draft201909", "draft202012"] }
+jsonschema = { version = "0.16", default-features = false, features = [
+    "draft201909",
+    "draft202012",
+] }
 lazy_static = "1.4"
 url = "2"
-figment = { version = "0.10", features = ["json", "env"] } # configuration/settings
+figment = { version = "0.10", features = [
+    "json",
+    "env",
+] } # configuration/settings
 log = "0.4"
 env_logger = "0.9"
 thiserror = "1"

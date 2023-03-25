@@ -1,7 +1,9 @@
 use crate::error;
 use actix_web::dev::{Decompress, Payload};
-use actix_web::{http::StatusCode, web::Bytes, HttpMessage}; // note Decompress == Decoder
+use actix_web::{http::header::HeaderMap, http::StatusCode, web::Bytes, HttpMessage}; // note Decompress == Decoder
 use awc::error::{PayloadError, SendRequestError};
+use awc::http::header;
+use awc::ClientRequest;
 use std::time::Duration;
 use thiserror::Error;
 
@@ -16,11 +18,14 @@ pub struct CoreStorageClient {
     base_url: String,
 }
 
+const USER_AGENT_VALUE: header::HeaderValue = header::HeaderValue::from_static("wdms2prod/1.0");
+const JSON_MIME: header::HeaderValue = header::HeaderValue::from_static("application/json");
+
 impl CoreStorageClient {
     pub fn new(base_url: &str) -> Self {
         let http_client = awc::Client::builder()
             .timeout(Duration::from_secs(10))
-            .add_default_header((awc::http::header::USER_AGENT, "wdms2prod/1.0"))
+            .add_default_header((awc::http::header::USER_AGENT, USER_AGENT_VALUE))
             .finish();
         CoreStorageClient {
             http_client,
@@ -28,12 +33,24 @@ impl CoreStorageClient {
         }
     }
 
+    fn add_headers(rq: &mut ClientRequest, headers: HeaderMap) {
+        let target_headers = rq.headers_mut();
+        for (name, value) in headers {
+            target_headers.append(name, value);
+        }
+    }
+
     /// fetch a record given a record id
-    pub async fn get_record(&self, r_id: String) -> Result<CoreClientResponse, error::WDMSError> {
+    pub async fn get_record(
+        &self,
+        headers: HeaderMap,
+        r_id: &str,
+    ) -> Result<CoreClientResponse, error::WDMSError> {
         let url = format!("{}/records/{}", self.base_url, r_id);
-        let res = self
-            .http_client
-            .get(url)
+        let mut request = self.http_client.get(url);
+        Self::add_headers(&mut request, headers);
+        let res = request
+            .insert_header((header::ACCEPT, JSON_MIME))
             .send()
             .await
             .map_err(CoreStorageClientError::from)?;
@@ -42,6 +59,27 @@ impl CoreStorageClient {
             Err(e) => Err(e.into()),
         }
     }
+    // pub async fn get_record(
+    //     &self,
+    //     data_partition: &str,
+    //     token: &str,
+    //     r_id: &str,
+    // ) -> Result<CoreClientResponse, error::WDMSError> {
+    //     let url = format!("{}/records/{}", self.base_url, r_id);
+    //     let res = self
+    //         .http_client
+    //         .get(url)
+    //         .append_header(("data-partition-id", data_partition))
+    //         .insert_header((header::AUTHORIZATION, token))
+    //         .insert_header((header::ACCEPT, "application/json"))
+    //         .send()
+    //         .await
+    //         .map_err(CoreStorageClientError::from)?;
+    //     match read_client_response(res).await {
+    //         Ok(r) => Ok(r),
+    //         Err(e) => Err(e.into()),
+    //     }
+    // }
 }
 
 impl From<CoreStorageClientError> for error::WDMSError {

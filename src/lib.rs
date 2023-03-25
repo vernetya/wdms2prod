@@ -5,6 +5,7 @@ use std::net::TcpListener;
 pub mod config;
 mod core_client;
 mod error;
+mod extractors;
 pub mod model;
 mod routes;
 use core_client::CoreStorageClient;

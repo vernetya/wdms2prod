@@ -51,6 +51,8 @@ async fn get_well_log_test() {
             "{}/welllogs/osdu:work-product-component--WellLog:blablabla",
             app_address
         ))
+        .header("data-partition-id", "dp")
+        .header("authorization", "Bearer T0k3n")
         .send()
         .await
         .expect("Failed to execute request.");
